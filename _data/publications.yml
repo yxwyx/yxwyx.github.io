@@ -1,4 +1,26 @@
 main:
+  - title: "Linear-layer-enhanced quantum long short-term memory for carbon price forecasting"
+    authors: <strong>Yuji Cao</strong>, Xiyuan Zhou, Xiang Fei, Huan Zhao*, Wenxuan Liu, Junhua Zhao* (*Corresponding authors)
+    conference_short: QMI
+    conference: Quantum Machine Intelligence
+    pdf: https://link.springer.com/article/10.1007/s42484-023-00115-2
+    code: https://github.com/TravisCao/L-QLSTM
+    # page: https://class-il.mpi-inf.mpg.de/mnemonics/
+    bibtex: https://scholar.googleusercontent.com/scholar.bib?q=info:Tc_tAdhRFoEJ:scholar.google.com/&output=citation&scisdr=ClHXjNAaEMH9urnXT2g:AFWwaeYAAAAAZRzRV2gzYiJtjC9gl5LZGoHu8rM&scisig=AFWwaeYAAAAAZRzRV5jjV8LQYJn80w0cpvPT49Q&scisf=4&ct=citation&cd=-1&hl=en
+    # notes: Oral Presentation
+    image: ./assets/img/L-QLSTM.png
+
+  - title: "Linear-layer-enhanced quantum long short-term memory for carbon price forecasting"
+    authors: <strong>Yuji Cao</strong>, Xiyuan Zhou, Xiang Fei, Huan Zhao*, Wenxuan Liu, Junhua Zhao* (*Corresponding authors)
+    conference_short: QMI
+    conference: Quantum Machine Intelligence
+    pdf: https://link.springer.com/article/10.1007/s42484-023-00115-2
+    code: https://github.com/TravisCao/L-QLSTM
+    # page: https://class-il.mpi-inf.mpg.de/mnemonics/
+    bibtex: https://scholar.googleusercontent.com/scholar.bib?q=info:Tc_tAdhRFoEJ:scholar.google.com/&output=citation&scisdr=ClHXjNAaEMH9urnXT2g:AFWwaeYAAAAAZRzRV2gzYiJtjC9gl5LZGoHu8rM&scisig=AFWwaeYAAAAAZRzRV5jjV8LQYJn80w0cpvPT49Q&scisf=4&ct=citation&cd=-1&hl=en
+    # notes: Oral Presentation
+    image: ./assets/img/L-QLSTM.png
+
   - title: "Fast and explainable warm-start point learning for AC Optimal Power Flow using decision tree"
     authors: <strong>Yuji Cao</strong>, Huan Zhao*, Gaoqi Liang, Junhua Zhao*, Huanxin Liao, Chao Yang (*Corresponding authors)
     conference_short: IJEPES

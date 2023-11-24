@@ -16,6 +16,7 @@ To achieve this, I employ methodologies such as *reinforcement learning* and *op
 
 ## News
 
+- **[Nov. 9, 2023]** Two paper are accepted in the *EI2 2023 (The 7th IEEE Conference on Energy Internet and Energy System Integration)*. One is about joint strategic bidding using reinforcement learning. Another is about interzonal carbon emission minimization.
 - **[Oct. 16, 2023]** One paper about risk estimation using quantum GAN and quantum amplitude estimation is submitted to *Energy Conversion and Economics*.
 - **[Oct. 15, 2023]** Two paper are submitted to the *EI2 2023 (The 7th IEEE Conference on Energy Internet and Energy System Integration)*. One is about joint strategic bidding using reinforcement learning. Another is about interzonal carbon emission minimization.
 - **[Sep. 24, 2023]** One paper about electricity-carbon collaborative demand response of data centers is submitted to *IEEE Transactions on Sustainable Energy*.
@@ -25,8 +26,8 @@ To achieve this, I employ methodologies such as *reinforcement learning* and *op
 - **[Jul. 29, 2022]** Our project about quantum LSTM for carbon price forecasting received the **National Second Prize** in quantum financial track of [CCF "Pilot Cup" Quantum Computing Programming Challenge](https://contest.originqc.com.cn/contest/31/contest:introduction).
 - **[Jul. 8, 2021]** I gave a seminar talk "Machine Learning Applications for Optimal Power Flow" at [Shenzhen Institute of Artificial Intelligence and Robotics for Society (AIRS)](https://airs.cuhk.edu.cn/).
 
-{% include_relative _includes/publications.md %}
+{% include_relative_includes/publications.md %}
 
-{% include_relative _includes/services.md %}
+{% include_relative_includes/services.md %}
 
-{% include_relative _includes/contact.md %}
+{% include_relative_includes/contact.md %}
