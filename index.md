@@ -8,7 +8,7 @@ layout: homepage
 
 I am currently pursuing my Master's degree at [The Chinese University of Hong Kong, Shenzhen (CUHK-SZ)](https://www.cuhk.edu.cn), where I also earned my Bachelor's degree in Computer Science and Engineering. I am privileged to be supervised by [Prof. Junhua Zhao](https://sse.cuhk.edu.cn/en/faculty/zhaojunhua) also work closely with [Dr. Huan Zhao](https://scholar.google.com/citations?user=bNt8A1AAAAAJ&hl=en) and [Prof. Gaoqi Liang](https://scholar.google.com.au/citations?user=Vs333KMAAAAJ&hl=en).
 
-My current research interests are at the nexus of smart grid technology, computer science, and optimization techniques. I am particularly interested in *data-driven decision-making*, *state-wise safe reinforcement learning for controlling*, and *trustworthy AI* with their applications in the smart grid.
+My current research interests are at the nexus of smart grid technology, computer science, and optimization techniques. I am particularly interested in *data-driven decision-making* with its applications in the smart grid.
 
 To achieve this, I employ methodologies such as *reinforcement learning* and *optimization* algorithms. The application scenarios of my research extend to electric vehicles, real-time optimal power flow, coupled power-transportation networks, and energy storage solutions.
 
