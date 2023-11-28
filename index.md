@@ -26,8 +26,8 @@ To achieve this, I employ methodologies such as *reinforcement learning* and *op
 - **[Jul. 29, 2022]** Our project about quantum LSTM for carbon price forecasting received the **National Second Prize** in quantum financial track of [CCF "Pilot Cup" Quantum Computing Programming Challenge](https://contest.originqc.com.cn/contest/31/contest:introduction).
 - **[Jul. 8, 2021]** I gave a seminar talk "Machine Learning Applications for Optimal Power Flow" at [Shenzhen Institute of Artificial Intelligence and Robotics for Society (AIRS)](https://airs.cuhk.edu.cn/).
 
-{% include_relative_includes/publications.md %}
+{% include_relative _includes/publications.md %}
 
-{% include_relative_includes/services.md %}
+{% include_relative _includes/services.md %}
 
-{% include_relative_includes/contact.md %}
+{% include_relative _includes/contact.md %}
