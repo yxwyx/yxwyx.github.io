@@ -1,15 +1,15 @@
 # Basic Information
 title: Yuji CAO
-position: Master Student
-affiliation: The Chinese University of Hong Kong, Shenzhen
-affiliation_link: https://www.cuhk.edu.cn
+position: PhD Student
+affiliation: The Chinese University of Hong Kong (CUHK)
+affiliation_link: https://www.cuhk.edu.hk
 # affiliation_logo:
-email: yujicao@link.cuhk.edu.cn
+email: yjcao@mae.cuhk.edu.hk
 
 # Search Engine Optimization (SEO)
 # The following information is used to improve the website traffic from search engines, e.g., Google.
 keywords: yuji cao, cao yuji, yujicao, caoyuji, traviscao, travis cao
-description: Yuji Cao is a master student at The Chinese University of Hong Kong, Shenzhen. His research lies in smart grid and reinforcement learning.
+description: Yuji Cao is a PhD student at The Chinese University of Hong Kong (CUHK). His research lies in smart grid and reinforcement learning.
 # canonical: https://minimal-light-theme.yliu.me/
 
 # The option is used to show the last update time.
@@ -18,7 +18,7 @@ enable_last_update: true
 # Links
 # If you don't need one of them, you may delete the corresponding line.
 google_scholar: https://scholar.google.com/citations?user=q-NFxGIAAAAJ&hl=en
-cv_link: assets/files/CV.pdf
+# cv_link: assets/files/CV.pdf
 github_link: https://github.com/TravisCao
 # linkedin: https://www.linkedin.com/
 # twitter: https://twitter.com/
