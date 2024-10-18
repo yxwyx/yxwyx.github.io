@@ -12,6 +12,8 @@
 
 <ul style="margin:0 0 20px;">
   <li><a href="https://ietresearch.onlinelibrary.wiley.com/journal/26341581"><autocolor>Energy Conversion and Economics</autocolor></a></li>
+  <li><a href="https://ieeexplore.ieee.org/xpl/RecentIssue.jsp?punumber=5165411"><autocolor> IEEE Transactions on Smart Grid</autocolor></a></li>
+  <li><a href="https://ieeexplore.ieee.org/xpl/RecentIssue.jsp?punumber=5962385"><autocolor> IEEE Transactions on Neural Network and Learning System</autocolor></a></li>
   <li><a href="https://attend.ieee.org/ei2-2023"><autocolor>EI2 2023 (The 7th IEEE Conference on Energy Internet and Energy System Integration)</autocolor></a></li>
   <!-- <li><a href="https://www.springer.com/journal/11263"><autocolor>International Journal of Computer Vision (IJCV)</autocolor></a></li> -->
 </ul>

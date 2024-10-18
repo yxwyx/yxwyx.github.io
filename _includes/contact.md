@@ -2,10 +2,10 @@
 
 <h2 style="margin: 60px 0px 10px;">Contact</h2>
 
-<p><strong>Address:</strong> <a href="https://maps.app.goo.gl/HozeTHQEHmNbXocD9">2001 Longxiang Boulevard, Longgang District, Shenzhen, Guangdong</a>
+<!-- <p><strong>Address:</strong> <a href="https://maps.app.goo.gl/HozeTHQEHmNbXocD9">Sh</a>
+<br /> -->
+<strong>Office Location:</strong> Academic Building 1 (AB1) 301
 <br />
-<strong>Office Location:</strong> Chengdao Building 320B
+<strong>Email:</strong> <email>yjcao (at) mae.cuhk.edu.hk</email>
 <br />
-<strong>Email:</strong> <email>yujicao (at) link.cuhk.edu.cn</email>
-<br />
-<strong>Phone:</strong> +86 (755)191-4793-0514 </p>
+<strong>Phone:</strong> +86 (755)13827460514 </p>
