@@ -32,7 +32,7 @@ main:
     bibtex: https://scholar.googleusercontent.com/scholar.bib?q=info:hKdbaAm1oOUJ:scholar.google.com/&output=citation&scisdr=ClE51BdBEMjTj4dfh2A:AFWwaeYAAAAAZzBZn2DFXxKg9bHqdksNSoA1o2o&scisig=AFWwaeYAAAAAZzBZn8zb6n1yQJoiDnBqOYIuO5s&scisf=4&ct=citation&cd=-1&hl=en
     image: ./assets/img/CEF.png
 
-  - title: "Fast and explainable warm-start point learning for AC Optimal Power Flow using decision tree"
+  - title: "Fast and Explainable Warm-Start Point Learning for AC Optimal Power Flow Using Decision Tree"
     authors: <strong>Yuji Cao</strong>, Huan Zhao, Gaoqi Liang, Junhua Zhao, Huanxin Liao, Chao Yang
     conference_short: IJEPES
     conference: International Journal of Electrical Power & Energy Systems
@@ -41,7 +41,7 @@ main:
     image: ./assets/img/warm-start.jpg
     # notes: Early Accept
 
-  - title: "Linear-layer-enhanced quantum long short-term memory for carbon price forecasting"
+  - title: "Linear-layer-enhanced Quantum Long Short-Term Memory for Carbon Price Forecasting"
     authors: <strong>Yuji Cao</strong>, Xiyuan Zhou, Xiang Fei, Huan Zhao, Wenxuan Liu, Junhua Zhao
     conference_short: QMI
     conference: Quantum Machine Intelligence
