@@ -1,43 +1,52 @@
 main:
+  - title: "Survey on Large Language Model-Enhanced Reinforcement Learning: Concept, Taxonomy, and Methods"
+    authors: <strong>Yuji Cao</strong>, Huan Zhao, Yuheng Cheng, Ting Shu, Yue Chen, Guolong Liu, Gaoqi Liang, Junhua Zhao, Jinyue Yan, Yun Li
+    conference_short: TNNLS
+    conference: IEEE Transactions on Neural Networks and Learning Systems
+    link: https://arxiv.org/abs/2404.00282
+    bibtex: https://scholar.googleusercontent.com/scholar.bib?q=info:EvFQ77ToMHwJ:scholar.google.com/&output=citation&scisdr=ClE51BdBEMjTj4dc_nc:AFWwaeYAAAAAZzBa5nfFoxLGcSYv2PaxEi5lt1o&scisig=AFWwaeYAAAAAZzBa5sfsHBzWazBtCZrCKOzaQVs&scisf=4&ct=citation&cd=-1&hl=en
+    image: ./assets/img/LLM-enhanced-RL.png
+
+  - title: "Privacy-Preserving Bi-Level Optimization of Internet Data Centers for Electricity-Carbon Collaborative Demand Response"
+    authors: Jiaqi Ruan, Yifan Zhu, <strong>Yuji Cao</strong>, Xianzhuo Sun, Shunbo Lei, Gaoqi Liang, Jing Qiu, Zhao Xu
+    conference_short: IEEE IoTJ
+    conference: IEEE Internet of Things Journal
+    link: https://ieeexplore.ieee.org/abstract/document/10506234
+    bibtex: https://scholar.googleusercontent.com/scholar.bib?q=info:keO2E_rMQfUJ:scholar.google.com/&output=citation&scisdr=ClE51BdBEMjTj4dceJE:AFWwaeYAAAAAZzBaYJFUmoERWiMmiEg1MbdDBKc&scisig=AFWwaeYAAAAAZzBaYLnAlMeRAl02xhoit_BnfhI&scisf=4&ct=citation&cd=-1&hl=en
+    image: ./assets/img/data-center.png
+
   - title: "Strategic Bidding and Trading in Joint Electricity-Carbon Market with Deep Reinforcement Learning"
     authors: Yingjie Li, Di Leng, <strong>Yuji Cao*</strong>, Huan Zhao, Junhua Zhao (*Corresponding authors)
     conference_short: EI2
     conference: The 7th IEEE Conference on Energy Internet and Energy System Integration
-    # pdf: https://link.springer.com/article/10.1007/s42484-023-00115-2
+    link: https://ieeexplore.ieee.org/abstract/document/10512704
     code: https://github.com/TravisCao/joint-carbon-electricity-market-bidding-RL
-    # page: https://class-il.mpi-inf.mpg.de/mnemonics/
-    # bibtex: https://scholar.googleusercontent.com/scholar.bib?q=info:Tc_tAdhRFoEJ:scholar.google.com/&output=citation&scisdr=ClHXjNAaEMH9urnXT2g:AFWwaeYAAAAAZRzRV2gzYiJtjC9gl5LZGoHu8rM&scisig=AFWwaeYAAAAAZRzRV5jjV8LQYJn80w0cpvPT49Q&scisf=4&ct=citation&cd=-1&hl=en
-    # notes: Oral Presentation
+    bibtex: https://scholar.googleusercontent.com/scholar.bib?q=info:buDEeTyukLQJ:scholar.google.com/&output=citation&scisdr=ClE51BdBEMjTj4df-70:AFWwaeYAAAAAZzBZ470SCPHcduoRYCIyClIPV5I&scisig=AFWwaeYAAAAAZzBZ4--RT7pzY7Na8o-l2hXc8Tw&scisf=4&ct=citation&cd=-1&hl=en
     image: ./assets/img/joint-bidding.png
 
   - title: "Interzonal Carbon Emission Flow Minimization"
     authors: Hanbing Zhang, Jichao Ye, Hua Feng, Xinwei Hu, Hui Huang, Yonghai Xu, <strong>Yuji Cao*</strong>, Huanxin Liao (*Corresponding authors)
     conference_short: EI2
     conference: The 7th IEEE Conference on Energy Internet and Energy System Integration
-    # pdf: https://link.springer.com/article/10.1007/s42484-023-00115-2
-    # code: https://github.com/TravisCao/L-QLSTM
-    # page: https://class-il.mpi-inf.mpg.de/mnemonics/
-    # bibtex: https://scholar.googleusercontent.com/scholar.bib?q=info:Tc_tAdhRFoEJ:scholar.google.com/&output=citation&scisdr=ClHXjNAaEMH9urnXT2g:AFWwaeYAAAAAZRzRV2gzYiJtjC9gl5LZGoHu8rM&scisig=AFWwaeYAAAAAZRzRV5jjV8LQYJn80w0cpvPT49Q&scisf=4&ct=citation&cd=-1&hl=en
-    # notes: Oral Presentation
+    link: https://ieeexplore.ieee.org/abstract/document/10512678
+    bibtex: https://scholar.googleusercontent.com/scholar.bib?q=info:hKdbaAm1oOUJ:scholar.google.com/&output=citation&scisdr=ClE51BdBEMjTj4dfh2A:AFWwaeYAAAAAZzBZn2DFXxKg9bHqdksNSoA1o2o&scisig=AFWwaeYAAAAAZzBZn8zb6n1yQJoiDnBqOYIuO5s&scisf=4&ct=citation&cd=-1&hl=en
     image: ./assets/img/CEF.png
 
   - title: "Fast and explainable warm-start point learning for AC Optimal Power Flow using decision tree"
-    authors: <strong>Yuji Cao</strong>, Huan Zhao*, Gaoqi Liang, Junhua Zhao*, Huanxin Liao, Chao Yang (*Corresponding authors)
+    authors: <strong>Yuji Cao</strong>, Huan Zhao, Gaoqi Liang, Junhua Zhao, Huanxin Liao, Chao Yang
     conference_short: IJEPES
     conference: International Journal of Electrical Power & Energy Systems
-    pdf: https://www.sciencedirect.com/science/article/pii/S014206152300426X
-    # code: https://github.com/MrGiovanni/ContinualLearning
+    link: https://www.sciencedirect.com/science/article/pii/S014206152300426X
     bibtex: https://scholar.googleusercontent.com/scholar.bib?q=info:IXlZoAmTdxcJ:scholar.google.com/&output=citation&scisdr=ClHXjNAaEMH9urnXhNc:AFWwaeYAAAAAZRzRnNeIVk_dkcMMcsaZIjtRE6c&scisig=AFWwaeYAAAAAZRzRnMN0hAj2h1pBPdNaA8uHLWQ&scisf=4&ct=citation&cd=-1&hl=en
     image: ./assets/img/warm-start.jpg
     # notes: Early Accept
 
   - title: "Linear-layer-enhanced quantum long short-term memory for carbon price forecasting"
-    authors: <strong>Yuji Cao</strong>, Xiyuan Zhou, Xiang Fei, Huan Zhao*, Wenxuan Liu, Junhua Zhao* (*Corresponding authors)
+    authors: <strong>Yuji Cao</strong>, Xiyuan Zhou, Xiang Fei, Huan Zhao, Wenxuan Liu, Junhua Zhao
     conference_short: QMI
     conference: Quantum Machine Intelligence
-    pdf: https://link.springer.com/article/10.1007/s42484-023-00115-2
+    link: https://link.springer.com/article/10.1007/s42484-023-00115-2
     code: https://github.com/TravisCao/L-QLSTM
-    # page: https://class-il.mpi-inf.mpg.de/mnemonics/
     bibtex: https://scholar.googleusercontent.com/scholar.bib?q=info:Tc_tAdhRFoEJ:scholar.google.com/&output=citation&scisdr=ClHXjNAaEMH9urnXT2g:AFWwaeYAAAAAZRzRV2gzYiJtjC9gl5LZGoHu8rM&scisig=AFWwaeYAAAAAZRzRV5jjV8LQYJn80w0cpvPT49Q&scisf=4&ct=citation&cd=-1&hl=en
     # notes: Oral Presentation
     image: ./assets/img/L-QLSTM.png
