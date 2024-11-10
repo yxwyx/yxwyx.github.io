@@ -16,7 +16,7 @@ main:
     image: ./assets/img/data-center.png
 
   - title: "Strategic Bidding and Trading in Joint Electricity-Carbon Market with Deep Reinforcement Learning"
-    authors: Yingjie Li, Di Leng, <strong>Yuji Cao*</strong>, etc.
+    authors: Yingjie Li, Di Leng, <strong>Yuji Cao*</strong>, etc. (*corresponding author)
     conference_short: EI2
     conference: The 7th IEEE Conference on Energy Internet and Energy System Integration
     link: https://ieeexplore.ieee.org/abstract/document/10512704
@@ -25,7 +25,7 @@ main:
     image: ./assets/img/joint-bidding.png
 
   - title: "Interzonal Carbon Emission Flow Minimization"
-    authors: Hanbing Zhang, Jichao Ye, Hua Feng, Xinwei Hu, Hui Huang, Yonghai Xu, <strong>Yuji Cao*</strong>, Huanxin Liao (*Corresponding authors)
+    authors: Hanbing Zhang, Jichao Ye, Hua Feng, Xinwei Hu, Hui Huang, Yonghai Xu, <strong>Yuji Cao*</strong>, Huanxin Liao (*corresponding author)
     conference_short: EI2
     conference: The 7th IEEE Conference on Energy Internet and Energy System Integration
     link: https://ieeexplore.ieee.org/abstract/document/10512678
