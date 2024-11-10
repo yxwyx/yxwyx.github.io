@@ -6,6 +6,6 @@
 <br /> -->
 <strong>Office Location:</strong> Academic Building 1 (AB1) 301
 <br />
-<strong>Email:</strong> <email>yjcao (at) mae.cuhk.edu.hk</email>
+<strong>Email:</strong> <email>yjcao@mae.cuhk.edu.hk</email>
 <br />
-<strong>Phone:</strong> +86 (755)13827460514 </p>
+<strong>Phone:</strong> +86 (755)13827460514
