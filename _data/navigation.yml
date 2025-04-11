@@ -2,9 +2,12 @@ main:
   #- title: "Contact"
   #  url: ./#contact
 
+  - title: "Services"
+    url: ./#services
+    right: true
+
   - title: "Talks"
     url: ./#invited-talks
-    right: true
 
   - title: "Services"
     url: ./#services
