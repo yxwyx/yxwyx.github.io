@@ -1,27 +1,25 @@
 # Basic Information
-title: Yuji CAO
+title: Yuxuan Wang
 position: PhD Student
-affiliation: The Chinese University of Hong Kong (CUHK)
+affiliation: Boston University School of Public Health
 affiliation_link: https://www.cuhk.edu.hk
-# affiliation_logo:
-email: yjcao@mae.cuhk.edu.hk
+email: yxw@bu.edu
 
 # Search Engine Optimization (SEO)
 # The following information is used to improve the website traffic from search engines, e.g., Google.
-keywords: yuji cao, cao yuji, yujicao, caoyuji, traviscao, travis cao
+keywords: yuxuan wang, wang yuxuan
 description: Yuji Cao is a PhD student at The Chinese University of Hong Kong (CUHK). His research lies in smart grid and reinforcement learning.
-# canonical: https://minimal-light-theme.yliu.me/
 
 # The option is used to show the last update time.
-enable_last_update: true
+enable_last_update: false
 
 # Links
 # If you don't need one of them, you may delete the corresponding line.
 google_scholar: https://scholar.google.com/citations?user=q-NFxGIAAAAJ&hl=en
 # cv_link: assets/files/CV.pdf
 github_link: https://github.com/TravisCao
-# linkedin: https://www.linkedin.com/
-# twitter: https://twitter.com/
+linkedin: https://www.linkedin.com/in/yuxuanbiostat
+twitter: https://x.com/kyleyx_w
 
 # Images (e.g., your profile picture and your website's favicon)
 # "favicon" and "favicon_dark" are used for the light and dark modes, respectively.
@@ -43,7 +41,7 @@ font: "Serif" # or "Sans Serif"
 
 # Google Analytics ID
 # Please remove this if you don't use Google Analytics
-google_analytics: G-R1YMLR9CBQ
+# google_analytics: G-R1YMLR9CBQ
 
 # Use this project as a remote theme for GitHub Pages
 # See the guide here: https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll/adding-a-theme-to-your-github-pages-site-using-jekyll
