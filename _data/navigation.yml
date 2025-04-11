@@ -18,5 +18,5 @@ main:
   - title: "News"
     url: ./#news
 
-  - title: "Bio"
+  - title: "About"
     url: ./#about-me
