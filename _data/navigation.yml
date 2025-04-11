@@ -1,7 +1,19 @@
 main:
-  - title: "Contact"
-    url: ./#contact
-    right: true
+
+  - title: "About"
+    url: ./#about-me
+
+  - title: "News"
+    url: ./#news
+
+  - title: "Publications"
+    url: ./#publications
+
+  - title: "Teaching"
+    url: ./#teaching
+    
+  #- title: "Contact"
+  #  url: ./#contact
 
   #- title: "Services"
   #  url: ./#services
@@ -9,14 +21,4 @@ main:
   #- title: "Talks"
   #  url: ./#invited-talks
 
-  - title: "Teaching"
-    url: ./#teaching
-
-  - title: "Publications"
-    url: ./#publications
-
-  #- title: "News"
-  #  url: ./#news
-
-  - title: "About"
-    url: ./#about-me
+    right: true
