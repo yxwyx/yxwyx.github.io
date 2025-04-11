@@ -6,9 +6,7 @@ layout: homepage
 
 <h2 style="margin: 60px 0px 10px;">Short Bio.</h2>
 
-I am currently pursuing a PhD degree at [The Chinese University of Hong Kong (CUHK)](https://www.cuhk.edu.hk). I'm very fortunate to be supervised by [Prof. Yue Chen](https://sites.google.com/view/academicyuechen/home). Prior to this, I earned my Master's degree and Bachelor's degree in [CUHK-Shenzhen](https://www.cuhk.edu.cn), where I collaborated with [Prof. Junhua Zhao](https://sse.cuhk.edu.cn/en/faculty/zhaojunhua).
-
-Currently, I work at the nexus of smart grid technology, AI, and optimization techniques.
+I am currently pursuing a PhD degree at [Boston University School of Public Health](https://www.bu.edu/sph/). 
 
 ## News
 - **[Nov. 7, 2024]** One survey paper about LLM-enhanced RL was accepted to *IEEE Transactions on Neural Networks and Learning Systems*.
@@ -22,4 +20,3 @@ Currently, I work at the nexus of smart grid technology, AI, and optimization te
 
 {% include_relative _includes/services.md %}
 
-{% include_relative _includes/contact.md %}
