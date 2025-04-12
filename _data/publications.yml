@@ -1,10 +1,10 @@
 main:
 
   - title: "Rare variants in long non-coding RNAs are associated with blood lipid levels in the TOPMed whole-genome sequencing study"
-    authors: Yuxuan Wang, Gina Peloso* (*Corresponding authors)
-    conference_short: AJHG
-    conference: American Journal of Human Genetics, 2023.
-    pdf: https://arxiv.org/pdf/2306.00988.pdf
+    authors: Yuxuan Wang, Margaret Sunitha Selvaraj,Xihao Li, ..., Xihong Lin, Pradeep Natarajan, Gina M. Peloso* (*Corresponding authors)
+    journal_short: AJHG
+    journal: American Journal of Human Genetics, 2023.
+    pdf: ./assets/files/lncRNA.pdf
     code: https://github.com/yxwyx/lncRNA-paper
-    page: https://class-il.mpi-inf.mpg.de/mnemonics/
+    page: https://www.cell.com/ajhg/fulltext/S0002-9297(23)00316-6
     image: ./assets/img/lncRNA.png
