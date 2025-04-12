@@ -3,7 +3,6 @@
   <head>
     <title>{{ site.title }}'s Homepage</title>
     <meta charset="UTF-8">
-    <!-- Ensuring the page is responsive -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="{{ site.description }}">
     {% if site.keywords %}
@@ -37,61 +36,17 @@
       <link rel="stylesheet" href="./assets/css/nav.css">
     {% endif %}
 
-    <!-- Additional CSS for mobile navigation -->
-    <style>
-      /* Base navigation styling */
-      .topnav {
-        overflow: hidden;
-        background-color: #333;
-      }
-      .topnav a {
-        float: left;
-        display: inline-block;
-        color: #f2f2f2;
-        text-align: center;
-        padding: 14px 16px;
-        text-decoration: none;
-      }
-      /* Hide the hamburger icon on larger screens */
-      .topnav a.icon {
-        display: none;
-      }
-      /* Mobile styles: for screens 600px wide or less */
-      @media screen and (max-width: 600px) {
-        /* Hide all links by default except the hamburger icon */
-        .topnav a:not(.icon) {
-          display: none;
-        }
-        .topnav a.icon {
-          float: right;
-          display: inline-block;
-        }
-        /* The navigation container; hidden unless activated */
-        #myLinks {
-          display: none;
-        }
-        /* When the active class is applied, display the mobile menu */
-        #myLinks.active {
-          display: inline;
-        }
-        /* Mobile styling for navigation links */
-        #myLinks a {
-          float: none;
-          display: block;
-          text-align: left;
-          border-top: 1px solid #444;
-        }
-      }
-    </style>
+    <!-- (Removed inline mobile nav style to avoid conflict; let nav.css handle mobile rules) -->
+
   </head>
   <body>
     <!-- Top Navigation -->
     <div class="topnav">
-      <!-- This container includes the navigation links (populated via your Jekyll include) -->
+      <!-- Navigation links loaded via Jekyll include -->
       <div id="myLinks">
         {% include navigation.md %}
       </div>
-      <!-- Hamburger icon: triggers toggling of the nav & reversal of link order -->
+      <!-- Hamburger icon for mobile -->
       <a href="javascript:void(0);" class="icon" onclick="toggleNav()">
         <i class="fa fa-bars"></i>
       </a>
@@ -102,7 +57,7 @@
       function toggleNav() {
         var navLinks = document.getElementById("myLinks");
         navLinks.classList.toggle("active");
-        reverseLinks(); // if you want to reverse the order as well
+        reverseLinks(); // Optional: reverse link order
         console.log("Navigation active:", navLinks.classList.contains("active"));
       }
 
@@ -112,12 +67,11 @@
         container.innerHTML = '';
         for (var i = links.length - 1; i >= 0; i--) {
           container.appendChild(links[i]);
+        }
       }
-    }
     </script>
 
-
-    <!-- Main content wrapper -->
+    <!-- Main content wrapper and other page content -->
     <div class="wrapper">
       <header>
         {% if site.avatar %}
@@ -160,8 +114,7 @@
           <p><small>Powered by Jekyll and <a href="https://github.com/yaoyao-liu/minimal-light" target="_blank" rel="noopener">Minimal Light</a> theme.</small></p>
         {% endif %}
       </section>
-      <footer>
-      </footer>
+      <footer></footer>
     </div>
 
     <!-- Back-to-Top Button Script -->

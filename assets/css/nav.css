@@ -122,21 +122,23 @@
       }
    }
 
-   @media print, screen and (max-width: 960px) { 
+   /* For mobile screens (up to 960px) */
+
+  @media print, screen and (max-width: 960px) { 
     .topnav #myLinks {
         display: none;
-      }
+    }
 
-      .topnav a.normal {
+    .topnav a.normal {
         color: white;
         float: none;
         padding: 14px 16px;
         text-decoration: none;
         font-size: 17px;
         display: block;
-      }
+    }
 
-      .topnav a.icon {
+    .topnav a.icon {
         color: white;
         display: block;
         padding: 10px 16px;
@@ -146,9 +148,9 @@
         right: 0;
         top: 0;
         margin-right:5%;
-      }
+    }
 
-      .topnav a.right {
+    .topnav a.right {
         color: white;
         float: none;
         padding: 14px 16px;
@@ -156,13 +158,10 @@
         font-size: 17px;
         display: block;
         margin-right:0;
-      }
-   }
-   
-   @media print, screen and (max-width: 960px) {
-  .topnav #myLinks.active {
-    display: block !important;
+    }
+  
+    /* When .active is applied, show the menu */
+    .topnav #myLinks.active {
+        display: block !important;
+    }
   }
-}
-
-
