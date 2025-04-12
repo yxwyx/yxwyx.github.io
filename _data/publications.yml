@@ -7,4 +7,4 @@ main:
     pdf: https://arxiv.org/pdf/2306.00988.pdf
     code: https://github.com/yxwyx/lncRNA-paper
     page: https://class-il.mpi-inf.mpg.de/mnemonics/
-    image: ./assets/img/lncRNA
+    image: ./assets/img/lncRNA.png
