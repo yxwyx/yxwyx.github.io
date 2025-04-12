@@ -18,9 +18,15 @@ I completed my undergraduate studies in Applied Biology with Biotechnology at [T
 
 {% include_relative _includes/news.md %}
 
+---
+
 {% include_relative _includes/publications.md %}
 
+---
+
 {% include_relative _includes/talks.md %}
+
+---
 
 {% include_relative _includes/teaching.md %}
 
