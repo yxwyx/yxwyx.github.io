@@ -6,5 +6,13 @@ main:
     journal: American Journal of Human Genetics, 2023.
     pdf: ./assets/files/lncRNA.pdf
     code: https://github.com/yxwyx/lncRNA-paper
-    page: https://www.cell.com/ajhg/fulltext/S0002-9297(23)00316-6
+    website: https://www.cell.com/ajhg/fulltext/S0002-9297(23)00316-6
     image: ./assets/img/lncRNA.png
+
+  - title: "Implicating genes, pleiotropy, and sexual dimorphism at blood lipid loci through multi-ancestry meta-analysis"
+    authors: Stavroula Kanoni†, Sarah E. Graham†, Yuxuan Wang†, Ida Surakka†, Shweta Ramdas†, Xiang Zhu†, ..., Cristen J. Willer*, Themistocles L. Assimes and Gina M. Peloso* († Co-first authors, *Corresponding authors)
+    journal: Genome Biology, 2022.
+    pdf: ./assets/files/glgc2.pdf
+    code: https://github.com/Global-Lipids-Genetics/glgc_biology_paper
+    website: https://genomebiology.biomedcentral.com/articles/10.1186/s13059-022-02837-1
+    image: ./assets/img/glgc2.png
