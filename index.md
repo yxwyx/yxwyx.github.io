@@ -26,6 +26,7 @@ I completed my undergraduate studies in Applied Biology with Biotechnology at [T
 
 ---
 
-<div style="text-align: center; margin-top: 40px;">
+<div style="width: 250px; margin: 0 auto;">
   <script type="text/javascript" id="clustrmaps" src="//clustrmaps.com/map_v2.js?d=O3yQoNAMToJtZhrqHyMefFxb-2_PzP2F5bbGT5qTuio&cl=ffffff&w=a"></script>
 </div>
+

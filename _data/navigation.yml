@@ -11,7 +11,7 @@ main:
     right: true
     
   - title: "Talks"
-    url: ./#invited-talks
+    url: ./#talks
 
   - title: "Publications"
     url: ./#publications
