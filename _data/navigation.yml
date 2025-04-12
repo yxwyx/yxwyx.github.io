@@ -4,18 +4,15 @@ main:
 
   
 
-  - title: "Services"
-    url: ./#services
-    right: true
+  #- title: "Services"
+  #  url: ./#services
+    
+  #- title: "Talks"
+  #  url: ./#invited-talks
 
-  - title: "Talks"
-    url: ./#invited-talks
-
-  - title: "Services"
-    url: ./#services
-
-  - title: "Teachings"
+  - title: "Teaching"
     url: ./#teaching
+    right: true
 
   - title: "Publications"
     url: ./#publications
