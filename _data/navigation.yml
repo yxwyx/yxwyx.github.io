@@ -5,12 +5,13 @@ main:
   #- title: "Services"
   #  url: ./#services
     
-  #- title: "Talks"
-  #  url: ./#invited-talks
 
   - title: "Teaching"
     url: ./#teaching
     right: true
+    
+  - title: "Talks"
+    url: ./#invited-talks
 
   - title: "Publications"
     url: ./#publications
