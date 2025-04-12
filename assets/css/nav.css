@@ -159,4 +159,10 @@
       }
    }
    
+   @media print, screen and (max-width: 960px) {
+  .topnav #myLinks.active {
+    display: block !important;
+  }
+}
+
 
