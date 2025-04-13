@@ -1,7 +1,7 @@
 main:
 
   - title: "Rare variants in long non-coding RNAs are associated with blood lipid levels in the TOPMed whole-genome sequencing study"
-    authors: Yuxuan Wang, Margaret Sunitha Selvaraj,Xihao Li, ..., Xihong Lin, Pradeep Natarajan, Gina M. Peloso* (*Corresponding authors)
+    authors: Yuxuan Wang, Margaret Sunitha Selvaraj, Xihao Li, ..., Xihong Lin, Pradeep Natarajan, Gina M. Peloso* (*Corresponding authors)
     journal_short: AJHG
     journal: American Journal of Human Genetics, 2023.
     pdf: ./assets/files/lncRNA.pdf
@@ -14,6 +14,23 @@ main:
     journal_short: Genome Biology
     journal: Genome Biology, 2022.
     pdf: ./assets/files/glgc2.pdf
-    #code: https://github.com/Global-Lipids-Genetics/glgc_biology_paper
+    code: https://github.com/Global-Lipids-Genetics/glgc_biology_paper
     website: https://genomebiology.biomedcentral.com/articles/10.1186/s13059-022-02837-1
     image: ./assets/img/glgc2.png
+    
+  - title: "A multi-layer functional genomic analysis to understand noncoding genetic variation in lipids"
+    authors: Shweta Ramdas†, Jonathan Judd†, Sarah E. Graham†, Stavroula Kanoni†, Yuxuan Wang†, ..., Cristen J. Willer, Xiang Zhu*, Christopher D. Brown* († Co-first authors, *Corresponding authors)
+    journal_short: AJHG
+    journal: American Journal of Human Genetics, 2022.
+    pdf: ./assets/files/glgc3.pdf
+    website: https://www.cell.com/ajhg/fulltext/S0002-9297(22)00265-8
+    image: ./assets/img/glgc3.png
+    
+  - title: "A comparison of analytical strategies for cluster randomized trials with survival outcomes in the presence of competing risks"
+    authors: Fan Li*, Wenhan Lu, Yuxuan Wang, Zehua Pan, Erich J Greene, Guanqun Meng, Can Meng, Ondrej Blaha, Yize Zhao, Peter Peduzzi, Denise Esserman († Co-first authors, *Corresponding authors)
+    journal_short: Stat. Methods Med. Res.
+    journal: Statistical Methods in Medical Research, 2022.
+    pdf: ./assets/files/simCRT.pdf
+    code: https://github.com/yxwyx/simCRTs
+    website: https://journals.sagepub.com/doi/abs/10.1177/09622802221085080
+    image: ./assets/img/simCRT.png
