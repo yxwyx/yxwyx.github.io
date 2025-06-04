@@ -1,4 +1,9 @@
-## Talks
+## Presentations
+
+**RePlei: Replication of pleiotropic loci with GWAS summary statistics**
+
+-   *NESS 2025, New Haven, CT – Summer 2025*
+
 
 **Assessing Fine-Mapping Methods to Identify Causal Variants at the APOE Locus in Alzheimer's Disease**
 
