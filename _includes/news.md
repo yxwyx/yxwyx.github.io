@@ -1,6 +1,6 @@
 ## News
 
--   **[Jan. 2025]** Yuxuan will present his thesis work, "RePlei: Replication of pleiotropic loci with GWAS summary statistics" at the New England Statistical Symposium 2025, New Haven, CT. 
+-   **[Jun. 2025]** Yuxuan will present his thesis work, "RePlei: Replication of pleiotropic loci with GWAS summary statistics" at the New England Statistical Symposium 2025, New Haven, CT. 
 
 -   **[Jan. 2025]** We’re overjoyed to share that our family has grown — a little one joined us recently, happy and healthy.
 
