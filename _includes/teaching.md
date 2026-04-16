@@ -1,4 +1,4 @@
-## Teaching
+<h2 class="section-heading" id="teaching">Teaching</h2>
 
 **Teaching Assistant, Boston University**  
 - SPH BS 858 Statistical Genetics I (Fall 2022)  

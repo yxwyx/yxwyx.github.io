@@ -1,4 +1,4 @@
-## Presentations
+<h2 class="section-heading" id="presentations">Presentations</h2>
 
 **RePlei: Replication of pleiotropic loci with GWAS summary statistics**
 
