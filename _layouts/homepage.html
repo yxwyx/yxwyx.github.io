@@ -12,6 +12,47 @@
       <link rel="canonical" href="{{ site.canonical }}" />
     {% endif %}
 
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="{{ site.title }}">
+    <meta property="og:description" content="{{ site.description }}">
+    <meta property="og:url" content="{{ site.url }}">
+    <meta property="og:image" content="{{ site.url }}/assets/img/avatar.jpg">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="{{ site.title }}">
+    <meta name="twitter:description" content="{{ site.description }}">
+    <meta name="twitter:image" content="{{ site.url }}/assets/img/avatar.jpg">
+    {% if site.twitter %}<meta name="twitter:site" content="@kyleyx_w">{% endif %}
+
+    <!-- JSON-LD Person Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "{{ site.title }}",
+      "url": "{{ site.url }}",
+      "image": "{{ site.url }}/assets/img/avatar.jpg",
+      "jobTitle": "{{ site.position }}",
+      "worksFor": {
+        "@type": "Organization",
+        "name": "{{ site.affiliation }}",
+        "url": "{{ site.affiliation_link }}"
+      },
+      "alumniOf": [
+        { "@type": "CollegeOrUniversity", "name": "Yale University" },
+        { "@type": "CollegeOrUniversity", "name": "The Hong Kong Polytechnic University" }
+      ],
+      "sameAs": [
+        "{{ site.google_scholar }}",
+        "{{ site.github_link }}",
+        "{{ site.linkedin }}",
+        "{{ site.twitter }}"
+      ]
+    }
+    </script>
+
     <!-- Favicons and touch icons -->
     <link rel="icon" media="(prefers-color-scheme:dark)" href="{{ site.favicon_dark }}" type="image/png">
     <link rel="icon" media="(prefers-color-scheme:light)" href="{{ site.favicon }}" type="image/png">
@@ -142,20 +183,12 @@
     <!-- Additional Scripts -->
     <script src="{{ '/assets/js/scale.fix.js' | relative_url }}"></script>
     {% if site.google_analytics %}
+      <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.google_analytics }}"></script>
       <script>
-        (function(i,s,o,g,r,a,m){
-          i['GoogleAnalyticsObject']=r;
-          i[r]=i[r]||function(){
-            (i[r].q=i[r].q||[]).push(arguments)
-          }, i[r].l=1*new Date();
-          a=s.createElement(o);
-          m=s.getElementsByTagName(o)[0];
-          a.async=1;
-          a.src=g;
-          m.parentNode.insertBefore(a,m)
-        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-        ga('create', '{{ site.google_analytics }}', 'auto');
-        ga('send', 'pageview');
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', '{{ site.google_analytics }}');
       </script>
     {% endif %}
   </body>
