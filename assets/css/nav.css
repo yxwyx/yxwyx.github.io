@@ -115,6 +115,25 @@
 
    }
 
+/* ── Research Interest Tags ───────────────────────────────── */
+.research-tags {
+  margin: 18px 0 4px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.research-tags .tag {
+  background-color: #eef3fb;
+  color: #0f4d92;
+  border: 1px solid #c2d4ec;
+  border-radius: 20px;
+  padding: 3px 13px;
+  font-size: 0.82rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
 /* ── Section Headings ─────────────────────────────────────── */
 .section-heading {
   border-left: 4px solid #0f4d92;

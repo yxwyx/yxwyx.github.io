@@ -12,6 +12,14 @@ Prior to my doctoral studies, I earned my master degree in Biostatistics from [Y
 
 I completed my undergraduate studies in Applied Biology with Biotechnology at [The Hong Kong Polytechnic University](https://www.polyu.edu.hk/), graduating with First Class Honours.
 
+<div class="research-tags">
+  <span class="tag">GWAS</span>
+  <span class="tag">Rare Variants</span>
+  <span class="tag">Bayesian Methods</span>
+  <span class="tag">Cardiometabolic Traits</span>
+  <span class="tag">TOPMed · GLGC</span>
+</div>
+
 {% include_relative _includes/news.md %}
 
 {% include_relative _includes/publications.md %}
