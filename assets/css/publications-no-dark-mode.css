@@ -36,7 +36,21 @@ blockquote { background: var(--global-bg-color); border-left: 2px solid var(--gl
 
 .publications ol.bibliography { list-style: none; padding: 0; margin-top: 0; }
 
-.publications ol.bibliography li { min-height: 110px; margin-bottom: 0.5rem; }
+.publications ol.bibliography li {
+  min-height: 110px;
+  margin-bottom: 1.2rem;
+  background: #fff;
+  border: 1px solid #e2eaf4;
+  border-radius: 8px;
+  padding: 14px 16px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.publications ol.bibliography li:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 18px rgba(15, 77, 146, 0.13);
+}
 
 .publications ol.bibliography li .abbr { height: 8rem; margin-bottom: 0.5rem; }
 

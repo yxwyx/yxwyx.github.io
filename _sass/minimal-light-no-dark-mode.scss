@@ -171,9 +171,8 @@ papertitle {
         border-radius: 100%;
         width: 45%;
         padding: 20px;
-        // border: 1px solid #ddd;
-        // padding: 3px;
-        // box-shadow: 0 -1px 5px 1px rgba(200, 200, 200, 0.3);
+        border: 3px solid #0f4d92;
+        box-shadow: 0 4px 14px rgba(15, 77, 146, 0.18);
       }
 
     #header .image.avatar {
@@ -288,7 +287,10 @@ header {
   position:fixed;
   -webkit-font-smoothing:subpixel-antialiased;
   padding-top:4.0em;
-  text-align:center
+  text-align:center;
+  background: linear-gradient(180deg, #eef3fb 0%, #ffffff 60%);
+  border-right: 1px solid #dce6f0;
+  height: 100vh;
 }
 
 
