@@ -98,8 +98,7 @@
       function toggleNav() {
         var navLinks = document.getElementById("myLinks");
         navLinks.classList.toggle("active");
-        reverseLinks(); // Optional: reverse link order
-        console.log("Navigation active:", navLinks.classList.contains("active"));
+        reverseLinks();
       }
 
       function reverseLinks() {
@@ -155,7 +154,11 @@
           <p><small>Powered by Jekyll and <a href="https://github.com/yaoyao-liu/minimal-light" target="_blank" rel="noopener">Minimal Light</a> theme.</small></p>
         {% endif %}
       </section>
-      <footer></footer>
+      <footer>
+        <p style="font-size:0.78rem; color:#999; text-align:center; margin-top:2rem;">
+          &copy; {{ 'now' | date: "%Y" }} Yuxuan Wang &nbsp;·&nbsp; Last updated {{ site.time | date: "%B %Y" }}
+        </p>
+      </footer>
     </div>
 
     <!-- Back-to-Top Button Script -->
