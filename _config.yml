@@ -1,14 +1,16 @@
 # Basic Information
 title: Yuxuan Wang
-position: PhD Student
-affiliation: Boston University
-affiliation_link: https://www.bu.edu/sph/departments/biostatistics/
+position: Postdoctoral Researcher
+affiliation: Broad Institute
+affiliation_link: https://www.broadinstitute.org/
 email: yxw[AT]bu.edu
+url: https://www.yuxuanwang.org
+canonical: https://www.yuxuanwang.org
 
 # Search Engine Optimization (SEO)
 # The following information is used to improve the website traffic from search engines, e.g., Google.
-keywords: yuxuan wang, wang yuxuan, biostatistics, human genetics, statistics, yale university, boston university
-description: Yuxuan Wang is a PhD student at Boston University. His research lies in statistical genetics.
+keywords: yuxuan wang, wang yuxuan, biostatistics, human genetics, statistical genetics, gwas, rare variants, broad institute, boston university
+description: Yuxuan Wang is a Postdoctoral Researcher at the Broad Institute. His research focuses on statistical methods for genetic association studies, GWAS meta-analysis, and Bayesian frameworks for complex traits.
 
 # The option is used to show the last update time.
 enable_last_update: false
@@ -41,7 +43,7 @@ font: "Serif" # or "Sans Serif"
 
 # Google Analytics ID
 # Please remove this if you don't use Google Analytics
-# google_analytics: G-R1YMLR9CBQ
+google_analytics: G-R1YMLR9CBQ
 
 # Use this project as a remote theme for GitHub Pages
 # See the guide here: https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll/adding-a-theme-to-your-github-pages-site-using-jekyll
