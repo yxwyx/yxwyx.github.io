@@ -53,21 +53,25 @@
     }
     </script>
 
+    <!-- Dark mode: apply saved preference before CSS loads to prevent flash -->
+    <script>if(localStorage.getItem('theme')==='dark')document.documentElement.classList.add('dark');</script>
+
     <!-- Favicons and touch icons -->
     <link rel="icon" media="(prefers-color-scheme:dark)" href="{{ site.favicon_dark }}" type="image/png">
     <link rel="icon" media="(prefers-color-scheme:light)" href="{{ site.favicon }}" type="image/png">
     <script src="./assets/js/favicon-switcher.js" type="application/javascript"></script>
 
-    <!-- External CSS for icons and brand styling -->
+    <!-- External CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ=" crossorigin="anonymous">
-    
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="anonymous">
+
     {% if site.font == "Sans Serif" %}
       <link rel="stylesheet" href="./assets/css/font_sans_serif.css">
     {% else %}
       <link rel="stylesheet" href="./assets/css/font.css">
     {% endif %}
-    
+
     {% if site.auto_dark_mode %}
       <link rel="stylesheet" href="./assets/css/style.css">
       <link rel="stylesheet" href="./assets/css/publications.css">
@@ -77,30 +81,27 @@
       <link rel="stylesheet" href="./assets/css/nav.css">
     {% endif %}
 
-    <!-- (Removed inline mobile nav style to avoid conflict; let nav.css handle mobile rules) -->
-
   </head>
   <body>
     <!-- Top Navigation -->
     <div class="topnav">
-      <!-- Navigation links loaded via Jekyll include -->
       <div id="myLinks">
         {% include navigation.md %}
       </div>
-      <!-- Hamburger icon for mobile -->
+      <button id="dark-mode-toggle" class="dark-toggle" title="Toggle dark mode">
+        <i class="fas fa-moon"></i>
+      </button>
       <a href="javascript:void(0);" class="icon" onclick="toggleNav()">
         <i class="fa fa-bars"></i>
       </a>
     </div>
 
-    <!-- JavaScript for mobile nav functionality -->
     <script>
       function toggleNav() {
         var navLinks = document.getElementById("myLinks");
         navLinks.classList.toggle("active");
         reverseLinks();
       }
-
       function reverseLinks() {
         var container = document.getElementById("myLinks");
         var links = Array.from(container.getElementsByTagName('a'));
@@ -111,7 +112,6 @@
       }
     </script>
 
-    <!-- Main content wrapper and other page content -->
     <div class="wrapper">
       <header>
         {% if site.avatar %}
@@ -145,6 +145,24 @@
             <a href="{{ site.twitter }}"><i class="fab fa-twitter"></i></a>
           {% endif %}
         </div>
+
+        <!-- Citation Sparkline -->
+        <div class="citation-widget">
+          <div class="citation-label">
+            <i class="ai ai-google-scholar" style="font-size:0.9rem;"></i>
+            Cited by <a id="citation-total" href="{{ site.google_scholar }}" target="_blank" rel="noopener">…</a>
+          </div>
+          <div id="citation-spark"></div>
+        </div>
+
+        <!-- Visitor Map (ClustrMaps) -->
+        <!-- To activate: register your site at clustrmaps.com and replace the script below -->
+        <div class="clustrmaps-widget">
+          <script type="text/javascript" id="clustrmaps"
+            src="//cdn.clustrmaps.com/map_v2.js?cl=ffffff&w=180&t=n&d=placeholder&co=0f4d92&ct=ffffff&cmo=3acc3a&cmn=ff5353">
+          </script>
+        </div>
+
         <br>
       </header>
       <section>
@@ -161,30 +179,58 @@
       </footer>
     </div>
 
-    <!-- Back-to-Top Button Script -->
+    <!-- Back-to-Top -->
     <script src="./assets/js/vanilla-back-to-top.min.js"></script>
     <script>
-      addBackToTop({
-        backgroundColor: '#fff',
-        innerHTML: 'Back to Top',
-        textColor: '#333'
-      });
+      addBackToTop({ backgroundColor: '#fff', innerHTML: 'Back to Top', textColor: '#333' });
     </script>
-    
     <style>
       #back-to-top {
-        border: 1px solid #ccc;
-        border-radius: 0;
-        font-size: 15px;
-        width: 100px;
-        text-align: center;
-        line-height: 30px;
-        height: 30px;
+        border: 1px solid #ccc; border-radius: 0;
+        font-size: 15px; width: 100px;
+        text-align: center; line-height: 30px; height: 30px;
       }
     </style>
 
-    <!-- Additional Scripts -->
+    <!-- Leaflet Map -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin="anonymous"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        var el = document.getElementById('talks-map');
+        var dataEl = document.getElementById('talks-data');
+        if (!el || !dataEl) return;
+
+        var talks = JSON.parse(dataEl.textContent);
+        var map = L.map('talks-map', { scrollWheelZoom: false }).setView([38, -95], 3);
+
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+          attribution: '&copy; <a href="https://carto.com/">CARTO</a>',
+          maxZoom: 10
+        }).addTo(map);
+
+        var icon = L.divIcon({
+          className: '',
+          html: '<div style="width:12px;height:12px;background:#0f4d92;border:2px solid #fff;border-radius:50%;box-shadow:0 1px 4px rgba(0,0,0,0.4)"></div>',
+          iconSize: [12, 12],
+          iconAnchor: [6, 6]
+        });
+
+        talks.forEach(function (t) {
+          if (t.lat && t.lng) {
+            L.marker([t.lat, t.lng], { icon: icon })
+              .addTo(map)
+              .bindPopup('<strong>' + t.venue + ' ' + t.year + '</strong><br>' + t.location + '<br><em>' + t.title + '</em>');
+          }
+        });
+      });
+    </script>
+
+    <!-- Feature Scripts -->
+    <script src="./assets/js/dark-mode.js"></script>
+    <script src="./assets/js/citations.js"></script>
+    <script src="./assets/js/bibtex.js"></script>
     <script src="{{ '/assets/js/scale.fix.js' | relative_url }}"></script>
+
     {% if site.google_analytics %}
       <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.google_analytics }}"></script>
       <script>

@@ -5,9 +5,10 @@ main:
     journal_short: AJHG
     journal: American Journal of Human Genetics, 2023.
     pdf: ./assets/files/lncRNA.pdf
-    #code: https://github.com/yxwyx/lncRNA-paper
     website: https://www.cell.com/ajhg/fulltext/S0002-9297(23)00316-6
     image: ./assets/img/lncRNA.jpg
+    doi: 10.1016/j.ajhg.2023.08.007
+    bibtex: "@article{wang2023rare,\n  title={Rare variants in long non-coding RNAs are associated with blood lipid levels in the TOPMed whole-genome sequencing study},\n  author={Wang, Yuxuan and Selvaraj, Margaret Sunitha and Li, Xihao and others},\n  journal={American Journal of Human Genetics},\n  volume={110},\n  pages={1737--1750},\n  year={2023},\n  doi={10.1016/j.ajhg.2023.08.007}\n}"
 
   - title: "Implicating genes, pleiotropy, and sexual dimorphism at blood lipid loci through multi-ancestry meta-analysis"
     authors: Stavroula Kanoni†, Sarah E. Graham†, Yuxuan Wang†, Ida Surakka†, Shweta Ramdas†, Xiang Zhu†, ..., Cristen J. Willer*, Themistocles L. Assimes and Gina M. Peloso* († Co-first authors, *Corresponding authors)
@@ -17,7 +18,9 @@ main:
     code: https://github.com/Global-Lipids-Genetics/glgc_biology_paper
     website: https://genomebiology.biomedcentral.com/articles/10.1186/s13059-022-02837-1
     image: ./assets/img/glgc2.jpg
-    
+    doi: 10.1186/s13059-022-02837-1
+    bibtex: "@article{kanoni2022implicating,\n  title={Implicating genes, pleiotropy, and sexual dimorphism at blood lipid loci through multi-ancestry meta-analysis},\n  author={Kanoni, Stavroula and Graham, Sarah E and Wang, Yuxuan and others},\n  journal={Genome Biology},\n  volume={23},\n  pages={268},\n  year={2022},\n  doi={10.1186/s13059-022-02837-1}\n}"
+
   - title: "A multi-layer functional genomic analysis to understand noncoding genetic variation in lipids"
     authors: Shweta Ramdas†, Jonathan Judd†, Sarah E. Graham†, Stavroula Kanoni†, Yuxuan Wang†, ..., Cristen J. Willer, Xiang Zhu*, Christopher D. Brown* († Co-first authors, *Corresponding authors)
     journal_short: AJHG
@@ -25,7 +28,9 @@ main:
     pdf: ./assets/files/glgc3.pdf
     website: https://www.cell.com/ajhg/fulltext/S0002-9297(22)00265-8
     image: ./assets/img/glgc3.jpg
-    
+    doi: 10.1016/j.ajhg.2022.05.012
+    bibtex: "@article{ramdas2022multi,\n  title={A multi-layer functional genomic analysis to understand noncoding genetic variation in lipids},\n  author={Ramdas, Shweta and Judd, Jonathan and Graham, Sarah E and Wang, Yuxuan and others},\n  journal={American Journal of Human Genetics},\n  volume={109},\n  pages={1366--1387},\n  year={2022},\n  doi={10.1016/j.ajhg.2022.05.012}\n}"
+
   - title: "A comparison of analytical strategies for cluster randomized trials with survival outcomes in the presence of competing risks"
     authors: Fan Li*, Wenhan Lu, Yuxuan Wang, Zehua Pan, Erich J Greene, Guanqun Meng, Can Meng, Ondrej Blaha, Yize Zhao, Peter Peduzzi, Denise Esserman († Co-first authors, *Corresponding authors)
     journal_short: Stat. Methods Med. Res.
@@ -34,3 +39,5 @@ main:
     code: https://github.com/yxwyx/simCRTs
     website: https://journals.sagepub.com/doi/abs/10.1177/09622802221085080
     image: ./assets/img/simCRT.png
+    doi: 10.1177/09622802221085080
+    bibtex: "@article{li2022comparison,\n  title={A comparison of analytical strategies for cluster randomized trials with survival outcomes in the presence of competing risks},\n  author={Li, Fan and Lu, Wenhan and Wang, Yuxuan and others},\n  journal={Statistical Methods in Medical Research},\n  volume={31},\n  pages={1505--1521},\n  year={2022},\n  doi={10.1177/09622802221085080}\n}"

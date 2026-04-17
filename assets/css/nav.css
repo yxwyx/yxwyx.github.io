@@ -248,3 +248,95 @@ html { scroll-behavior: smooth; }
         display: block !important;
     }
   }
+
+/* ── Dark Mode Toggle Button ──────────────────────────────── */
+.dark-toggle {
+  float: left;
+  background: transparent;
+  border: none;
+  color: #f2f2f2;
+  cursor: pointer;
+  padding: 10px 12px;
+  font-size: 15px;
+  line-height: 1.2;
+  margin-left: 30%;
+  transition: color 0.2s;
+}
+.dark-toggle:hover { color: #ffd966; }
+
+@media screen and (max-width: 1400px) and (min-width: 1201px) { .dark-toggle { margin-left: 12%; } }
+@media screen and (max-width: 1200px) and (min-width: 1001px) { .dark-toggle { margin-left: 6%; } }
+@media screen and (max-width: 1000px) { .dark-toggle { margin-left: 3%; } }
+
+/* ── Citation Widget ──────────────────────────────────────── */
+.citation-widget {
+  margin: 14px 0 10px;
+  font-size: 0.82rem;
+  color: #666;
+  text-align: center;
+}
+.citation-label { margin-bottom: 2px; }
+.citation-label a { color: #0f4d92; font-weight: 600; }
+
+/* ── ClustrMaps Widget ────────────────────────────────────── */
+.clustrmaps-widget {
+  margin: 10px auto 0;
+  text-align: center;
+}
+
+/* ── BibTeX Copied State ──────────────────────────────────── */
+.bibtex-copied { color: #2da44e !important; border-color: #2da44e !important; }
+
+/* ── Dark Mode Overrides ──────────────────────────────────── */
+html.dark {
+  --global-bg-color: #0d1117;
+  --global-theme-color: #58a6ff;
+}
+html.dark body { background: #0d1117; color: #c9d1d9; }
+html.dark header {
+  background: linear-gradient(180deg, #161b22 0%, #0d1117 60%);
+  border-right-color: #21262d;
+}
+html.dark h1, html.dark h2, html.dark h3,
+html.dark h4, html.dark h5, html.dark h6 { color: #79aaef; }
+html.dark .section-heading { color: #c9d1d9; border-left-color: #58a6ff; }
+html.dark a { color: #58a6ff; }
+html.dark a:hover { color: #89b4fa; }
+html.dark autocolor { color: #8b949e; }
+html.dark strong { color: #e6edf3; }
+html.dark hr { background: #21262d; }
+html.dark .image.avatar img {
+  border-color: #58a6ff;
+  box-shadow: 0 4px 14px rgba(88,166,255,0.2);
+}
+html.dark .social-icons a { color: #79aaef !important; }
+html.dark section { border-color: #21262d; }
+html.dark .publications ol.bibliography li {
+  background: #161b22;
+  border-color: #21262d;
+}
+html.dark .publications ol.bibliography li:hover {
+  box-shadow: 0 6px 18px rgba(88,166,255,0.12);
+}
+html.dark .publications ol.bibliography li .links a.btn,
+html.dark .publications ol.bibliography li .links button.btn {
+  color: #c9d1d9;
+  border-color: #30363d;
+}
+html.dark .timeline::before { background-color: #21262d; }
+html.dark .timeline-item::before {
+  background-color: #58a6ff;
+  border-color: #0d1117;
+  box-shadow: 0 0 0 2px #58a6ff;
+}
+html.dark .timeline-date { color: #8b949e; }
+html.dark .research-tags .tag {
+  background: #1c2d3d;
+  border-color: #30363d;
+  color: #79aaef;
+}
+html.dark .citation-widget { color: #8b949e; }
+html.dark .citation-label a { color: #58a6ff; }
+html.dark #back-to-top { background: #161b22; color: #c9d1d9; border-color: #30363d; }
+html.dark footer p { color: #6e7681 !important; }
+html.dark .leaflet-tile-pane { filter: invert(1) hue-rotate(200deg) brightness(0.85); }
