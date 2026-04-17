@@ -146,14 +146,15 @@
           {% endif %}
         </div>
 
-        <!-- Citation Sparkline -->
+        <!-- Citation Count -->
+        {% if site.google_scholar_citations %}
         <div class="citation-widget">
-          <div class="citation-label">
-            <i class="ai ai-google-scholar" style="font-size:0.9rem;"></i>
-            Cited by <a id="citation-total" href="{{ site.google_scholar }}" target="_blank" rel="noopener">…</a>
-          </div>
-          <div id="citation-spark"></div>
+          <a href="{{ site.google_scholar }}" target="_blank" rel="noopener" class="citation-badge">
+            <i class="ai ai-google-scholar"></i>
+            Cited by {{ site.google_scholar_citations }}
+          </a>
         </div>
+        {% endif %}
 
         <!-- Visitor Map (ClustrMaps) -->
         <!-- To activate: register your site at clustrmaps.com and replace the script below -->
@@ -227,7 +228,6 @@
 
     <!-- Feature Scripts -->
     <script src="./assets/js/dark-mode.js"></script>
-    <script src="./assets/js/citations.js"></script>
     <script src="./assets/js/bibtex.js"></script>
     <script src="{{ '/assets/js/scale.fix.js' | relative_url }}"></script>
 

@@ -271,12 +271,22 @@ html { scroll-behavior: smooth; }
 /* ── Citation Widget ──────────────────────────────────────── */
 .citation-widget {
   margin: 14px 0 10px;
-  font-size: 0.82rem;
-  color: #666;
   text-align: center;
 }
-.citation-label { margin-bottom: 2px; }
-.citation-label a { color: #0f4d92; font-weight: 600; }
+.citation-badge {
+  display: inline-block;
+  background: #eef3fb;
+  border: 1px solid #c2d4ec;
+  border-radius: 20px;
+  padding: 4px 14px;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: #0f4d92 !important;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+.citation-badge:hover { background: #dce9f8; }
+.citation-badge .ai { margin-right: 5px; }
 
 /* ── ClustrMaps Widget ────────────────────────────────────── */
 .clustrmaps-widget {
@@ -335,8 +345,12 @@ html.dark .research-tags .tag {
   border-color: #30363d;
   color: #79aaef;
 }
-html.dark .citation-widget { color: #8b949e; }
-html.dark .citation-label a { color: #58a6ff; }
+html.dark .citation-badge {
+  background: #1c2d3d;
+  border-color: #30363d;
+  color: #79aaef !important;
+}
+html.dark .citation-badge:hover { background: #243447; }
 html.dark #back-to-top { background: #161b22; color: #c9d1d9; border-color: #30363d; }
 html.dark footer p { color: #6e7681 !important; }
 html.dark .leaflet-tile-pane { filter: invert(1) hue-rotate(200deg) brightness(0.85); }
