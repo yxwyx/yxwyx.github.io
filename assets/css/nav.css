@@ -1,3 +1,5 @@
+html { scroll-behavior: smooth; }
+
 /* Add a black background color to the top navigation */
 .topnav {
     background-color: #0f4d92;
