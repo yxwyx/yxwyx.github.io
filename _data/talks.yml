@@ -1,0 +1,48 @@
+- title: "RePlei: Replication of pleiotropic loci with GWAS summary statistics"
+  venue: "NESS 2025"
+  location: "New Haven, CT"
+  lat: 41.3083
+  lng: -72.9279
+  year: 2025
+
+- title: "Assessing Fine-Mapping Methods to Identify Causal Variants at the APOE Locus in Alzheimer's Disease"
+  venue: "Genentech, Inc."
+  location: "South San Francisco, CA"
+  lat: 37.6547
+  lng: -122.4077
+  year: 2024
+
+- title: "Impact of GWAS Meta-analysis Heterogeneity on Polygenic Prediction Accuracy"
+  venue: "ASHG"
+  location: "Washington, D.C."
+  lat: 38.9072
+  lng: -77.0369
+  year: 2023
+
+- title: "Rare Variants in Long Non-coding RNAs are Associated with Blood Lipid Levels in the TOPMed Whole Genome Sequencing Study"
+  venue: "ASHG"
+  location: "Los Angeles, CA"
+  lat: 34.0522
+  lng: -118.2437
+  year: 2022
+
+- title: "Rare Variants in Long Non-coding RNAs are Associated with Blood Lipid Levels in the TOPMed Whole Genome Sequencing Study"
+  venue: "BU-FHS TOPMed Working Group"
+  location: "Boston, MA"
+  lat: 42.3601
+  lng: -71.0589
+  year: 2023
+
+- title: "Integrating Multiple Gene Prioritization Methods to Identify Causal Genes"
+  venue: "Statistical Genetics Seminar, Boston University"
+  location: "Boston, MA"
+  lat: 42.3601
+  lng: -71.0589
+  year: 2021
+
+- title: "Comparison of Methods to Analyze Clustered Time-to-Event Data with Competing Risks"
+  venue: "ENAR"
+  location: "Nashville, TN"
+  lat: 36.1627
+  lng: -86.7816
+  year: 2020

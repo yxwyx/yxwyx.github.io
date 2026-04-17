@@ -1,5 +1,11 @@
 <h2 class="section-heading" id="presentations">Presentations</h2>
 
+<div id="talks-map" style="height:240px;border-radius:8px;margin:16px 0;border:1px solid #e2eaf4;"></div>
+
+<script id="talks-data" type="application/json">
+{{ site.data.talks | jsonify }}
+</script>
+
 **RePlei: Replication of pleiotropic loci with GWAS summary statistics**
 
 -   *NESS 2025, New Haven, CT – Summer 2025*
