@@ -231,6 +231,10 @@
     <script src="./assets/js/bibtex.js"></script>
     <script src="{{ '/assets/js/scale.fix.js' | relative_url }}"></script>
 
+    {% if page.extra_css %}
+      <link rel="stylesheet" href="{{ page.extra_css }}">
+    {% endif %}
+
     {% if site.google_analytics %}
       <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.google_analytics }}"></script>
       <script>
