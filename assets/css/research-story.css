@@ -1,0 +1,234 @@
+/* ── Research Story Page ─────────────────────────────────── */
+
+/* Chapter block */
+.story-chapter {
+  border-top: 3px solid #0f4d92;
+  padding-top: 2rem;
+  margin-top: 3rem;
+}
+
+.story-chapter-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #0f4d92;
+  margin-bottom: 0.3rem;
+}
+
+.story-chapter-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #111;
+}
+
+/* Narrative block */
+.story-narrative {
+  background: #f5f8fd;
+  border-left: 4px solid #0f4d92;
+  padding: 1rem 1.2rem;
+  border-radius: 0 6px 6px 0;
+  margin-bottom: 1.4rem;
+  font-size: 0.97rem;
+  line-height: 1.7;
+  color: #333;
+}
+
+/* Paper cards */
+.story-paper-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.story-paper-card {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 12px 14px;
+  margin-bottom: 10px;
+  border: 1px solid #e2eaf4;
+  border-radius: 8px;
+  background: #fff;
+  transition: box-shadow 0.18s, transform 0.18s;
+}
+
+.story-paper-card:hover {
+  box-shadow: 0 3px 12px rgba(15, 77, 146, 0.12);
+  transform: translateY(-2px);
+}
+
+/* Left meta column */
+.story-paper-meta {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  min-width: 58px;
+  padding-top: 2px;
+}
+
+/* Role badges */
+.badge-first {
+  background: #0f4d92;
+  color: #fff;
+  border-radius: 4px;
+  font-size: 0.68rem;
+  padding: 2px 7px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.badge-cofirst {
+  background: #2e7d32;
+  color: #fff;
+  border-radius: 4px;
+  font-size: 0.68rem;
+  padding: 2px 7px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* Citation chip */
+.chip-cites {
+  font-size: 0.75rem;
+  color: #555;
+  border: 1px solid #ccd7e8;
+  border-radius: 20px;
+  padding: 2px 8px;
+  background: #f0f4fb;
+  white-space: nowrap;
+}
+
+/* Paper body */
+.story-paper-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.story-paper-title {
+  font-weight: 600;
+  font-size: 0.97rem;
+  line-height: 1.4;
+  margin-bottom: 4px;
+  color: #0f4d92;
+  text-decoration: none;
+  display: block;
+}
+
+.story-paper-title:hover {
+  text-decoration: underline;
+}
+
+.story-paper-authors {
+  font-size: 0.84rem;
+  color: #555;
+  margin-bottom: 3px;
+}
+
+.story-paper-journal {
+  font-size: 0.84rem;
+  color: #666;
+  font-style: italic;
+}
+
+/* Impact bar */
+.impact-bar {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background: #0f4d92;
+  color: #fff;
+  border-radius: 10px;
+  padding: 1.4rem 1rem;
+  margin: 2rem 0;
+}
+
+.impact-stat {
+  text-align: center;
+}
+
+.impact-number {
+  font-size: 2.2rem;
+  font-weight: 700;
+  display: block;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.impact-label {
+  font-size: 0.78rem;
+  opacity: 0.85;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.impact-divider {
+  width: 1px;
+  height: 48px;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Hero narrative */
+.story-hero {
+  font-size: 1.02rem;
+  line-height: 1.75;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+/* ── Dark Mode ───────────────────────────────────────────── */
+html.dark .story-hero { color: #c9d1d9; }
+
+html.dark .story-narrative {
+  background: #1c2d3d;
+  border-left-color: #58a6ff;
+  color: #c9d1d9;
+}
+
+html.dark .story-chapter { border-top-color: #58a6ff; }
+html.dark .story-chapter-label { color: #58a6ff; }
+html.dark .story-chapter-title { color: #e6edf3; }
+
+html.dark .story-paper-card {
+  background: #161b22;
+  border-color: #21262d;
+}
+
+html.dark .story-paper-card:hover {
+  box-shadow: 0 3px 12px rgba(88, 166, 255, 0.12);
+}
+
+html.dark .story-paper-title { color: #79aaef; }
+
+html.dark .story-paper-authors { color: #8b949e; }
+html.dark .story-paper-journal { color: #8b949e; }
+
+html.dark .chip-cites {
+  background: #1c2d3d;
+  border-color: #30363d;
+  color: #8b949e;
+}
+
+html.dark .impact-bar { background: #1c2d3d; }
+
+/* ── Responsive ──────────────────────────────────────────── */
+@media screen and (max-width: 600px) {
+  .impact-bar {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .impact-divider {
+    width: 80px;
+    height: 1px;
+  }
+  .story-paper-card {
+    flex-direction: column;
+  }
+  .story-paper-meta {
+    flex-direction: row;
+    min-width: unset;
+  }
+}

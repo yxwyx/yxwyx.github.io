@@ -10,6 +10,9 @@ main:
     url: ./#teaching
     right: true
     
+  - title: "Research"
+    url: ./research.html
+
   - title: "Presentations"
     url: ./#presentations
 
