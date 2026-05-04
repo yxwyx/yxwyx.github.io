@@ -4,7 +4,7 @@
 
   <div class="timeline-item">
     <span class="timeline-date">Feb. 2026</span>
-    <span class="timeline-content">I joined the <a href="https://natarajanlab.mgh.harvard.edu/" target="_blank" rel="noopener">Natarajan Lab</a> as a Postdoctoral Researcher. Our laboratory spans the Massachusetts General Hospital Cardiovascular Research Center and Center for Genomic Medicine, Program in Medical &amp; Population Genetics of the Broad Institute of Harvard and MIT, and Harvard Medical School.</span>
+    <span class="timeline-content">I joined the <a href="https://natarajanlab.mgh.harvard.edu/" target="_blank" rel="noopener">Natarajan Lab</a> in MGH and Broad Institute as a Postdoctoral Researcher.</span>
   </div>
 
   <div class="timeline-item">
