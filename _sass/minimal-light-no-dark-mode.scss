@@ -285,6 +285,9 @@ header {
   width:232px;
   float:left;
   position:fixed;
+  left: calc(50vw - 480px);
+  top: 0;
+  z-index: 100;
   -webkit-font-smoothing:subpixel-antialiased;
   padding-top:4.0em;
   text-align:center;
