@@ -117,6 +117,13 @@ html { scroll-behavior: smooth; }
 
    }
 
+/* ── Full-width page content (no sidebar) ─────────────────── */
+.page-content {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 5rem 2rem 4rem;
+}
+
 /* ── Research Interest Tags ───────────────────────────────── */
 .research-tags {
   margin: 18px 0 4px;

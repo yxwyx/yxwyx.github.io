@@ -1,5 +1,5 @@
 ---
-layout: homepage
+layout: page
 extra_css: ./assets/css/research-story.css
 ---
 
