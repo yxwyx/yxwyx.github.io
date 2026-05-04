@@ -3,6 +3,11 @@
 <div class="timeline">
 
   <div class="timeline-item">
+    <span class="timeline-date">Feb. 2026</span>
+    <span class="timeline-content">I joined the <a href="https://natarajanlab.mgh.harvard.edu/" target="_blank" rel="noopener">Natarajan Lab</a> in MGH and Broad Institute as a Postdoctoral Researcher.</span>
+  </div>
+
+  <div class="timeline-item">
     <span class="timeline-date">Nov. 2025</span>
     <span class="timeline-content">I am thrilled to share that I successfully defended my thesis today!</span>
   </div>
