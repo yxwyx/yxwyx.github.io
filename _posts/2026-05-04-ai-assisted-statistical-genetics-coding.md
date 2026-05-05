@@ -11,7 +11,7 @@ I'm a postdoctoral researcher at the Broad Institute working on statistical gene
 
 Over the past year, AI coding agents have fundamentally changed how I work. This post covers the tools I use, the concepts that make them effective, and practical patterns for statistical genetics specifically, including how to work safely with sensitive genomic data.
 
-<p style="margin: 1.2em 0 0.5em"><a href="/assets/slides/ai-workflow-slides.html" target="_blank" rel="noopener" style="display:inline-block; background:#0f4d92; color:#fff; padding:6px 16px; border-radius:4px; text-decoration:none; font-size:0.88rem; font-family:sans-serif">&#9654; View as slides</a> <span style="font-size:0.82rem; color:#666; font-family:sans-serif">— 15-slide deck for lab meetings</span></p>
+<p style="margin: 1.2em 0 0.5em"><a href="/assets/slides/ai-workflow-slides.html" target="_blank" rel="noopener" style="display:inline-block; background:#0f4d92; color:#fff; padding:6px 16px; border-radius:4px; text-decoration:none; font-size:0.88rem; font-family:sans-serif">&#9654; View as slides</a> <span style="font-size:0.82rem; color:#666; font-family:sans-serif">— 18-slide deck for lab meetings</span></p>
 
 ## The AI toolkit
 
@@ -241,6 +241,44 @@ For researchers, the most relevant properties are:
 The tradeoff relative to Claude Code or Copilot is that OpenClaw is less focused on code editing and file manipulation, and more on being an always-available assistant across your communication channels. Think of it as complementary: Claude Code for heads-down coding sessions; OpenClaw for quick questions, job monitoring, or retrieval tasks when you are away from your IDE.
 
 It is also a useful reference implementation if you want to build a custom agent that routes to your own HPC environment — the architecture (Gateway + channel adapters + model backends) maps well onto research infrastructure.
+
+## MCP: connecting agents to external tools
+
+The [Model Context Protocol](https://modelcontextprotocol.io) (MCP) is an open standard that lets AI agents connect to external data sources and tools through a common interface. Instead of pasting PubMed abstracts into the chat, you install an MCP server and the agent can search PubMed directly. Instead of copy-pasting gnomAD allele frequencies, the agent queries gnomAD itself.
+
+The architecture is straightforward: an MCP server sits between the agent and the external resource, translating the agent's requests into API calls and returning structured results. Once a server is registered in your agent's config, you use it like any other tool — you describe what you need in plain language, the agent decides which server to call, and the result comes back into the conversation.
+
+For statistical genetics, a handful of MCP servers are immediately practical:
+
+- **PubMed / NCBI**: search literature, retrieve abstracts and metadata without leaving the coding session. Useful for verifying a method's original paper or checking whether a gene has known lipid associations.
+- **bioRxiv**: access preprint metadata and abstracts directly. Particularly useful for tracking recent GWAS results before peer review.
+- **ChEMBL**: query compound bioactivity, targets, and drug mechanisms. Relevant if you work near the drug-gene interface (lipid-lowering targets, Mendelian randomization for therapeutic targets).
+- **ClinicalTrials.gov**: search registered trials by condition or intervention. Useful for translational context around GWAS findings.
+- **gnomAD** (via custom or community servers): retrieve population-level allele frequencies, variant annotations, and constraint metrics without switching browser tabs.
+
+The practical value accumulates in workflow continuity. A typical task without MCP: you're writing a lncRNA annotation script, pause, open a browser, search gnomAD, copy a frequency, paste it back, lose your train of thought. With a gnomAD MCP server registered, you stay in the agent session and say: "check the gnomAD allele frequency for rs12345 in EUR and AFR populations." The agent calls the server, the answer appears inline, and you keep coding.
+
+Setting up MCP in Claude Code is done via the `claude mcp add` command or by editing your project's `.mcp.json`. For VS Code Copilot, MCP support has been added in recent versions — check the Copilot settings panel under "MCP Servers."
+
+The [MCP registry](https://registry.mcphub.io) lists community-maintained servers across many domains. If nothing exists for a niche resource (say, a specific population biobank), the MCP specification is simple enough to implement a lightweight server yourself in an afternoon.
+
+## Cost awareness
+
+AI agents are not free, and the cost structure is worth understanding even if the Broad's enterprise Copilot license covers part of it.
+
+**The token model**: you pay (in dollars or usage quota) per token — roughly, per word processed. Both your input (the conversation, any files you share, the context window) and the model's output count. A large codebase added to context, or a long back-and-forth debugging session, can consume tokens quickly.
+
+**Typical costs for a GWAS coding session**: a 90-minute Claude Sonnet session doing pipeline development — exploring existing scripts, writing a new REGENIE wrapper, debugging a SLURM array — runs roughly 200–400K tokens total. At current API pricing that is about $0.50–$1.50. For Opus-class models used for heavy planning, the same session costs 3–5× more. These numbers shift as pricing changes, but the relative ordering (Haiku << Sonnet << Opus, in cost) is stable.
+
+**Practical strategies**:
+
+- **Match model to task**: plan with Opus, implement with Sonnet, generate boilerplate with Haiku. Copilot Auto mode does this for you; Claude Code's `/model` command lets you do it explicitly.
+- **Don't add large files to context unless necessary**: adding a 10MB VCF header to context when you only need the column names wastes tokens on every subsequent exchange. Share what the agent actually needs — column names, file paths, a few example rows — not the whole file.
+- **Use `/compact` in Claude Code**: when a long debugging session has accumulated many turns, `/compact` condenses the conversation history while preserving the essential context. This avoids hitting the context limit mid-session and keeps costs from compounding.
+- **Prefer targeted questions over broad ones**: "why is my REGENIE step 2 producing NA p-values for chromosome 6?" costs far fewer tokens than "review my entire pipeline and tell me what's wrong." The more specific your question, the smaller the input, and the more useful the answer.
+- **Check your usage dashboard**: Claude Code's usage is visible at console.anthropic.com. Copilot usage is in your GitHub settings. Worth checking once a week when you start, so unexpected spikes don't surprise you.
+
+From June 1, 2026, GitHub Copilot Enterprise plans move to usage-based billing for some features. Check with BITS on how the Broad's agreement handles this before running extended agentic sessions.
 
 ## Tips and caveats
 

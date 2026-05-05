@@ -314,6 +314,9 @@
 <!-- ④ The toolkit ───────────────────────────────────────── -->
 <section>
   <h2>The toolkit</h2>
+  <p style="font-size:0.65em; color:var(--muted); margin: -0.4em 0 0.6em">
+    Before AI: RStudio. Now: VS Code — the only editor where all of these integrate natively.
+  </p>
 
   <table>
     <tr>
@@ -457,7 +460,39 @@
   </div>
 </section>
 
-<!-- ⑨ Prompting specificity ─────────────────────────────── -->
+<!-- ⑨ Git worktrees ──────────────────────────────────────── -->
+<section>
+  <h2>Git worktrees</h2>
+  <h3>Multiple branches checked out simultaneously</h3>
+
+  <div class="cols cols-2" style="font-size: 0.68em; gap: 1.5em">
+    <div>
+      <p style="color: var(--blue); font-weight: bold; margin: 0 0 0.4em">The problem</p>
+      <ul>
+        <li>Cluster job running on <code class="inline">main</code></li>
+        <li>You want to develop a new feature in parallel</li>
+        <li><code class="inline">git stash</code> / branch switching loses your context</li>
+      </ul>
+    </div>
+    <div>
+      <p style="color: var(--blue); font-weight: bold; margin: 0 0 0.4em">The solution</p>
+<pre style="font-size:0.85em"><code class="language-bash"># check out a second branch
+# without touching your current tree
+git worktree add ../project-dev dev-branch
+
+# now you have two directories:
+# /project       → main (cluster runs here)
+# /project-dev   → dev  (you code here)</code></pre>
+    </div>
+  </div>
+
+  <div class="callout" style="margin-top: 0.7em; font-size: 0.62em">
+    Claude Code and Copilot both respect worktree boundaries — each worktree gets its own agent context.
+    Submit jobs from <code class="inline">main</code>, develop in <code class="inline">dev-branch</code>, no interference.
+  </div>
+</section>
+
+<!-- ⑩ Prompting specificity ─────────────────────────────── -->
 <section>
   <h2>Specificity is everything</h2>
   <h3>Prompts that get good statistical code</h3>
@@ -479,7 +514,7 @@
   </ul>
 </section>
 
-<!-- ⑩ Model switching ───────────────────────────────────── -->
+<!-- ⑪ Model switching ───────────────────────────────────── -->
 <section>
   <h2>Right model for the task</h2>
   <h3>cc-switch: switching models mid-workflow</h3>
@@ -519,7 +554,7 @@ claude --model claude-opus-4-7</code></pre>
   </p>
 </section>
 
-<!-- ⑪ Sensitive data ─────────────────────────────────────── -->
+<!-- ⑫ Sensitive data ─────────────────────────────────────── -->
 <section>
   <h2>Sensitive genomic data</h2>
   <h3>The cardinal rule: never let the agent read your data files</h3>
@@ -548,7 +583,7 @@ claude --model claude-opus-4-7</code></pre>
   </div>
 </section>
 
-<!-- ⑫ OpenClaw ───────────────────────────────────────────── -->
+<!-- ⑬ OpenClaw ───────────────────────────────────────────── -->
 <section>
   <h2>OpenClaw</h2>
   <h3>A different paradigm: local-first, always-on</h3>
@@ -576,7 +611,83 @@ claude --model claude-opus-4-7</code></pre>
   </div>
 </section>
 
-<!-- ⑬ Good / bad ─────────────────────────────────────────── -->
+<!-- ⑭ MCP ────────────────────────────────────────────────── -->
+<section>
+  <h2>MCP: agents that fetch for you</h2>
+  <h3>Model Context Protocol — open standard for agent ↔ tool connections</h3>
+
+  <div class="cols cols-2" style="font-size: 0.68em; gap: 1.5em; margin-top: 0.5em">
+    <div>
+      <p style="color: var(--blue); font-weight: bold; margin: 0 0 0.4em">Without MCP</p>
+      <ul>
+        <li>Open browser → search PubMed → copy abstract → paste into chat</li>
+        <li>Go to gnomAD → look up allele frequency → switch back</li>
+        <li>Context switch every few minutes</li>
+      </ul>
+    </div>
+    <div>
+      <p style="color: var(--blue); font-weight: bold; margin: 0 0 0.4em">With MCP</p>
+      <ul>
+        <li>Agent searches PubMed inline</li>
+        <li>Agent queries gnomAD directly</li>
+        <li>You stay in the coding session</li>
+      </ul>
+    </div>
+  </div>
+
+  <div style="font-size: 0.62em; margin-top: 0.7em">
+    <strong>Relevant servers for statistical genetics:</strong><br>
+    PubMed &nbsp;·&nbsp; bioRxiv &nbsp;·&nbsp; gnomAD &nbsp;·&nbsp; ClinicalTrials.gov &nbsp;·&nbsp; ChEMBL
+  </div>
+
+  <div class="callout" style="margin-top: 0.6em; font-size: 0.6em">
+    Claude Code: <code class="inline">claude mcp add &lt;server&gt;</code> &nbsp;·&nbsp;
+    VS Code Copilot: MCP Servers panel &nbsp;·&nbsp;
+    Registry: <a href="https://registry.mcphub.io">registry.mcphub.io</a>
+  </div>
+</section>
+
+<!-- ⑮ Cost awareness ─────────────────────────────────────── -->
+<section>
+  <h2>Cost awareness</h2>
+  <h3>You pay per token — input + output</h3>
+
+  <table style="font-size: 0.65em; margin-top: 0.4em">
+    <tr>
+      <th>Model</th>
+      <th>Typical GWAS session (90 min)</th>
+      <th>Relative cost</th>
+    </tr>
+    <tr>
+      <td><span class="chip">claude-haiku-4-5</span></td>
+      <td>~200–400 K tokens</td>
+      <td style="color:#2e7d32">$</td>
+    </tr>
+    <tr>
+      <td><span class="chip">claude-sonnet-4-6</span></td>
+      <td>~200–400 K tokens</td>
+      <td style="color:#e67e22">$$</td>
+    </tr>
+    <tr>
+      <td><span class="chip">claude-opus-4-7</span></td>
+      <td>same tokens, 3–5× price</td>
+      <td style="color:#c0392b">$$$$</td>
+    </tr>
+  </table>
+
+  <ul style="font-size: 0.65em; margin-top: 0.7em">
+    <li><strong>Share column names, not files</strong> — big files burn tokens on every turn</li>
+    <li><strong><code class="inline">/compact</code></strong> in Claude Code — condenses long sessions before context fills</li>
+    <li><strong>Specific prompts</strong> cost less and get better answers</li>
+    <li>Check usage: <code class="inline">console.anthropic.com</code> / GitHub Copilot settings</li>
+  </ul>
+
+  <div class="callout warn" style="margin-top: 0.6em; font-size: 0.6em">
+    ⚠️ Copilot usage-based billing starts June 1, 2026 — verify coverage with BITS before extended sessions.
+  </div>
+</section>
+
+<!-- ⑯ Good / bad ─────────────────────────────────────────── -->
 <section>
   <h2>Honest assessment</h2>
 
@@ -609,7 +720,7 @@ claude --model claude-opus-4-7</code></pre>
   </div>
 </section>
 
-<!-- ⑭ Get started ───────────────────────────────────────── -->
+<!-- ⑰ Get started ───────────────────────────────────────── -->
 <section>
   <h2>Three things to do this week</h2>
 
@@ -629,7 +740,7 @@ claude --model claude-opus-4-7</code></pre>
   </ol>
 </section>
 
-<!-- ⑮ Q&A ─────────────────────────────────────────────────── -->
+<!-- ⑱ Q&A ─────────────────────────────────────────────────── -->
 <section class="title-slide" data-background-color="#0f4d92">
   <h1 style="font-size: 1.6em">Questions?</h1>
   <p class="subtitle">
