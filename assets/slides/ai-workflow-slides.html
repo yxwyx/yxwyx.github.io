@@ -314,6 +314,9 @@
 <!-- ④ The toolkit ───────────────────────────────────────── -->
 <section>
   <h2>The toolkit</h2>
+  <p style="font-size:0.65em; color:var(--muted); margin: -0.4em 0 0.6em">
+    Before AI: RStudio. Now: VS Code — the only editor where all of these integrate natively.
+  </p>
 
   <table>
     <tr>
@@ -457,7 +460,39 @@
   </div>
 </section>
 
-<!-- ⑨ Prompting specificity ─────────────────────────────── -->
+<!-- ⑨ Git worktrees ──────────────────────────────────────── -->
+<section>
+  <h2>Git worktrees</h2>
+  <h3>Multiple branches checked out simultaneously</h3>
+
+  <div class="cols cols-2" style="font-size: 0.68em; gap: 1.5em">
+    <div>
+      <p style="color: var(--blue); font-weight: bold; margin: 0 0 0.4em">The problem</p>
+      <ul>
+        <li>Cluster job running on <code class="inline">main</code></li>
+        <li>You want to develop a new feature in parallel</li>
+        <li><code class="inline">git stash</code> / branch switching loses your context</li>
+      </ul>
+    </div>
+    <div>
+      <p style="color: var(--blue); font-weight: bold; margin: 0 0 0.4em">The solution</p>
+<pre style="font-size:0.85em"><code class="language-bash"># check out a second branch
+# without touching your current tree
+git worktree add ../project-dev dev-branch
+
+# now you have two directories:
+# /project       → main (cluster runs here)
+# /project-dev   → dev  (you code here)</code></pre>
+    </div>
+  </div>
+
+  <div class="callout" style="margin-top: 0.7em; font-size: 0.62em">
+    Claude Code and Copilot both respect worktree boundaries — each worktree gets its own agent context.
+    Submit jobs from <code class="inline">main</code>, develop in <code class="inline">dev-branch</code>, no interference.
+  </div>
+</section>
+
+<!-- ⑩ Prompting specificity ─────────────────────────────── -->
 <section>
   <h2>Specificity is everything</h2>
   <h3>Prompts that get good statistical code</h3>
@@ -479,7 +514,7 @@
   </ul>
 </section>
 
-<!-- ⑩ Model switching ───────────────────────────────────── -->
+<!-- ⑪ Model switching ───────────────────────────────────── -->
 <section>
   <h2>Right model for the task</h2>
   <h3>cc-switch: switching models mid-workflow</h3>
@@ -519,7 +554,7 @@ claude --model claude-opus-4-7</code></pre>
   </p>
 </section>
 
-<!-- ⑪ Sensitive data ─────────────────────────────────────── -->
+<!-- ⑫ Sensitive data ─────────────────────────────────────── -->
 <section>
   <h2>Sensitive genomic data</h2>
   <h3>The cardinal rule: never let the agent read your data files</h3>
@@ -548,7 +583,7 @@ claude --model claude-opus-4-7</code></pre>
   </div>
 </section>
 
-<!-- ⑫ OpenClaw ───────────────────────────────────────────── -->
+<!-- ⑬ OpenClaw ───────────────────────────────────────────── -->
 <section>
   <h2>OpenClaw</h2>
   <h3>A different paradigm: local-first, always-on</h3>
@@ -576,7 +611,7 @@ claude --model claude-opus-4-7</code></pre>
   </div>
 </section>
 
-<!-- ⑬ Good / bad ─────────────────────────────────────────── -->
+<!-- ⑭ Good / bad ─────────────────────────────────────────── -->
 <section>
   <h2>Honest assessment</h2>
 
@@ -609,7 +644,7 @@ claude --model claude-opus-4-7</code></pre>
   </div>
 </section>
 
-<!-- ⑭ Get started ───────────────────────────────────────── -->
+<!-- ⑮ Get started ───────────────────────────────────────── -->
 <section>
   <h2>Three things to do this week</h2>
 
@@ -629,7 +664,7 @@ claude --model claude-opus-4-7</code></pre>
   </ol>
 </section>
 
-<!-- ⑮ Q&A ─────────────────────────────────────────────────── -->
+<!-- ⑯ Q&A ─────────────────────────────────────────────────── -->
 <section class="title-slide" data-background-color="#0f4d92">
   <h1 style="font-size: 1.6em">Questions?</h1>
   <p class="subtitle">
