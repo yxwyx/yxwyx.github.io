@@ -69,6 +69,22 @@
       <link rel="stylesheet" href="/assets/css/nav.css">
     {% endif %}
 
+    <!-- Full-width: hide sidebar, expand section -->
+    <style>
+      header { display: none !important; }
+      .wrapper { width: 100%; max-width: 860px; }
+      section {
+        float: none !important;
+        width: 100% !important;
+        max-width: 860px;
+        margin: 0 auto;
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+        box-sizing: border-box;
+      }
+      footer { position: static !important; float: none !important; width: 100% !important; }
+    </style>
+
   </head>
   <body>
     <!-- Top Navigation -->
