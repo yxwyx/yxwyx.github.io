@@ -7,9 +7,9 @@ excerpt: "A practical guide to integrating AI coding agents — Copilot, Claude 
 extra_css: /assets/css/blog.css
 ---
 
-I'm a postdoctoral researcher at the Broad Institute working on statistical genetics. My projects span blood lipid GWAS meta-analysis across hundreds of thousands of participants, whole-genome sequencing in the TOPMed consortium, rare variant association testing in long non-coding RNAs, and functional genomics screens linking genetic regulatory effects to complex traits. These projects are coding-intensive: on any given day I might be writing R scripts for quality control, building GWAS pipelines in Python, submitting batch jobs to a UGER cluster, or debugging statistical models.
+I'm a postdoctoral researcher at the Broad Institute working on statistical genetics. On any given day I might be writing R scripts for quality control, building GWAS pipelines, submitting batch jobs to a cluster, or debugging statistical models.
 
-Over the past year, AI coding agents have fundamentally changed how I work. This post covers the tools I use, the concepts that make them effective, and practical patterns for statistical genetics specifically — including how to work safely with sensitive genomic data.
+Over the past year, AI coding agents have fundamentally changed how I work. This post covers the tools I use, the concepts that make them effective, and practical patterns for statistical genetics specifically, including how to work safely with sensitive genomic data.
 
 <p style="margin: 1.2em 0 0.5em"><a href="/assets/slides/ai-workflow-slides.html" target="_blank" rel="noopener" style="display:inline-block; background:#0f4d92; color:#fff; padding:6px 16px; border-radius:4px; text-decoration:none; font-size:0.88rem; font-family:sans-serif">&#9654; View as slides</a> <span style="font-size:0.82rem; color:#666; font-family:sans-serif">— 15-slide deck for lab meetings</span></p>
 
