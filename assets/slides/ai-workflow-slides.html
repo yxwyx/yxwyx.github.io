@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Agents in Statistical Genetics · Yuxuan Wang</title>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/theme/white.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/plugin/highlight/github.css">
+
+  <style>
+    /* ── Typography ───────────────────────────────────────── */
+    :root {
+      --blue: #0f4d92;
+      --blue-light: #e8f0fe;
+      --blue-mid: #79aaef;
+      --text: #222;
+      --muted: #555;
+      --border: #dde4f0;
+      --code-bg: #f5f8fd;
+    }
+
+    .reveal {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 36px;
+      color: var(--text);
+    }
+
+    .reveal h1, .reveal h2, .reveal h3 {
+      color: var(--blue);
+      font-family: Georgia, serif;
+      text-transform: none;
+      letter-spacing: -0.01em;
+    }
+
+    .reveal h2 { font-size: 1.3em; margin-bottom: 0.6em; }
+    .reveal h3 { font-size: 1.0em; color: var(--muted); font-weight: normal; margin-top: 0; }
+
+    .reveal p, .reveal li { line-height: 1.5; }
+
+    .reveal ul { list-style: none; padding: 0; margin: 0; }
+    .reveal ul li { padding: 0.25em 0 0.25em 1.4em; position: relative; }
+    .reveal ul li::before {
+      content: "▸";
+      color: var(--blue);
+      position: absolute;
+      left: 0;
+      font-size: 0.8em;
+      top: 0.3em;
+    }
+
+    /* ── Title slide ──────────────────────────────────────── */
+    .title-slide {
+      background: var(--blue) !important;
+    }
+    .title-slide h1 {
+      color: #fff !important;
+      font-size: 1.4em;
+      line-height: 1.25;
+    }
+    .title-slide .subtitle {
+      color: rgba(255,255,255,0.75);
+      font-size: 0.65em;
+      margin-top: 0.5em;
+    }
+    .title-slide .meta {
+      color: rgba(255,255,255,0.55);
+      font-size: 0.5em;
+      margin-top: 2em;
+      border-top: 1px solid rgba(255,255,255,0.2);
+      padding-top: 0.8em;
+    }
+
+    /* ── Two-column layout ────────────────────────────────── */
+    .cols {
+      display: grid;
+      gap: 2em;
+      align-items: start;
+      text-align: left;
+    }
+    .cols-2 { grid-template-columns: 1fr 1fr; }
+    .cols-3 { grid-template-columns: 1fr 1fr 1fr; }
+
+    /* ── Callout boxes ────────────────────────────────────── */
+    .callout {
+      background: var(--blue-light);
+      border-left: 4px solid var(--blue);
+      border-radius: 0 6px 6px 0;
+      padding: 0.5em 0.9em;
+      margin: 0.5em 0;
+      font-size: 0.75em;
+      text-align: left;
+    }
+    .callout.warn {
+      background: #fff8e1;
+      border-left-color: #e6a817;
+    }
+    .callout.good {
+      background: #e8f5e9;
+      border-left-color: #2e7d32;
+    }
+    .callout.bad {
+      background: #fce8e8;
+      border-left-color: #c0392b;
+    }
+
+    /* ── Code ─────────────────────────────────────────────── */
+    .reveal pre {
+      width: 100%;
+      box-shadow: none;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 0.55em;
+      margin: 0.6em 0;
+    }
+    .reveal code.inline {
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      padding: 1px 6px;
+      font-size: 0.8em;
+    }
+
+    /* ── Table ────────────────────────────────────────────── */
+    .reveal table {
+      font-size: 0.7em;
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .reveal table th {
+      background: var(--blue);
+      color: #fff;
+      padding: 0.4em 0.8em;
+      text-align: left;
+    }
+    .reveal table td {
+      padding: 0.35em 0.8em;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+    .reveal table tr:nth-child(even) td { background: var(--blue-light); }
+
+    /* ── Chip/tag ─────────────────────────────────────────── */
+    .chip {
+      display: inline-block;
+      background: var(--blue-light);
+      color: var(--blue);
+      border-radius: 12px;
+      padding: 2px 12px;
+      font-size: 0.6em;
+      font-family: 'SFMono-Regular', Consolas, monospace;
+      margin: 2px;
+    }
+
+    /* ── Diagram ──────────────────────────────────────────── */
+    .diagram {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      font-size: 0.65em;
+      margin: 0.8em 0;
+    }
+    .diagram-box {
+      background: var(--blue);
+      color: #fff;
+      border-radius: 8px;
+      padding: 0.5em 1em;
+      text-align: center;
+      font-weight: bold;
+    }
+    .diagram-box.light {
+      background: var(--blue-light);
+      color: var(--blue);
+      border: 2px solid var(--blue);
+    }
+    .diagram-arrow {
+      font-size: 1.4em;
+      color: var(--blue);
+      padding: 0 0.3em;
+    }
+    .diagram-label {
+      font-size: 0.8em;
+      color: var(--muted);
+      display: block;
+      margin-top: 3px;
+    }
+
+    /* ── Step flow ────────────────────────────────────────── */
+    .steps {
+      display: flex;
+      gap: 0.4em;
+      justify-content: center;
+      margin: 0.8em 0;
+    }
+    .step {
+      flex: 1;
+      background: var(--blue-light);
+      border-radius: 8px;
+      padding: 0.6em 0.4em;
+      text-align: center;
+      font-size: 0.6em;
+    }
+    .step .step-num {
+      display: block;
+      font-size: 1.6em;
+      font-weight: bold;
+      color: var(--blue);
+    }
+    .step .step-name {
+      display: block;
+      font-weight: bold;
+      color: var(--blue);
+      margin: 0.2em 0;
+    }
+    .step .step-desc {
+      display: block;
+      color: var(--muted);
+      font-size: 0.9em;
+      line-height: 1.3;
+    }
+
+    /* ── Do / Don't ───────────────────────────────────────── */
+    .do-dont {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1em;
+      font-size: 0.7em;
+      text-align: left;
+    }
+    .do-dont .col-head {
+      font-size: 1.1em;
+      font-weight: bold;
+      margin-bottom: 0.4em;
+    }
+    .do-dont li { font-size: 0.9em; margin-bottom: 0.3em; }
+
+    /* ── Slide number override ────────────────────────────── */
+    .reveal .slide-number { font-size: 14px; color: #aaa; }
+
+    /* ── Footer ───────────────────────────────────────────── */
+    .slide-footer {
+      position: absolute;
+      bottom: 0.5em;
+      right: 1em;
+      font-size: 0.35em;
+      color: #bbb;
+    }
+  </style>
+</head>
+
+<body>
+<div class="reveal">
+<div class="slides">
+
+<!-- ① Title ─────────────────────────────────────────────── -->
+<section class="title-slide" data-background-color="#0f4d92">
+  <h1>AI Agents in<br>Statistical Genetics Research</h1>
+  <p class="subtitle">A practical guide for the lab</p>
+  <p class="meta">
+    Yuxuan Wang &nbsp;·&nbsp; Broad Institute &nbsp;·&nbsp; May 2026<br>
+    <small>slides: <a href="https://yuxuanwang.org/musings.html" style="color:rgba(255,255,255,0.6)">yuxuanwang.org/musings.html</a></small>
+  </p>
+</section>
+
+<!-- ② Why bother ────────────────────────────────────────── -->
+<section>
+  <h2>Does this actually save time?</h2>
+  <h3>Typical day in our lab</h3>
+  <ul>
+    <li>GWAS QC scripts, variant filters, HPC submissions</li>
+    <li>ggplot2 tweaks, file format conversions, debugging</li>
+    <li>Writing the same SLURM header for the 50th time</li>
+  </ul>
+  <div class="callout good" style="margin-top:1em">
+    <strong>These are all mechanical.</strong> AI handles the mechanical parts →
+    you focus on the science: choosing models, interpreting results, designing the next experiment.
+  </div>
+</section>
+
+<!-- ③ The key distinction ───────────────────────────────── -->
+<section>
+  <h2>LLM ≠ Agent</h2>
+  <h3>The distinction that matters</h3>
+
+  <div class="diagram" style="margin: 0.8em 0;">
+    <div>
+      <div class="diagram-box light">LLM</div>
+      <span class="diagram-label">text in → text out<br>stateless, no tools</span>
+    </div>
+    <div class="diagram-arrow">+</div>
+    <div>
+      <div class="diagram-box light" style="text-align:left; padding: 0.5em 0.8em; font-weight:normal">
+        <div>🔧 Tools (read files, run code)</div>
+        <div>🧠 Memory (project context)</div>
+        <div>🔁 Action loop (plan → act → observe)</div>
+        <div>📡 Orchestration (multi-agent)</div>
+      </div>
+    </div>
+    <div class="diagram-arrow">=</div>
+    <div>
+      <div class="diagram-box">Agent</div>
+      <span class="diagram-label">Claude Code<br>Copilot, OpenClaw</span>
+    </div>
+  </div>
+
+  <div class="callout" style="font-size: 0.65em">
+    Same LLM (e.g., Claude Sonnet) can run inside Claude Code, Copilot, or OpenClaw with different capabilities.
+    <strong>Cost = tokens (a model property, not an agent property).</strong>
+  </div>
+</section>
+
+<!-- ④ The toolkit ───────────────────────────────────────── -->
+<section>
+  <h2>The toolkit</h2>
+
+  <table>
+    <tr>
+      <th>Tool</th>
+      <th>Strength</th>
+      <th>Access</th>
+    </tr>
+    <tr>
+      <td><strong>Copilot in VS Code</strong></td>
+      <td>Inline completion, autopilot, auto-model</td>
+      <td>BITS enterprise license</td>
+    </tr>
+    <tr>
+      <td><strong>Claude Code</strong></td>
+      <td>Extended agentic tasks, skills, hooks</td>
+      <td>Personal subscription</td>
+    </tr>
+    <tr>
+      <td><strong>Codex / Gemini</strong></td>
+      <td>Quick generation, large context</td>
+      <td>Via Copilot auto-model</td>
+    </tr>
+    <tr>
+      <td><strong>Local models</strong><br><small>(Qwen, custom)</small></td>
+      <td>Private data, zero API cost</td>
+      <td>Self-hosted or Copilot</td>
+    </tr>
+    <tr>
+      <td><strong>OpenClaw</strong></td>
+      <td>Always-on, multi-channel (Slack, voice)</td>
+      <td>Open source</td>
+    </tr>
+  </table>
+</section>
+
+<!-- ⑤ Copilot deep-dive ──────────────────────────────────── -->
+<section>
+  <h2>GitHub Copilot in VS Code</h2>
+  <h3>More capable than you might think</h3>
+
+  <ul>
+    <li><strong>Autopilot mode</strong>: runs multi-step tasks without constant approval — configure "approve all" for uninterrupted sessions</li>
+    <li><strong>Auto model</strong>: self-selects Claude, Codex, or Gemini based on task complexity; claims ~10% cost reduction</li>
+    <li><strong>Local models</strong>: connect Qwen or a custom endpoint — OSS models are competitive for routine tasks</li>
+  </ul>
+
+  <div class="callout warn" style="margin-top: 0.8em">
+    ⚠️ <strong>Usage-based billing starts June 1, 2026</strong> — check with BITS whether the enterprise agreement covers this.
+  </div>
+</section>
+
+<!-- ⑥ The context file ───────────────────────────────────── -->
+<section>
+  <h2>The single most impactful thing</h2>
+  <h3>Write a <code class="inline">CLAUDE.md</code> for your project</h3>
+
+  <div class="cols cols-2" style="font-size: 0.7em; margin-top: 0.5em">
+    <div>
+      <p style="color: var(--blue); font-weight: bold; margin:0 0 0.4em">Without it</p>
+      <ul>
+        <li>Agent uses <code class="inline">docker</code> → your cluster uses <code class="inline">podman</code></li>
+        <li>Writes SLURM headers → you use UGER</li>
+        <li>Uses gene symbols → you need ENSG IDs</li>
+        <li>Re-explains setup every session</li>
+      </ul>
+    </div>
+    <div>
+      <p style="color: var(--blue); font-weight: bold; margin:0 0 0.4em">With it</p>
+      <ul>
+        <li>Agent knows your scheduler, runtime, data format</li>
+        <li>Writes correct code from prompt 1</li>
+        <li>Persistent across sessions</li>
+        <li><strong>20 min to write → saves hours</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="callout" style="margin-top: 0.7em; font-size: 0.6em">
+    Copilot equivalent: <code class="inline">.github/copilot-instructions.md</code> &nbsp;·&nbsp;
+    Generic: <code class="inline">AGENTS.md</code>
+  </div>
+</section>
+
+<!-- ⑦ CLAUDE.md example ─────────────────────────────────── -->
+<section>
+  <h2>A real example</h2>
+  <h3>From the perturb-seq / HepG2 project</h3>
+
+<pre><code class="language-markdown">## Scientific Focus
+- Prioritize statistical + biological correctness over style
+
+## HPC Environment (UGER / Grid Engine)
+- Scheduler: qsub / qrsh
+- GPU jobs require: -l gpu=1  -l os=RedHat8  -hard
+- Container runtime: podman (not docker)
+
+## Data Conventions
+- Always use ENSG IDs (not gene symbols)
+
+## Code Standards
+- R primary; use data.table and apply over loops
+- Commit messages ≤ 5 words
+</code></pre>
+
+  <p style="font-size: 0.6em; color: var(--muted); text-align: left; margin-top: 0.4em">
+    Now every generated job script targets UGER, uses <code>podman</code>, and references ENSG IDs — without you saying it each time.
+  </p>
+</section>
+
+<!-- ⑧ The workflow ───────────────────────────────────────── -->
+<section>
+  <h2>The workflow that works</h2>
+  <h3>Applies to any agent: Copilot, Claude Code, etc.</h3>
+
+  <div class="steps">
+    <div class="step">
+      <span class="step-num">1</span>
+      <span class="step-name">Explore</span>
+      <span class="step-desc">Find what already exists. Don't reinvent the wheel.</span>
+    </div>
+    <div class="step">
+      <span class="step-num">2</span>
+      <span class="step-name">Plan</span>
+      <span class="step-desc">Design before coding. Review the plan. Catch bad assumptions early.</span>
+    </div>
+    <div class="step">
+      <span class="step-num">3</span>
+      <span class="step-name">Implement</span>
+      <span class="step-desc">Specific prompts. Agent handles boilerplate.</span>
+    </div>
+    <div class="step">
+      <span class="step-num">4</span>
+      <span class="step-name">Commit</span>
+      <span class="step-desc">Review the diff. Clean commit message. No leaked paths.</span>
+    </div>
+  </div>
+
+  <div class="callout" style="font-size: 0.62em; margin-top: 0.4em">
+    Claude Code has a <strong>plan mode</strong> that enforces this — no code until you approve the plan.
+    Copilot autopilot does the same with manual review before each action.
+  </div>
+</section>
+
+<!-- ⑨ Prompting specificity ─────────────────────────────── -->
+<section>
+  <h2>Specificity is everything</h2>
+  <h3>Prompts that get good statistical code</h3>
+
+  <div class="callout bad">
+    ❌ &nbsp;<em>"Run a burden test"</em>
+  </div>
+
+  <div class="callout good" style="margin-top: 0.6em">
+    ✓ &nbsp;<em>"Run STAAR-O with MAF &lt; 0.01, adjusting for age, sex, and the first
+    10 PCs. Loop over all annotated protein-coding genes on chr22. Use ENSG IDs.
+    Read variants from <code>/data/topmed/wgs_chr22.pgen</code>.
+    Output to <code>results/chr22_staar.rds</code>."</em>
+  </div>
+
+  <ul style="font-size: 0.65em; margin-top: 0.7em">
+    <li>Include: method, covariates, thresholds, input paths, output format</li>
+    <li>The agent can implement any method you name — <strong>you choose the method</strong></li>
+  </ul>
+</section>
+
+<!-- ⑩ Model switching ───────────────────────────────────── -->
+<section>
+  <h2>Right model for the task</h2>
+  <h3>cc-switch: switching models mid-workflow</h3>
+
+  <table style="font-size: 0.65em">
+    <tr>
+      <th>Task</th>
+      <th>Model</th>
+      <th>Why</th>
+    </tr>
+    <tr>
+      <td>Exploration, planning, statistical reasoning</td>
+      <td><span class="chip">claude-opus-4-7</span></td>
+      <td>Best reasoning</td>
+    </tr>
+    <tr>
+      <td>Implementation, refactoring</td>
+      <td><span class="chip">claude-sonnet-4-6</span></td>
+      <td>Fast, sufficient</td>
+    </tr>
+    <tr>
+      <td>Boilerplate, format conversions</td>
+      <td><span class="chip">claude-haiku-4-5</span></td>
+      <td>Very fast, cheap</td>
+    </tr>
+  </table>
+
+<pre style="margin-top: 0.7em"><code class="language-bash"># Inside Claude Code — switch mid-session
+/model claude-sonnet-4-6
+
+# At session start
+claude --model claude-opus-4-7</code></pre>
+
+  <p style="font-size: 0.6em; color: var(--muted)">
+    Copilot <strong>Auto mode</strong> does this automatically.
+    Manual switching gives you more control over cost vs. quality.
+  </p>
+</section>
+
+<!-- ⑪ Sensitive data ─────────────────────────────────────── -->
+<section>
+  <h2>Sensitive genomic data</h2>
+  <h3>The cardinal rule: never let the agent read your data files</h3>
+
+  <div class="cols cols-2" style="font-size: 0.68em; gap: 1.5em">
+    <div>
+      <div class="callout bad">
+        ❌ &nbsp;"Here's my phenotype file,<br>write a REGENIE script"
+        <br><small style="color:#777">(data leaves your environment)</small>
+      </div>
+    </div>
+    <div>
+      <div class="callout good">
+        ✓ &nbsp;You run <code>head -3 pheno.txt</code><br>
+        ✓ &nbsp;You paste: column names, format, paths<br>
+        ✓ &nbsp;Agent writes the code<br>
+        ✓ &nbsp;You execute on the cluster
+      </div>
+    </div>
+  </div>
+
+  <div class="callout" style="margin-top: 0.7em; font-size: 0.62em">
+    Genetic / health data → DUA restrictions → IRB requirements.
+    <strong>The metadata (column names, file structure) is usually fine.
+    The data itself is not.</strong>
+  </div>
+</section>
+
+<!-- ⑫ OpenClaw ───────────────────────────────────────────── -->
+<section>
+  <h2>OpenClaw</h2>
+  <h3>A different paradigm: local-first, always-on</h3>
+
+  <div class="cols cols-2" style="font-size: 0.7em">
+    <div>
+      <ul>
+        <li>Runs on your own device (not cloud-hosted)</li>
+        <li>Answers via WhatsApp, Slack, Discord, voice</li>
+        <li>Multi-model: Claude, GPT-4o, local Qwen</li>
+        <li>Skills registry (like Claude Code)</li>
+      </ul>
+    </div>
+    <div>
+      <div class="callout" style="font-size: 0.9em">
+        <strong>When this beats Claude Code:</strong><br>
+        Monitoring a cluster job while away from your desk.<br>
+        Quick questions via Slack.<br>
+        Hands-free via voice on mobile.
+      </div>
+      <p style="margin-top: 0.6em; font-size: 0.85em; color: var(--muted)">
+        <a href="https://github.com/openclaw/openclaw">github.com/openclaw/openclaw</a>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ⑬ Good / bad ─────────────────────────────────────────── -->
+<section>
+  <h2>Honest assessment</h2>
+
+  <div class="do-dont">
+    <div>
+      <div class="col-head" style="color: #2e7d32">✓ Good at</div>
+      <ul>
+        <li>Syntactically correct R / Python / bash</li>
+        <li>Implementing a method you specify</li>
+        <li>Boilerplate (UGER scripts, argument parsers)</li>
+        <li>Refactoring messy scripts</li>
+        <li>Explaining error messages</li>
+      </ul>
+    </div>
+    <div>
+      <div class="col-head" style="color: #c0392b">✗ Not good at</div>
+      <ul>
+        <li>Choosing the right statistical method</li>
+        <li>Knowing your cluster without being told</li>
+        <li>Validating scientific results</li>
+        <li>Catching batch artifacts</li>
+        <li>Replacing domain expertise</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="callout" style="margin-top: 0.8em; font-size: 0.62em">
+    Always read every line of generated statistical code.
+    A wrong sign or dropped covariate produces wrong results silently.
+  </div>
+</section>
+
+<!-- ⑭ Get started ───────────────────────────────────────── -->
+<section>
+  <h2>Three things to do this week</h2>
+
+  <ol style="list-style: none; padding: 0; counter-reset: steps; font-size: 0.8em">
+    <li style="padding: 0.5em 0 0.5em 2.5em; position:relative; counter-increment: steps; border-bottom: 1px solid var(--border)">
+      <span style="position:absolute; left:0; font-size:1.4em; font-weight:bold; color:var(--blue); top:0.2em">1</span>
+      <strong>Enable Copilot in VS Code</strong> — contact BITS, it's covered by the enterprise license
+    </li>
+    <li style="padding: 0.5em 0 0.5em 2.5em; position:relative; counter-increment: steps; border-bottom: 1px solid var(--border)">
+      <span style="position:absolute; left:0; font-size:1.4em; font-weight:bold; color:var(--blue); top:0.2em">2</span>
+      <strong>Write a <code class="inline">CLAUDE.md</code> for your project</strong> — scheduler, container runtime, data format, package preferences
+    </li>
+    <li style="padding: 0.5em 0 0.5em 2.5em; position:relative">
+      <span style="position:absolute; left:0; font-size:1.4em; font-weight:bold; color:var(--blue); top:0.2em">3</span>
+      <strong>Try the workflow on one task you've been putting off</strong> — Explore → Plan → Implement → Commit
+    </li>
+  </ol>
+</section>
+
+<!-- ⑮ Q&A ─────────────────────────────────────────────────── -->
+<section class="title-slide" data-background-color="#0f4d92">
+  <h1 style="font-size: 1.6em">Questions?</h1>
+  <p class="subtitle">
+    Blog post &amp; slides:<br>
+    <a href="https://yuxuanwang.org/musings.html" style="color:rgba(255,255,255,0.8)">yuxuanwang.org/musings.html</a>
+  </p>
+  <p class="meta">
+    github.com/openclaw/openclaw<br>
+    github.blog · Copilot billing changes (June 1, 2026)
+  </p>
+</section>
+
+</div><!-- .slides -->
+</div><!-- .reveal -->
+
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/plugin/highlight/highlight.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/plugin/notes/notes.js"></script>
+<script>
+  Reveal.initialize({
+    hash: true,
+    slideNumber: 'c/t',
+    progress: true,
+    center: true,
+    transition: 'fade',
+    transitionSpeed: 'fast',
+    plugins: [RevealHighlight, RevealNotes],
+    highlight: { highlightOnLoad: true }
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang | default: 'en-US' }}">
+  <head>
+    <title>{{ page.title }} | {{ site.title }}</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="{{ page.excerpt | strip_html | truncatewords: 30 | default: site.description }}">
+    {% if site.keywords %}
+      <meta name="keywords" content="{{ site.keywords }}">
+    {% endif %}
+    {% if site.canonical %}
+      <link rel="canonical" href="{{ site.url }}{{ page.url }}" />
+    {% endif %}
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="{{ page.title }}">
+    <meta property="og:description" content="{{ page.excerpt | strip_html | truncatewords: 30 | default: site.description }}">
+    <meta property="og:url" content="{{ site.url }}{{ page.url }}">
+    <meta property="og:image" content="{{ site.url }}/assets/img/avatar.jpg">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="{{ page.title }}">
+    <meta name="twitter:description" content="{{ page.excerpt | strip_html | truncatewords: 30 | default: site.description }}">
+    <meta name="twitter:image" content="{{ site.url }}/assets/img/avatar.jpg">
+    {% if site.twitter %}<meta name="twitter:site" content="@kyleyx_w">{% endif %}
+
+    <!-- JSON-LD Article Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": "{{ page.title }}",
+      "author": {
+        "@type": "Person",
+        "name": "{{ site.title }}",
+        "url": "{{ site.url }}"
+      },
+      "datePublished": "{{ page.date | date_to_xmlschema }}",
+      "url": "{{ site.url }}{{ page.url }}"
+    }
+    </script>
+
+    <!-- Dark mode: apply saved preference before CSS loads to prevent flash -->
+    <script>if(localStorage.getItem('theme')==='dark')document.documentElement.classList.add('dark');</script>
+
+    <!-- Favicons and touch icons -->
+    <link rel="icon" media="(prefers-color-scheme:dark)" href="/assets/img/favicon.png" type="image/png">
+    <link rel="icon" media="(prefers-color-scheme:light)" href="/assets/img/favicon.png" type="image/png">
+    <script src="/assets/js/favicon-switcher.js" type="application/javascript"></script>
+
+    <!-- External CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ=" crossorigin="anonymous">
+
+    {% if site.font == "Sans Serif" %}
+      <link rel="stylesheet" href="/assets/css/font_sans_serif.css">
+    {% else %}
+      <link rel="stylesheet" href="/assets/css/font.css">
+    {% endif %}
+
+    {% if site.auto_dark_mode %}
+      <link rel="stylesheet" href="/assets/css/style.css">
+      <link rel="stylesheet" href="/assets/css/publications.css">
+    {% else %}
+      <link rel="stylesheet" href="/assets/css/style-no-dark-mode.css">
+      <link rel="stylesheet" href="/assets/css/publications-no-dark-mode.css">
+      <link rel="stylesheet" href="/assets/css/nav.css">
+    {% endif %}
+
+  </head>
+  <body>
+    <!-- Top Navigation -->
+    <div class="topnav">
+      <div id="myLinks">
+        {% for link in site.data.navigation.main %}
+          {% assign abs_url = link.url | replace: './', '/' %}
+          {% if link.right %}
+            <a class="normal right" href="{{ abs_url }}">{{ link.title }}</a>
+          {% else %}
+            <a class="normal" href="{{ abs_url }}">{{ link.title }}</a>
+          {% endif %}
+        {% endfor %}
+      </div>
+      <button id="dark-mode-toggle" class="dark-toggle" title="Toggle dark mode">
+        <i class="fas fa-moon"></i>
+      </button>
+      <a href="javascript:void(0);" class="icon" onclick="toggleNav()">
+        <i class="fa fa-bars"></i>
+      </a>
+    </div>
+
+    <script>
+      function toggleNav() {
+        var navLinks = document.getElementById("myLinks");
+        navLinks.classList.toggle("active");
+        reverseLinks();
+      }
+      function reverseLinks() {
+        var container = document.getElementById("myLinks");
+        var links = Array.from(container.getElementsByTagName('a'));
+        container.innerHTML = '';
+        for (var i = links.length - 1; i >= 0; i--) {
+          container.appendChild(links[i]);
+        }
+      }
+    </script>
+
+    <div class="wrapper">
+      <header>
+        {% if site.avatar %}
+          <a class="image avatar"><img src="/assets/img/avatar.jpg" alt="avatar" /></a>
+        {% endif %}
+        <h1>{{ site.title }}</h1>
+        {% if site.position %}
+          <position style="font-size:1.10rem;">{{ site.position }}</position><br>
+        {% endif %}
+        {% if site.affiliation %}
+          <a href="{{ site.affiliation_link }}" rel="noopener"><autocolor>{{ site.affiliation }}</autocolor></a><br>
+        {% endif %}
+        {% if site.email %}
+          <email>{{ site.email }}</email>
+        {% endif %}
+        <br><br>
+        <div class="social-icons">
+          {% if site.google_scholar %}
+            <a href="{{ site.google_scholar }}"><i class="ai ai-google-scholar" style="font-size:1.2rem"></i></a>
+          {% endif %}
+          {% if site.cv_link %}
+            <a href="{{ site.cv_link }}"><i class="ai ai-cv" style="font-size:1.3rem;"></i></a>
+          {% endif %}
+          {% if site.github_link %}
+            <a href="{{ site.github_link }}"><i class="fab fa-github"></i></a>
+          {% endif %}
+          {% if site.linkedin %}
+            <a href="{{ site.linkedin }}"><i class="fab fa-linkedin"></i></a>
+          {% endif %}
+          {% if site.twitter %}
+            <a href="{{ site.twitter }}"><i class="fab fa-twitter"></i></a>
+          {% endif %}
+        </div>
+
+        <!-- Citation Count -->
+        {% if site.google_scholar_citations %}
+        <div class="citation-widget">
+          <a href="{{ site.google_scholar }}" target="_blank" rel="noopener" class="citation-badge">
+            <i class="ai ai-google-scholar"></i>
+            Cited by {{ site.google_scholar_citations }}
+          </a>
+        </div>
+        {% endif %}
+
+        <br>
+      </header>
+      <section>
+        <article class="blog-post">
+          <div class="post-header">
+            <h2 class="section-heading">{{ page.title }}</h2>
+            <div class="post-meta">{{ page.date | date: "%B %-d, %Y" }}</div>
+          </div>
+          <div class="post-content">
+            {{ content }}
+          </div>
+          <div class="post-footer">
+            <a href="/musings.html">&larr; Back to all musings</a>
+          </div>
+        </article>
+        <br>
+        {% if site.enable_footnote %}
+          <p><small>Powered by Jekyll and <a href="https://github.com/yaoyao-liu/minimal-light" target="_blank" rel="noopener">Minimal Light</a> theme.</small></p>
+        {% endif %}
+      </section>
+      <footer>
+        <p style="font-size:0.78rem; color:#999; text-align:center; margin-top:2rem;">
+          &copy; {{ 'now' | date: "%Y" }} Yuxuan Wang &nbsp;&middot;&nbsp; Last updated {{ site.time | date: "%B %Y" }}
+        </p>
+      </footer>
+    </div>
+
+    <!-- Back-to-Top -->
+    <script src="/assets/js/vanilla-back-to-top.min.js"></script>
+    <script>
+      addBackToTop({ backgroundColor: '#fff', innerHTML: 'Back to Top', textColor: '#333' });
+    </script>
+    <style>
+      #back-to-top {
+        border: 1px solid #ccc; border-radius: 0;
+        font-size: 15px; width: 100px;
+        text-align: center; line-height: 30px; height: 30px;
+      }
+    </style>
+
+    <!-- Feature Scripts -->
+    <script src="/assets/js/dark-mode.js"></script>
+    <script src="/assets/js/scale.fix.js"></script>
+
+    {% if page.extra_css %}
+      <link rel="stylesheet" href="{{ page.extra_css }}">
+    {% endif %}
+
+    {% if site.google_analytics %}
+      <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.google_analytics }}"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', '{{ site.google_analytics }}');
+      </script>
+    {% endif %}
+  </body>
+</html>

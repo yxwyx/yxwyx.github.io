@@ -13,6 +13,9 @@ main:
   - title: "Research"
     url: ./research.html
 
+  - title: "Musings"
+    url: ./musings.html
+
   - title: "Presentations"
     url: ./presentations.html
 
