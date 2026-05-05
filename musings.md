@@ -1,5 +1,5 @@
 ---
-layout: homepage
+layout: wide
 permalink: /musings.html
 extra_css: /assets/css/blog.css
 ---

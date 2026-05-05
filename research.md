@@ -1,5 +1,6 @@
 ---
 layout: page
+permalink: /research.html
 extra_css: ./assets/css/research-story.css
 ---
 

@@ -7,7 +7,7 @@ excerpt: "A practical guide to integrating AI coding agents — Copilot, Claude 
 extra_css: /assets/css/blog.css
 ---
 
-I'm a postdoctoral researcher at the Broad Institute working on statistical genetics. My projects span blood lipid GWAS meta-analysis across hundreds of thousands of participants, whole-genome sequencing in the TOPMed consortium, rare variant association testing in long non-coding RNAs, and perturb-seq screens in HepG2 cells linking genetic regulatory effects to complex trait burden. These projects are coding-intensive: on any given day I might be writing R scripts for quality control, building GWAS pipelines in Python, submitting batch jobs to a UGER cluster, or debugging statistical models.
+I'm a postdoctoral researcher at the Broad Institute working on statistical genetics. My projects span blood lipid GWAS meta-analysis across hundreds of thousands of participants, whole-genome sequencing in the TOPMed consortium, rare variant association testing in long non-coding RNAs, and functional genomics screens linking genetic regulatory effects to complex traits. These projects are coding-intensive: on any given day I might be writing R scripts for quality control, building GWAS pipelines in Python, submitting batch jobs to a UGER cluster, or debugging statistical models.
 
 Over the past year, AI coding agents have fundamentally changed how I work. This post covers the tools I use, the concepts that make them effective, and practical patterns for statistical genetics specifically — including how to work safely with sensitive genomic data.
 
@@ -58,7 +58,7 @@ A good context file tells the agent:
 - What coding conventions to follow
 - What to avoid
 
-Here's an example from one of my active projects — a perturb-seq screen linking genetic regulatory effects to complex trait burden in HepG2 cells:
+Here's an example from one of my active projects:
 
 ```markdown
 ## Scientific Focus
@@ -70,7 +70,7 @@ Here's an example from one of my active projects — a perturb-seq screen linkin
 
 - Pipeline: limma differential expression → gene-level effect sizes →
   burden correlation → plots
-- Key directories: ota_data/ (reference), hepg2_limma/ (per-KO results),
+- Key directories: ref_data/ (reference), results/ (per-analysis outputs),
   data/ (intermediate), results/
 
 ## HPC Environment (UGER / Grid Engine)
