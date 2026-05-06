@@ -54,6 +54,9 @@ google_analytics: G-EH6EFLTYCT
 # Blog / Writing
 permalink: /musings/:title/
 
+plugins:
+  - jekyll-sitemap
+
 exclude:
   - Gemfile
   - Gemfile.lock
