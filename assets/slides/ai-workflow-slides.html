@@ -30,11 +30,12 @@
       color: var(--text);
     }
 
-    /* Fix bleed-through: solid white background on every slide */
+    /* Fix bleed-through + uniform height on every slide */
     .reveal .slides section {
       background: #fff;
       padding-top: 1.2em;
       box-sizing: border-box;
+      height: 100% !important;
     }
 
     /* Title slide: use padding to center content vertically */
