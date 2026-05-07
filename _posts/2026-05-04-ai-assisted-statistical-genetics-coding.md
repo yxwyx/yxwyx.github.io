@@ -11,7 +11,7 @@ I'm a postdoctoral researcher at the Broad Institute working on statistical gene
 
 Over the past year, AI coding agents have fundamentally changed how I work. This post covers the tools I use, the concepts that make them effective, and practical patterns for statistical genetics specifically — including how to work safely with sensitive genomic data.
 
-<p style="margin: 1.2em 0 0.5em"><a href="/assets/slides/ai-workflow-slides.html" target="_blank" rel="noopener" style="display:inline-block; background:#0f4d92; color:#fff; padding:6px 16px; border-radius:4px; text-decoration:none; font-size:0.88rem; font-family:sans-serif">&#9654; View as slides</a> <span style="font-size:0.82rem; color:#666; font-family:sans-serif">— 18-slide deck for lab meetings</span></p>
+<p style="margin: 1.2em 0 0.5em"><a href="/assets/slides/ai-workflow-slides.html" target="_blank" rel="noopener" style="display:inline-block; background:#0f4d92; color:#fff; padding:6px 16px; border-radius:4px; text-decoration:none; font-size:0.88rem; font-family:sans-serif">&#9654; View as slides</a> <span style="font-size:0.82rem; color:#666; font-family:sans-serif">— 19-slide deck for lab meetings</span></p>
 
 ## The AI toolkit
 
@@ -304,5 +304,7 @@ From June 1, 2026, GitHub Copilot Enterprise plans move to usage-based billing f
 2. Test on a small subset (e.g., chromosome 22) before submitting a 22-chromosome array job.
 3. Compare against known results or a previous version of the pipeline where possible.
 4. Check that test statistics, p-values, and effect sizes are in plausible ranges.
+
+**Don't get locked into one provider.** This field moves faster than any other area of software I have watched. The model that is clearly best today may be third-best in six months, and a newcomer you haven't heard of may be leading on code benchmarks by the time you read this. The practical implication: structure your workflow around the *interface* (VS Code, a context file, the Explore→Plan→Implement→Commit loop) rather than around any specific model. Copilot's Auto mode helps here — it routes to whichever model performs best for a given task, across Anthropic, OpenAI, Google, and others, without you having to manually track rankings. Outside of Copilot, it is worth spending an afternoon every few months with a new model on a real task you know well, so you have a concrete sense of where the landscape actually stands.
 
 The bottom line: AI agents do not replace statistical genetics expertise — they amplify it. They handle the mechanical parts of coding so you can focus on the science.
