@@ -445,7 +445,7 @@
   </ul>
 
   <div class="callout warn" style="margin-top: 0.8em">
-    ⚠️ <strong>Usage-based billing starts June 1, 2026</strong> — check with BITS whether the enterprise agreement covers this.
+    ⚠️ <strong>June 1, 2026: AI Credits replace premium requests</strong> — monthly plans auto-migrate; annual enterprise plans stay on PRU billing until renewal. Check with BITS.
   </div>
 </section>
 
@@ -761,50 +761,47 @@ claude --model claude-opus-4-7</code></pre>
 
 <!-- ⑯ Cost awareness ─────────────────────────────────────── -->
 <section>
-  <h2>Copilot premium requests</h2>
-  <h3>Each model tier costs a different number of premium requests per interaction</h3>
+  <h2>Copilot cost: heavier models cost more</h2>
+  <h3>Billing transitions to AI Credits on June 1, 2026 — the principle stays the same</h3>
 
   <table style="font-size: 0.63em; margin-top: 0.3em">
     <tr>
       <th>Tier</th>
-      <th>Premium requests used</th>
+      <th>Cost weight</th>
       <th>Examples</th>
       <th>Use for</th>
     </tr>
     <tr>
-      <td>Standard</td>
-      <td style="color:#2e7d32; font-weight:bold">1 per interaction</td>
-      <td>GPT-4.5, Claude Sonnet 4.6</td>
+      <td>Included / Lightweight</td>
+      <td style="color:#2e7d32; font-weight:bold">Free / low</td>
+      <td>GPT-4o, GPT-5 mini, Claude Haiku 4.5</td>
       <td>Everyday coding, QC scripts, plots</td>
     </tr>
     <tr>
       <td>Premium</td>
-      <td style="color:#e67e22; font-weight:bold">3 per interaction</td>
-      <td>Claude Opus 4.6</td>
+      <td style="color:#e67e22; font-weight:bold">Medium</td>
+      <td>Claude Sonnet 4.6, Gemini 2.5 Pro</td>
       <td>Planning, architecture, tricky bugs</td>
     </tr>
     <tr>
       <td>High-tier / Agentic</td>
-      <td style="color:#c0392b; font-weight:bold">15 per interaction</td>
-      <td>Claude Opus 4.7</td>
+      <td style="color:#c0392b; font-weight:bold">High</td>
+      <td>Claude Opus 4.7, GPT-5.5</td>
       <td>Complex multi-step pipelines only</td>
     </tr>
   </table>
 
-  <div class="callout bad" style="margin-top: 0.6em; font-size: 0.62em">
-    300 premium requests/month = 300 standard <em>or</em> 100 premium <em>or</em> <strong>just 20 high-tier</strong> interactions.
-    One Opus 4.7 agentic run spends 15 in a single shot.
+  <div class="callout warn" style="margin-top: 0.6em; font-size: 0.62em">
+    ⚠️ <strong>June 1, 2026:</strong> premium requests → <strong>GitHub AI Credits</strong> (token-based).
+    Pro: 1,000 credits/mo · Pro+: 3,900 credits/mo · Enterprise: $19/user in credits.
+    Annual plan users stay on PRU billing until renewal.
   </div>
 
   <ul style="font-size: 0.62em; margin-top: 0.5em">
-    <li>Default to <strong>Standard</strong> — sufficient for most research coding</li>
+    <li>Default to <strong>Included / Auto model</strong> — sufficient for most research coding</li>
     <li>Keep context lean — every turn draws from your allowance</li>
     <li>Check: <strong>GitHub Settings → Billing → Copilot</strong></li>
   </ul>
-
-  <div class="callout warn" style="margin-top: 0.5em; font-size: 0.58em">
-    ⚠️ Usage-based billing (overages) starts June 1, 2026 — verify BITS coverage first.
-  </div>
 </section>
 
 <!-- ⑰ Good / bad ─────────────────────────────────────────── -->
@@ -869,7 +866,7 @@ claude --model claude-opus-4-7</code></pre>
   </p>
   <p class="meta">
     github.com/openclaw/openclaw<br>
-    github.blog · Copilot billing changes (June 1, 2026)
+    docs.github.com/copilot · AI Credits transition (June 1, 2026)
   </p>
 </section>
 
