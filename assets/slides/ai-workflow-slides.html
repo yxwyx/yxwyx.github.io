@@ -403,34 +403,38 @@
     <tr>
       <th>Tool</th>
       <th>Strength</th>
-      <th>Access</th>
+      <th>Compliance (Broad / MGB)</th>
     </tr>
     <tr>
       <td><strong>Copilot in VS Code</strong></td>
       <td>Inline completion, autopilot, auto-model</td>
-      <td>BITS enterprise license</td>
+      <td style="color:#2e7d32; font-weight:bold">✓ Both</td>
     </tr>
     <tr>
       <td><strong>Claude Code</strong></td>
       <td>Extended agentic tasks, skills, hooks</td>
-      <td>Personal subscription</td>
+      <td style="color:#c0392b">✗ Neither*</td>
     </tr>
     <tr>
       <td><strong>Codex / Gemini</strong></td>
       <td>Quick generation, large context</td>
-      <td>Via Copilot auto-model</td>
+      <td style="color:#2e7d32">✓ via Copilot</td>
     </tr>
     <tr>
       <td><strong>Local models</strong><br><small>(Qwen, custom)</small></td>
       <td>Private data, zero API cost</td>
-      <td>Self-hosted or Copilot</td>
+      <td style="color:#2e7d32">✓ Self-hosted</td>
     </tr>
     <tr>
       <td><strong>OpenClaw</strong></td>
       <td>Always-on, multi-channel (Slack, voice)</td>
-      <td>Open source</td>
+      <td style="color:#e67e22">Personal use only</td>
     </tr>
   </table>
+
+  <p style="font-size:0.55em; color:var(--muted); margin: 0.4em 0 0">
+    * Claude Code is not covered by an institutional agreement at either Broad or MGB. Use Copilot for all institutional work.
+  </p>
 </section>
 
 <!-- ⑤ Copilot deep-dive ──────────────────────────────────── -->
@@ -445,7 +449,7 @@
   </ul>
 
   <div class="callout warn" style="margin-top: 0.8em">
-    ⚠️ <strong>Usage-based billing starts June 1, 2026</strong> — check with BITS whether the enterprise agreement covers this.
+    ⚠️ <strong>June 1, 2026: AI Credits replace premium requests</strong> — monthly plans auto-migrate; annual enterprise plans stay on PRU billing until renewal. Check with your institution's IT team.
   </div>
 </section>
 
@@ -761,84 +765,50 @@ claude --model claude-opus-4-7</code></pre>
 
 <!-- ⑯ Cost awareness ─────────────────────────────────────── -->
 <section>
-  <h2>Copilot premium requests</h2>
-  <h3>Each model tier costs a different number of premium requests per interaction</h3>
+  <h2>Copilot cost: heavier models cost more</h2>
+  <h3>Billing transitions to AI Credits on June 1, 2026 — the principle stays the same</h3>
 
   <table style="font-size: 0.63em; margin-top: 0.3em">
     <tr>
       <th>Tier</th>
-      <th>Premium requests used</th>
+      <th>Cost weight</th>
       <th>Examples</th>
       <th>Use for</th>
     </tr>
     <tr>
-      <td>Standard</td>
-      <td style="color:#2e7d32; font-weight:bold">1 per interaction</td>
-      <td>GPT-4.5, Claude Sonnet 4.6</td>
+      <td>Included / Lightweight</td>
+      <td style="color:#2e7d32; font-weight:bold">Free / low</td>
+      <td>GPT-4o, GPT-5 mini, Claude Haiku 4.5</td>
       <td>Everyday coding, QC scripts, plots</td>
     </tr>
     <tr>
       <td>Premium</td>
-      <td style="color:#e67e22; font-weight:bold">3 per interaction</td>
-      <td>Claude Opus 4.6</td>
+      <td style="color:#e67e22; font-weight:bold">Medium</td>
+      <td>Claude Sonnet 4.6, Gemini 2.5 Pro</td>
       <td>Planning, architecture, tricky bugs</td>
     </tr>
     <tr>
       <td>High-tier / Agentic</td>
-      <td style="color:#c0392b; font-weight:bold">15 per interaction</td>
-      <td>Claude Opus 4.7</td>
+      <td style="color:#c0392b; font-weight:bold">High</td>
+      <td>Claude Opus 4.7, GPT-5.5</td>
       <td>Complex multi-step pipelines only</td>
     </tr>
   </table>
 
-  <div class="callout bad" style="margin-top: 0.6em; font-size: 0.62em">
-    300 premium requests/month = 300 standard <em>or</em> 100 premium <em>or</em> <strong>just 20 high-tier</strong> interactions.
-    One Opus 4.7 agentic run spends 15 in a single shot.
+  <div class="callout warn" style="margin-top: 0.6em; font-size: 0.62em">
+    ⚠️ <strong>June 1, 2026:</strong> premium requests → <strong>GitHub AI Credits</strong> (token-based).
+    Pro: 1,000 credits/mo · Pro+: 3,900 credits/mo · Enterprise: $19/user in credits.
+    Annual plan users stay on PRU billing until renewal.
   </div>
 
   <ul style="font-size: 0.62em; margin-top: 0.5em">
-    <li>Default to <strong>Standard</strong> — sufficient for most research coding</li>
+    <li>Default to <strong>Included / Auto model</strong> — sufficient for most research coding</li>
     <li>Keep context lean — every turn draws from your allowance</li>
     <li>Check: <strong>GitHub Settings → Billing → Copilot</strong></li>
   </ul>
-
-  <div class="callout warn" style="margin-top: 0.5em; font-size: 0.58em">
-    ⚠️ Usage-based billing (overages) starts June 1, 2026 — verify BITS coverage first.
-  </div>
 </section>
 
-<!-- ⑰ Don't get locked in ────────────────────────────────── -->
-<section>
-  <h2>Don't get locked into one provider</h2>
-  <h3>This field moves faster than any other area of software</h3>
-
-  <div class="callout" style="font-size: 0.7em; margin-bottom: 0.8em">
-    The model that is clearly best today may be third-best in six months.
-    A newcomer you haven't heard of may be leading on code benchmarks by then.
-  </div>
-
-  <div class="cols cols-2" style="font-size: 0.68em; gap: 1.5em">
-    <div>
-      <p style="color: var(--blue); font-weight: bold; margin: 0 0 0.4em">What to do</p>
-      <ul>
-        <li>Build your workflow around the <strong>interface</strong> — context file, Explore→Plan→Implement→Commit — not a specific model</li>
-        <li>Use <strong>Copilot Auto mode</strong> — routes across Anthropic, OpenAI, Google automatically</li>
-        <li>Spend an afternoon every few months testing a new model on a real task you know well</li>
-      </ul>
-    </div>
-    <div>
-      <p style="color: var(--blue); font-weight: bold; margin: 0 0 0.4em">Major providers to watch</p>
-      <ul>
-        <li><strong>Anthropic</strong> — Claude Opus / Sonnet / Haiku</li>
-        <li><strong>OpenAI</strong> — GPT-4o, o3, Codex</li>
-        <li><strong>Google</strong> — Gemini 2.5 Pro / Flash</li>
-        <li><strong>Meta / Mistral</strong> — open-weight alternatives</li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-<!-- ⑱ Good / bad ─────────────────────────────────────────── -->
+<!-- ⑰ Good / bad ─────────────────────────────────────────── -->
 <section>
   <h2>Honest assessment</h2>
 
@@ -878,7 +848,7 @@ claude --model claude-opus-4-7</code></pre>
   <ol style="list-style: none; padding: 0; counter-reset: steps; font-size: 0.8em">
     <li style="padding: 0.5em 0 0.5em 2.5em; position:relative; counter-increment: steps; border-bottom: 1px solid var(--border)">
       <span style="position:absolute; left:0; font-size:1.4em; font-weight:bold; color:var(--blue); top:0.2em">1</span>
-      <strong>Enable Copilot in VS Code</strong> — contact BITS, it's covered by the enterprise license
+      <strong>Enable Copilot in VS Code</strong> — check with your institution's IT team; many research institutes cover it under an enterprise license
     </li>
     <li style="padding: 0.5em 0 0.5em 2.5em; position:relative; counter-increment: steps; border-bottom: 1px solid var(--border)">
       <span style="position:absolute; left:0; font-size:1.4em; font-weight:bold; color:var(--blue); top:0.2em">2</span>
@@ -900,7 +870,7 @@ claude --model claude-opus-4-7</code></pre>
   </p>
   <p class="meta">
     github.com/openclaw/openclaw<br>
-    github.blog · Copilot billing changes (June 1, 2026)
+    docs.github.com/copilot · AI Credits transition (June 1, 2026)
   </p>
 </section>
 

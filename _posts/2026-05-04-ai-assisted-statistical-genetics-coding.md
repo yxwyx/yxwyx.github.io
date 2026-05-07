@@ -7,11 +7,19 @@ excerpt: "A practical guide to integrating AI coding agents — Copilot, Claude 
 extra_css: /assets/css/blog.css
 ---
 
-I'm a postdoctoral researcher at the Broad Institute working on statistical genetics. On any given day I might be writing R scripts for quality control, building GWAS pipelines, submitting batch jobs to a cluster, or debugging statistical models.
+Statistical genetics is a coding-intensive field. On any given day you might be writing R scripts for quality control, building GWAS pipelines in Python, submitting batch jobs to an HPC cluster, or debugging statistical models — across projects spanning GWAS meta-analysis, whole-genome sequencing, rare variant association testing, and functional genomics.
 
 Over the past year, AI coding agents have fundamentally changed how I work. This post covers the tools I use, the concepts that make them effective, and practical patterns for statistical genetics specifically, including how to work safely with sensitive genomic data.
 
 <p style="margin: 1.2em 0 0.5em"><a href="/assets/slides/ai-workflow-slides.html" target="_blank" rel="noopener" style="display:inline-block; background:#0f4d92; color:#fff; padding:6px 16px; border-radius:4px; text-decoration:none; font-size:0.88rem; font-family:sans-serif">&#9654; View as slides</a> <span style="font-size:0.82rem; color:#666; font-family:sans-serif">— 20-slide deck for lab meetings</span></p>
+
+## Institutional compliance
+
+Before listing the tools: **if you work at MGB or the Broad Institute, GitHub Copilot is currently the only AI coding tool approved under both institutions' data governance policies**, covered by the Microsoft enterprise agreement. Claude Code, Codex, and other third-party tools operate under personal subscriptions and have not been cleared under either institutional agreement — including Broad.
+
+This does not mean those tools are unsafe by design — it means they have not gone through institutional review. Until that changes, use Copilot for any work in these institutional environments.
+
+If you work at another institution, check with your IT or compliance team before using any AI tool in a research context. The core question to ask: *Is this tool covered by an enterprise agreement that includes a BAA (Business Associate Agreement) or equivalent data governance terms?*
 
 ## The AI toolkit
 
@@ -21,7 +29,7 @@ All my AI tools live inside VS Code, which I use both locally and via remote SSH
 
 ### GitHub Copilot
 
-For Broad researchers, GitHub Copilot is available through BITS — no personal subscription needed. This makes it the lowest-friction entry point.
+GitHub Copilot is available through institutional and enterprise GitHub licenses — check with your institution's IT department. If you're at a research university or major institute, there's a good chance it's already covered. This makes it the lowest-friction entry point.
 
 Copilot in VS Code has come a long way. The **Copilot Chat** panel now does most of what you'd get from a dedicated AI CLI: it can read files, make edits, run terminal commands, and work through multi-step tasks in your project. Recent additions make it especially useful:
 
@@ -29,7 +37,7 @@ Copilot in VS Code has come a long way. The **Copilot Chat** panel now does most
 - **Auto model** lets the agent self-select the best model for each task. The pool includes Claude models, Codex, and Gemini. This is genuinely useful: simpler tasks route to faster, cheaper models, while complex reasoning gets a capable one. Copilot claims this delivers around 10% cost savings, though part of that may simply be cheaper models handling easier tasks.
 - **Local models** are also supported — Qwen and custom endpoints if you have them. Open-source models have caught up substantially for routine tasks: boilerplate generation, simple refactoring, format conversions. They may be a few months behind on complex reasoning, but "a few months behind the best" is often fine for everyday research coding.
 
-**One important note for Broad researchers**: starting June 1, 2026, [GitHub Copilot is moving to usage-based billing](https://github.blog/news-insights/company-news/github-copilot-is-moving-to-usage-based-billing/). It is worth checking with BITS whether the enterprise agreement covers this or whether costs will change.
+**One important billing note**: starting June 1, 2026, [GitHub Copilot is moving to usage-based billing](https://github.blog/news-insights/company-news/github-copilot-is-moving-to-usage-based-billing/), replacing premium requests with GitHub AI Credits. It is worth checking with your institution's IT or finance team whether the enterprise agreement covers this or whether individual costs will change.
 
 ### Claude Code
 
@@ -99,7 +107,7 @@ Here's an example from one of my active projects:
 - Keep commit messages ≤ 5 words
 ```
 
-This kind of file turns generic AI suggestions into project-aware ones. The agent knows to write `data.table::fread` not `read.csv`, to target UGER not SLURM, to use `podman` not `docker`, and to reference ENSG IDs in any gene-level code. It takes twenty minutes to write and saves hours of corrections.
+This kind of file turns generic AI suggestions into project-aware ones. The agent knows to write `data.table::fread` not `read.csv`, to target your specific scheduler not a generic one, to use `podman` not `docker`, and to reference ENSG IDs in any gene-level code. It takes twenty minutes to write and saves hours of corrections.
 
 ## The workflow: Explore, Plan, Implement, Commit
 
@@ -377,7 +385,7 @@ So the "3×" and "15×" labels are literal: one Opus 4.7 interaction consumes 15
 - **Prefer targeted questions**: "why is my REGENIE step 2 producing NA p-values for chromosome 6?" uses fewer premium requests than "review my entire pipeline" — and tends to get a better answer.
 - **Check your usage**: GitHub Settings → Billing → Copilot. Worth checking after your first few agentic sessions so you can calibrate.
 
-From June 1, 2026, GitHub Copilot Enterprise plans move to usage-based billing for premium requests beyond the plan limit. Check with BITS on how the Broad's enterprise agreement handles overages before running extended high-tier sessions.
+From June 1, 2026, GitHub Copilot moves to usage-based billing (AI Credits replace premium requests for most plans). Check with your institution's IT team on how the enterprise agreement handles this transition before running extended high-tier sessions.
 
 ## Tips and caveats
 
