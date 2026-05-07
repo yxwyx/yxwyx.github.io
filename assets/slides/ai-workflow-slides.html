@@ -465,19 +465,20 @@
   <h2>Approval settings</h2>
   <h3>Define where the agent acts freely — and where it stops and asks</h3>
 
-  <div class="cols cols-2" style="font-size: 0.65em; gap: 1.5em; margin-top: 0.4em">
+  <div class="cols cols-2" style="font-size: 0.63em; gap: 1.5em; margin-top: 0.4em">
     <div>
-      <p style="color: var(--blue); font-weight: bold; margin: 0 0 0.3em">Copilot autopilot levels</p>
+      <p style="color: var(--blue); font-weight: bold; margin: 0 0 0.3em"><code class="inline">chat.permissions.default</code></p>
       <ul>
-        <li><strong>Confirm all</strong> — pauses on every action (safest)</li>
-        <li><strong>Confirm risky</strong> — auto-approves edits, pauses on shell commands &amp; deletions <span style="color:#2e7d32">← recommended</span></li>
-        <li><strong>Approve all</strong> — fully autonomous (only for well-scoped tasks)</li>
+        <li><strong><code class="inline">default</code></strong> — pauses before terminal commands &amp; file edits <span style="color:#2e7d32">← start here</span></li>
+        <li><strong><code class="inline">autopilot</code></strong> — auto-approves all, runs to completion</li>
+        <li><strong><code class="inline">autoApprove</code></strong> — bypasses everything, avoid in research</li>
       </ul>
-      <p style="color: var(--blue); font-weight: bold; margin: 0.8em 0 0.3em">Claude Code: plan mode</p>
+      <p style="color: var(--blue); font-weight: bold; margin: 0.6em 0 0.3em">Fine-grained controls</p>
       <ul>
-        <li>Agent describes <em>what it will do</em> before touching anything</li>
-        <li>You review and approve the plan first</li>
-        <li>Cheapest moment to catch wrong assumptions</li>
+        <li><code class="inline">chat.tools.terminal.autoApprove</code> — whitelist safe commands</li>
+        <li><code class="inline">chat.tools.edits.autoApprove</code> — glob patterns for safe paths</li>
+        <li><code class="inline">chat.agent.maxRequests: 25</code> — runaway prevention</li>
+        <li><code class="inline">chat.agent.deniedNetworkDomains</code> — block data exfiltration</li>
       </ul>
     </div>
     <div>
@@ -486,12 +487,12 @@
         <li>Any <strong>deletion</strong> — <code class="inline">rm</code>, overwrite</li>
         <li><strong>Git push</strong> / force-push</li>
         <li>Writes to <strong>protected data dirs</strong></li>
-        <li><strong>HPC job submission</strong> — a misfired array job is expensive</li>
-        <li>Any <strong>external API call</strong></li>
+        <li><strong>HPC job submission</strong> — misfired array = expensive</li>
+        <li>Any <strong>external network call</strong></li>
       </ul>
-      <div class="callout" style="margin-top: 0.6em; font-size: 0.85em">
-        Goal: agent acts freely on <em>reversible</em> work.<br>
-        Irreversible actions always have a human in the loop.
+      <div class="callout" style="margin-top: 0.5em; font-size: 0.85em">
+        Use <strong>Plan agent</strong> in Copilot or <strong>plan mode</strong> in Claude Code —
+        agent describes every step before touching anything.
       </div>
     </div>
   </div>

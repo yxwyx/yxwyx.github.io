@@ -139,21 +139,51 @@ Review the diff, run a sanity check, and commit. A good agent writes a concise c
 
 AI agents are most useful when they can act autonomously — reading files, running code, making edits — without you approving every keystroke. But unconstrained autonomy is also how things go wrong: an agent that can delete files, overwrite data, or push to a remote repository without asking can cause damage that is hard or impossible to undo. Approval settings let you define exactly where the agent acts freely and where it stops and asks.
 
-Every major agent has some version of this control. Understanding it before you start a session is like checking the brakes before you drive — the point is that you rarely need them, but you want them calibrated correctly.
+### Copilot agent approval settings in VS Code
 
-### GitHub Copilot autopilot approval levels
+The core setting is `chat.permissions.default`, which takes one of three values:
 
-Copilot's autopilot mode has three approval levels, configured in VS Code settings under `github.copilot.chat.agent.autoApprove`:
+- **`default`** (Default Approvals): the agent pauses and asks before running terminal commands or modifying files. Safest, and the right starting point for new tasks.
+- **`autopilot`**: auto-approves all tool calls and runs until task completion without pausing. Use this only for well-scoped tasks after you have reviewed the plan.
+- **`autoApprove`**: bypasses approvals entirely. Avoid this in research environments — it disables the safety net with no granular control.
 
-- **Confirm all** (default): Copilot proposes each action — file edit, terminal command, file creation — and waits for your explicit approval. Safest, but interrupts your flow frequently.
-- **Confirm risky actions**: Copilot auto-approves low-risk edits (writing code, reading files) and pauses only for actions it considers potentially destructive (running shell commands, modifying or deleting existing files). A reasonable balance for most research coding.
-- **Approve all**: fully autonomous — Copilot executes without pausing. Use this only on well-scoped tasks where you have reviewed the plan and understand exactly what the agent will touch.
+Beyond the top-level mode, VS Code exposes per-category controls that give you more precision:
 
-A practical pattern: start a new task in "confirm all" mode until you trust that the agent understands what you want, then switch to "confirm risky actions" for execution.
+```json
+// settings.json
+{
+  // auto-approve only safe, read-only commands; rm and curl still prompt
+  "chat.tools.terminal.autoApprove": ["ls", "cat", "head", "grep", "Rscript", "plink2"],
+
+  // only allow edits inside src/ and scripts/ without asking
+  "chat.tools.edits.autoApprove": ["src/**", "scripts/**"],
+
+  // cap how many steps an agent can take before stopping (default: 25)
+  "chat.agent.maxRequests": 25,
+
+  // block the agent from making outbound calls to external domains
+  "chat.agent.deniedNetworkDomains": ["*"],
+  "chat.agent.allowedNetworkDomains": ["api.anthropic.com", "api.openai.com"]
+}
+```
+
+`maxRequests` is an underused setting — it acts as a runaway-prevention mechanism. If an agent gets into a loop or starts doing more than you expected, it will stop at 25 steps and hand control back to you. For exploratory tasks raise it; for well-defined ones leave it at the default.
+
+The network domain filtering (`chat.agent.deniedNetworkDomains` / `chat.agent.allowedNetworkDomains`) is particularly relevant for genomics work. Denying all domains except the model APIs means the agent cannot exfiltrate data to an unexpected endpoint, even accidentally.
+
+VS Code also offers a **sandbox mode** (currently preview on macOS and Linux) that runs agent shell commands in an isolated environment. Enable it with `chat.agent.sandbox.enabled: "on"` for full filesystem isolation, or `"allowNetwork"` for network access only. Worth enabling when running unfamiliar agent sessions.
+
+For separate control over the planning vs. implementation phases, two settings let you assign different models to each:
+```json
+{
+  "chat.planAgent.defaultModel": "claude-opus-4-7",        // careful reasoning for planning
+  "github.copilot.chat.implementAgent.model": "claude-sonnet-4-6"  // faster for writing code
+}
+```
 
 ### Claude Code permissions
 
-Claude Code has a permission system that controls which file paths and shell commands the agent can access without asking. These are set in the project's `.claude/settings.json`:
+Claude Code has a permission system in the project's `.claude/settings.json`:
 
 ```json
 {
@@ -161,8 +191,10 @@ Claude Code has a permission system that controls which file paths and shell com
     "allow": [
       "Bash(Rscript:*)",
       "Bash(plink2:*)",
+      "Bash(regenie:*)",
       "Read(**)",
-      "Write(src/**)"
+      "Write(src/**)",
+      "Write(scripts/**)"
     ],
     "deny": [
       "Bash(rm -rf *)",
@@ -172,14 +204,14 @@ Claude Code has a permission system that controls which file paths and shell com
 }
 ```
 
-`allow` entries let the agent use specific commands or write to specific paths without prompting. `deny` entries are hard blocks — the agent will not execute them even if asked. A well-written settings file for a genomics project might allow running R, PLINK, and REGENIE, allow reading anywhere in the project tree, allow writing to the `src/` and `scripts/` directories, and hard-deny any writes to the `/protected/` data directory.
+`allow` entries let the agent use specific commands or write to specific paths without prompting. `deny` entries are hard blocks — the agent will not execute them even if asked. A well-written settings file for a genomics project allows running R, PLINK, and REGENIE, allows reading anywhere in the project tree, allows writing to `src/` and `scripts/`, and hard-denies any writes to the `/protected/` data directory.
 
 ### Plan mode: the pre-flight check
 
-Both Copilot and Claude Code support a plan-before-code mode. In Claude Code, activating plan mode tells the agent to describe what it intends to do and wait for your sign-off before writing a single line of code. This is the most powerful approval mechanism because it catches wrong assumptions at the cheapest possible moment — before any changes have been made.
+Both Copilot and Claude Code have a plan-before-code mode. In Copilot, select the **Plan** agent from the agent picker. In Claude Code, enable plan mode to have the agent describe what it intends to do and wait for your sign-off before writing anything.
 
 For complex tasks — "refactor this entire QC pipeline," "add chromosome-stratified output to all downstream scripts" — always review the plan first. Look specifically for:
-- Files it intends to modify that you didn't expect
+- Files it intends to modify that you did not expect
 - Shell commands it plans to run (especially anything involving deletion, overwriting, or external network calls)
 - Assumptions about data formats or file locations that might be wrong
 
@@ -187,7 +219,7 @@ Approving the plan does not mean blindly trusting the implementation. Review the
 
 ### What should always require your approval
 
-Regardless of how your approval settings are configured, these actions should always stop and ask:
+Regardless of settings, these actions should always stop and ask:
 
 - **Any deletion** — `rm`, overwriting an existing file, clearing a directory
 - **Git operations that affect remote state** — `push`, `force-push`, branch deletion
@@ -195,7 +227,7 @@ Regardless of how your approval settings are configured, these actions should al
 - **External API calls** — anything that sends data outside your environment
 - **HPC job submission** — `qsub`, `sbatch`, or equivalent: a misfired array job is expensive to cancel and can hold cluster resources for hours
 
-The goal is not to make the agent ask about every line of code it writes. It is to ensure that irreversible or high-impact actions always have a human in the loop.
+The goal is not to make the agent slow. It is to ensure that irreversible or high-impact actions always have a human in the loop.
 
 ## Working with sensitive genomic data
 
