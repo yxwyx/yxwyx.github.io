@@ -649,41 +649,49 @@ claude --model claude-opus-4-7</code></pre>
 
 <!-- ⑮ Cost awareness ─────────────────────────────────────── -->
 <section>
-  <h2>Cost awareness</h2>
-  <h3>You pay per token — input + output</h3>
+  <h2>Copilot quota multipliers</h2>
+  <h3>Not all models cost the same — they drain your quota at different rates</h3>
 
-  <table style="font-size: 0.65em; margin-top: 0.4em">
+  <table style="font-size: 0.63em; margin-top: 0.3em">
     <tr>
-      <th>Model</th>
-      <th>Typical GWAS session (90 min)</th>
-      <th>Relative cost</th>
+      <th>Tier</th>
+      <th>Multiplier</th>
+      <th>Examples</th>
+      <th>Use for</th>
     </tr>
     <tr>
-      <td><span class="chip">claude-haiku-4-5</span></td>
-      <td>~200–400 K tokens</td>
-      <td style="color:#2e7d32">$</td>
+      <td>Standard</td>
+      <td style="color:#2e7d32; font-weight:bold">1×</td>
+      <td>GPT-4.5, Claude Sonnet 4.6</td>
+      <td>Everyday coding, QC scripts, plots</td>
     </tr>
     <tr>
-      <td><span class="chip">claude-sonnet-4-6</span></td>
-      <td>~200–400 K tokens</td>
-      <td style="color:#e67e22">$$</td>
+      <td>Premium</td>
+      <td style="color:#e67e22; font-weight:bold">3×</td>
+      <td>Claude Opus 4.6</td>
+      <td>Planning, architecture, tricky bugs</td>
     </tr>
     <tr>
-      <td><span class="chip">claude-opus-4-7</span></td>
-      <td>same tokens, 3–5× price</td>
-      <td style="color:#c0392b">$$$$</td>
+      <td>High-tier / Agentic</td>
+      <td style="color:#c0392b; font-weight:bold">15×</td>
+      <td>Claude Opus 4.7</td>
+      <td>Complex multi-step pipelines only</td>
     </tr>
   </table>
 
-  <ul style="font-size: 0.65em; margin-top: 0.7em">
-    <li><strong>Share column names, not files</strong> — big files burn tokens on every turn</li>
-    <li><strong><code class="inline">/compact</code></strong> in Claude Code — condenses long sessions before context fills</li>
-    <li><strong>Specific prompts</strong> cost less and get better answers</li>
-    <li>Check usage: <code class="inline">console.anthropic.com</code> / GitHub Copilot settings</li>
+  <div class="callout bad" style="margin-top: 0.6em; font-size: 0.62em">
+    1,000 standard interactions = <strong>333 premium</strong> = <strong>67 high-tier</strong>.
+    One long Opus 4.7 agentic run can consume a significant chunk of your monthly quota.
+  </div>
+
+  <ul style="font-size: 0.62em; margin-top: 0.5em">
+    <li>Default to <strong>Standard</strong> — sufficient for most research coding</li>
+    <li>Share <strong>column names, not files</strong> — large context multiplies cost every turn</li>
+    <li>Check usage in <strong>GitHub Settings → Billing</strong></li>
   </ul>
 
-  <div class="callout warn" style="margin-top: 0.6em; font-size: 0.6em">
-    ⚠️ Copilot usage-based billing starts June 1, 2026 — verify coverage with BITS before extended sessions.
+  <div class="callout warn" style="margin-top: 0.5em; font-size: 0.58em">
+    ⚠️ Usage-based billing starts June 1, 2026 — verify BITS coverage before extended high-tier sessions.
   </div>
 </section>
 

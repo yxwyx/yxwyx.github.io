@@ -264,21 +264,26 @@ The [MCP registry](https://registry.mcphub.io) lists community-maintained server
 
 ## Cost awareness
 
-AI agents are not free, and the cost structure is worth understanding even if the Broad's enterprise Copilot license covers part of it.
+With Copilot's enterprise plan, your usage is measured in **multipliers against a monthly quota**, not raw dollars. Understanding the tiers matters because a single agentic session can burn quota much faster than you expect.
 
-**The token model**: you pay (in dollars or usage quota) per token — roughly, per word processed. Both your input (the conversation, any files you share, the context window) and the model's output count. A large codebase added to context, or a long back-and-forth debugging session, can consume tokens quickly.
+| Tier | Multiplier | Examples |
+|------|-----------|---------|
+| Standard | **1×** | GPT-4.5, Claude Sonnet 4.6 — baseline rate, most everyday tasks |
+| Premium | **3×** | Claude Opus 4.6 — stronger reasoning, three times the quota consumption |
+| High-tier / Agentic | **15×** | Claude Opus 4.7, specialized agentic modes — complex multi-step tasks, exhausts quota rapidly |
 
-**Typical costs for a GWAS coding session**: a 90-minute Claude Sonnet session doing pipeline development — exploring existing scripts, writing a new REGENIE wrapper, debugging a SLURM array — runs roughly 200–400K tokens total. At current API pricing that is about $0.50–$1.50. For Opus-class models used for heavy planning, the same session costs 3–5× more. These numbers shift as pricing changes, but the relative ordering (Haiku << Sonnet << Opus, in cost) is stable.
+In practice: if your monthly quota supports 1,000 standard interactions, switching to a 15× model means you burn through that same quota in roughly 67 interactions. One long agentic GWAS pipeline run at 15× can consume a significant fraction of a month's allowance.
 
-**Practical strategies**:
+**Practical strategies for managing quota**:
 
-- **Match model to task**: plan with Opus, implement with Sonnet, generate boilerplate with Haiku. Copilot Auto mode does this for you; Claude Code's `/model` command lets you do it explicitly.
-- **Don't add large files to context unless necessary**: adding a 10MB VCF header to context when you only need the column names wastes tokens on every subsequent exchange. Share what the agent actually needs — column names, file paths, a few example rows — not the whole file.
-- **Use `/compact` in Claude Code**: when a long debugging session has accumulated many turns, `/compact` condenses the conversation history while preserving the essential context. This avoids hitting the context limit mid-session and keeps costs from compounding.
-- **Prefer targeted questions over broad ones**: "why is my REGENIE step 2 producing NA p-values for chromosome 6?" costs far fewer tokens than "review my entire pipeline and tell me what's wrong." The more specific your question, the smaller the input, and the more useful the answer.
-- **Check your usage dashboard**: Claude Code's usage is visible at console.anthropic.com. Copilot usage is in your GitHub settings. Worth checking once a week when you start, so unexpected spikes don't surprise you.
+- **Default to Standard for most coding tasks**: Sonnet-class models handle GWAS QC scripting, plot generation, and boilerplate equally well at 1× cost.
+- **Reserve Premium (3×) for planning and architecture**: designing a pipeline, reasoning about a statistical model, debugging a subtle error — tasks where stronger reasoning pays off.
+- **Use High-tier (15×) deliberately**: for genuinely complex multi-step agentic work only. Don't leave an Opus 4.7 session running overnight on routine tasks.
+- **Don't add large files to context**: sharing an entire VCF header or a full phenotype file when you only need the column names multiplies your usage on every subsequent turn in that session.
+- **Prefer targeted questions**: "why is my REGENIE step 2 producing NA p-values for chromosome 6?" consumes far less quota than "review my entire pipeline." Specificity is both cheaper and more effective.
+- **Check your usage dashboard**: Copilot usage is in your GitHub settings under Billing. Worth checking after your first few agentic sessions to calibrate your intuition.
 
-From June 1, 2026, GitHub Copilot Enterprise plans move to usage-based billing for some features. Check with BITS on how the Broad's agreement handles this before running extended agentic sessions.
+From June 1, 2026, GitHub Copilot Enterprise plans move to usage-based billing for some features. Check with BITS on how the Broad's agreement handles this before running extended high-tier sessions.
 
 ## Tips and caveats
 
