@@ -13,6 +13,14 @@ Over the past year, AI coding agents have fundamentally changed how I work. This
 
 <p style="margin: 1.2em 0 0.5em"><a href="/assets/slides/ai-workflow-slides.html" target="_blank" rel="noopener" style="display:inline-block; background:#0f4d92; color:#fff; padding:6px 16px; border-radius:4px; text-decoration:none; font-size:0.88rem; font-family:sans-serif">&#9654; View as slides</a> <span style="font-size:0.82rem; color:#666; font-family:sans-serif">— 20-slide deck for lab meetings</span></p>
 
+## Institutional compliance
+
+Before listing the tools: **if you work at MGB or the Broad Institute, GitHub Copilot is currently the only AI coding tool approved under both institutions' data governance policies**, covered by the Microsoft enterprise agreement. Claude Code, Codex, and other third-party tools operate under personal subscriptions and have not been cleared under these institutional agreements.
+
+This does not mean those tools are unsafe by design — it means they have not gone through institutional review. For Broad-only work, Claude Code is workable when following the no-data rule described later. For anything touching MGB data or systems, use Copilot.
+
+If you work at another institution, check with your IT or compliance team before using any AI tool in a research context. The core question to ask: *Is this tool covered by an enterprise agreement that includes a BAA (Business Associate Agreement) or equivalent data governance terms?*
+
 ## The AI toolkit
 
 ### VS Code: the hub
