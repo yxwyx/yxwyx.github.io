@@ -1,7 +1,3 @@
-Got it! Here's a more minimal and to-the-point version of your README:
-
----
-
 # My Personal Page
 
 This is the source code for my personal website.
