@@ -460,7 +460,44 @@
   </div>
 </section>
 
-<!-- ⑨ Git worktrees ──────────────────────────────────────── -->
+<!-- ⑨ Approval settings ──────────────────────────────────── -->
+<section>
+  <h2>Approval settings</h2>
+  <h3>Define where the agent acts freely — and where it stops and asks</h3>
+
+  <div class="cols cols-2" style="font-size: 0.65em; gap: 1.5em; margin-top: 0.4em">
+    <div>
+      <p style="color: var(--blue); font-weight: bold; margin: 0 0 0.3em">Copilot autopilot levels</p>
+      <ul>
+        <li><strong>Confirm all</strong> — pauses on every action (safest)</li>
+        <li><strong>Confirm risky</strong> — auto-approves edits, pauses on shell commands &amp; deletions <span style="color:#2e7d32">← recommended</span></li>
+        <li><strong>Approve all</strong> — fully autonomous (only for well-scoped tasks)</li>
+      </ul>
+      <p style="color: var(--blue); font-weight: bold; margin: 0.8em 0 0.3em">Claude Code: plan mode</p>
+      <ul>
+        <li>Agent describes <em>what it will do</em> before touching anything</li>
+        <li>You review and approve the plan first</li>
+        <li>Cheapest moment to catch wrong assumptions</li>
+      </ul>
+    </div>
+    <div>
+      <p style="color: var(--blue); font-weight: bold; margin: 0 0 0.3em">Always require approval</p>
+      <ul>
+        <li>Any <strong>deletion</strong> — <code class="inline">rm</code>, overwrite</li>
+        <li><strong>Git push</strong> / force-push</li>
+        <li>Writes to <strong>protected data dirs</strong></li>
+        <li><strong>HPC job submission</strong> — a misfired array job is expensive</li>
+        <li>Any <strong>external API call</strong></li>
+      </ul>
+      <div class="callout" style="margin-top: 0.6em; font-size: 0.85em">
+        Goal: agent acts freely on <em>reversible</em> work.<br>
+        Irreversible actions always have a human in the loop.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ⑩ Git worktrees ──────────────────────────────────────── -->
 <section>
   <h2>Git worktrees</h2>
   <h3>Multiple branches checked out simultaneously</h3>
@@ -492,7 +529,7 @@ git worktree add ../project-dev dev-branch
   </div>
 </section>
 
-<!-- ⑩ Prompting specificity ─────────────────────────────── -->
+<!-- ⑪ Prompting specificity ─────────────────────────────── -->
 <section>
   <h2>Specificity is everything</h2>
   <h3>Prompts that get good statistical code</h3>
@@ -514,7 +551,7 @@ git worktree add ../project-dev dev-branch
   </ul>
 </section>
 
-<!-- ⑪ Model switching ───────────────────────────────────── -->
+<!-- ⑫ Model switching ───────────────────────────────────── -->
 <section>
   <h2>Right model for the task</h2>
   <h3>cc-switch: switching models mid-workflow</h3>
@@ -554,7 +591,7 @@ claude --model claude-opus-4-7</code></pre>
   </p>
 </section>
 
-<!-- ⑫ Sensitive data ─────────────────────────────────────── -->
+<!-- ⑬ Sensitive data ─────────────────────────────────────── -->
 <section>
   <h2>Sensitive genomic data</h2>
   <h3>The cardinal rule: never let the agent read your data files</h3>
@@ -583,7 +620,7 @@ claude --model claude-opus-4-7</code></pre>
   </div>
 </section>
 
-<!-- ⑬ OpenClaw ───────────────────────────────────────────── -->
+<!-- ⑭ OpenClaw ───────────────────────────────────────────── -->
 <section>
   <h2>OpenClaw</h2>
   <h3>A different paradigm: local-first, always-on</h3>
@@ -611,7 +648,7 @@ claude --model claude-opus-4-7</code></pre>
   </div>
 </section>
 
-<!-- ⑭ MCP ────────────────────────────────────────────────── -->
+<!-- ⑮ MCP ────────────────────────────────────────────────── -->
 <section>
   <h2>MCP: agents that fetch for you</h2>
   <h3>Model Context Protocol — open standard for agent ↔ tool connections</h3>
@@ -647,7 +684,7 @@ claude --model claude-opus-4-7</code></pre>
   </div>
 </section>
 
-<!-- ⑮ Cost awareness ─────────────────────────────────────── -->
+<!-- ⑯ Cost awareness ─────────────────────────────────────── -->
 <section>
   <h2>Copilot premium requests</h2>
   <h3>Each model tier costs a different number of premium requests per interaction</h3>
@@ -695,7 +732,7 @@ claude --model claude-opus-4-7</code></pre>
   </div>
 </section>
 
-<!-- ⑯ Don't get locked in ────────────────────────────────── -->
+<!-- ⑰ Don't get locked in ────────────────────────────────── -->
 <section>
   <h2>Don't get locked into one provider</h2>
   <h3>This field moves faster than any other area of software</h3>
@@ -726,7 +763,7 @@ claude --model claude-opus-4-7</code></pre>
   </div>
 </section>
 
-<!-- ⑰ Good / bad ─────────────────────────────────────────── -->
+<!-- ⑱ Good / bad ─────────────────────────────────────────── -->
 <section>
   <h2>Honest assessment</h2>
 
@@ -759,7 +796,7 @@ claude --model claude-opus-4-7</code></pre>
   </div>
 </section>
 
-<!-- ⑱ Get started ───────────────────────────────────────── -->
+<!-- ⑲ Get started ───────────────────────────────────────── -->
 <section>
   <h2>Three things to do this week</h2>
 
@@ -779,7 +816,7 @@ claude --model claude-opus-4-7</code></pre>
   </ol>
 </section>
 
-<!-- ⑲ Q&A ─────────────────────────────────────────────────── -->
+<!-- ⑳ Q&A ─────────────────────────────────────────────────── -->
 <section class="title-slide" data-background-color="#0f4d92">
   <h1 style="font-size: 1.6em">Questions?</h1>
   <p class="subtitle">

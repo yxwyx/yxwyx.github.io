@@ -11,7 +11,7 @@ I'm a postdoctoral researcher at the Broad Institute working on statistical gene
 
 Over the past year, AI coding agents have fundamentally changed how I work. This post covers the tools I use, the concepts that make them effective, and practical patterns for statistical genetics specifically — including how to work safely with sensitive genomic data.
 
-<p style="margin: 1.2em 0 0.5em"><a href="/assets/slides/ai-workflow-slides.html" target="_blank" rel="noopener" style="display:inline-block; background:#0f4d92; color:#fff; padding:6px 16px; border-radius:4px; text-decoration:none; font-size:0.88rem; font-family:sans-serif">&#9654; View as slides</a> <span style="font-size:0.82rem; color:#666; font-family:sans-serif">— 19-slide deck for lab meetings</span></p>
+<p style="margin: 1.2em 0 0.5em"><a href="/assets/slides/ai-workflow-slides.html" target="_blank" rel="noopener" style="display:inline-block; background:#0f4d92; color:#fff; padding:6px 16px; border-radius:4px; text-decoration:none; font-size:0.88rem; font-family:sans-serif">&#9654; View as slides</a> <span style="font-size:0.82rem; color:#666; font-family:sans-serif">— 20-slide deck for lab meetings</span></p>
 
 ## The AI toolkit
 
@@ -134,6 +134,68 @@ Write code with the agent's assistance. At this stage it has context from explor
 ### Commit
 
 Review the diff, run a sanity check, and commit. A good agent writes a concise commit message, checks that no hardcoded local paths leaked into the script, and verifies the `.gitignore` excludes data files.
+
+## Approval settings: keeping the agent out of dangerous territory
+
+AI agents are most useful when they can act autonomously — reading files, running code, making edits — without you approving every keystroke. But unconstrained autonomy is also how things go wrong: an agent that can delete files, overwrite data, or push to a remote repository without asking can cause damage that is hard or impossible to undo. Approval settings let you define exactly where the agent acts freely and where it stops and asks.
+
+Every major agent has some version of this control. Understanding it before you start a session is like checking the brakes before you drive — the point is that you rarely need them, but you want them calibrated correctly.
+
+### GitHub Copilot autopilot approval levels
+
+Copilot's autopilot mode has three approval levels, configured in VS Code settings under `github.copilot.chat.agent.autoApprove`:
+
+- **Confirm all** (default): Copilot proposes each action — file edit, terminal command, file creation — and waits for your explicit approval. Safest, but interrupts your flow frequently.
+- **Confirm risky actions**: Copilot auto-approves low-risk edits (writing code, reading files) and pauses only for actions it considers potentially destructive (running shell commands, modifying or deleting existing files). A reasonable balance for most research coding.
+- **Approve all**: fully autonomous — Copilot executes without pausing. Use this only on well-scoped tasks where you have reviewed the plan and understand exactly what the agent will touch.
+
+A practical pattern: start a new task in "confirm all" mode until you trust that the agent understands what you want, then switch to "confirm risky actions" for execution.
+
+### Claude Code permissions
+
+Claude Code has a permission system that controls which file paths and shell commands the agent can access without asking. These are set in the project's `.claude/settings.json`:
+
+```json
+{
+  "permissions": {
+    "allow": [
+      "Bash(Rscript:*)",
+      "Bash(plink2:*)",
+      "Read(**)",
+      "Write(src/**)"
+    ],
+    "deny": [
+      "Bash(rm -rf *)",
+      "Write(/protected/**)"
+    ]
+  }
+}
+```
+
+`allow` entries let the agent use specific commands or write to specific paths without prompting. `deny` entries are hard blocks — the agent will not execute them even if asked. A well-written settings file for a genomics project might allow running R, PLINK, and REGENIE, allow reading anywhere in the project tree, allow writing to the `src/` and `scripts/` directories, and hard-deny any writes to the `/protected/` data directory.
+
+### Plan mode: the pre-flight check
+
+Both Copilot and Claude Code support a plan-before-code mode. In Claude Code, activating plan mode tells the agent to describe what it intends to do and wait for your sign-off before writing a single line of code. This is the most powerful approval mechanism because it catches wrong assumptions at the cheapest possible moment — before any changes have been made.
+
+For complex tasks — "refactor this entire QC pipeline," "add chromosome-stratified output to all downstream scripts" — always review the plan first. Look specifically for:
+- Files it intends to modify that you didn't expect
+- Shell commands it plans to run (especially anything involving deletion, overwriting, or external network calls)
+- Assumptions about data formats or file locations that might be wrong
+
+Approving the plan does not mean blindly trusting the implementation. Review the diff after implementation, before committing.
+
+### What should always require your approval
+
+Regardless of how your approval settings are configured, these actions should always stop and ask:
+
+- **Any deletion** — `rm`, overwriting an existing file, clearing a directory
+- **Git operations that affect remote state** — `push`, `force-push`, branch deletion
+- **Writes to protected data directories** — any path containing your actual genomic or phenotypic data
+- **External API calls** — anything that sends data outside your environment
+- **HPC job submission** — `qsub`, `sbatch`, or equivalent: a misfired array job is expensive to cancel and can hold cluster resources for hours
+
+The goal is not to make the agent ask about every line of code it writes. It is to ensure that irreversible or high-impact actions always have a human in the loop.
 
 ## Working with sensitive genomic data
 
