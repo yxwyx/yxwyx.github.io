@@ -10,23 +10,44 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/plugin/highlight/github.css">
 
   <style>
-    /* ── Typography ───────────────────────────────────────── */
+    /* ── Design tokens ────────────────────────────────────── */
     :root {
       --blue: #0f4d92;
       --blue-light: #e8f0fe;
       --blue-mid: #79aaef;
-      --text: #222;
-      --muted: #555;
+      --blue-dark: #093870;
+      --text: #1a1a2e;
+      --muted: #5a6478;
       --border: #dde4f0;
-      --code-bg: #f5f8fd;
+      --code-bg: #f4f7fd;
+      --shadow: 0 2px 12px rgba(15,77,146,0.08);
     }
 
+    /* ── Base ─────────────────────────────────────────────── */
     .reveal {
       font-family: Georgia, 'Times New Roman', serif;
-      font-size: 36px;
+      font-size: 34px;
       color: var(--text);
     }
 
+    /* Fix bleed-through: solid white background on every slide */
+    .reveal .slides section {
+      background: #fff;
+      padding-top: 1.2em;
+      box-sizing: border-box;
+    }
+
+    /* Title slide: use padding to center content vertically */
+    .title-slide {
+      padding-top: 12% !important;
+      text-align: center;
+    }
+
+    /* Outer reveal background — dark blue so slide boundary looks intentional */
+    body { background: #071d3a; }
+    .reveal { background: #071d3a; }
+
+    /* ── Headings ─────────────────────────────────────────── */
     .reveal h1, .reveal h2, .reveal h3 {
       color: var(--blue);
       font-family: Georgia, serif;
@@ -34,48 +55,71 @@
       letter-spacing: -0.01em;
     }
 
-    .reveal h2 { font-size: 1.3em; margin-bottom: 0.6em; }
-    .reveal h3 { font-size: 1.0em; color: var(--muted); font-weight: normal; margin-top: 0; }
+    .reveal h2 {
+      font-size: 1.25em;
+      margin-bottom: 0.15em;
+      padding-bottom: 0.3em;
+      border-bottom: 2px solid var(--blue-light);
+    }
+    .reveal h3 {
+      font-size: 0.9em;
+      color: var(--muted);
+      font-weight: normal;
+      margin-top: 0;
+      margin-bottom: 0.7em;
+      font-style: italic;
+    }
 
+    /* ── Accent bar at top of every content slide ─────────── */
+    .reveal .slides section:not(.title-slide) {
+      border-top: 4px solid var(--blue);
+    }
+
+    /* ── Body text ────────────────────────────────────────── */
     .reveal p, .reveal li { line-height: 1.5; }
 
     .reveal ul { list-style: none; padding: 0; margin: 0; }
-    .reveal ul li { padding: 0.25em 0 0.25em 1.4em; position: relative; }
+    .reveal ul li { padding: 0.22em 0 0.22em 1.4em; position: relative; }
     .reveal ul li::before {
       content: "▸";
-      color: var(--blue);
+      color: var(--blue-mid);
       position: absolute;
       left: 0;
-      font-size: 0.8em;
-      top: 0.3em;
+      font-size: 0.75em;
+      top: 0.35em;
     }
 
     /* ── Title slide ──────────────────────────────────────── */
     .title-slide {
-      background: var(--blue) !important;
+      background: linear-gradient(135deg, var(--blue-dark) 0%, var(--blue) 60%, #1a6abf 100%) !important;
+      border-top: none !important;
     }
     .title-slide h1 {
       color: #fff !important;
-      font-size: 1.4em;
-      line-height: 1.25;
+      font-size: 1.45em;
+      line-height: 1.2;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.2);
     }
     .title-slide .subtitle {
-      color: rgba(255,255,255,0.75);
-      font-size: 0.65em;
-      margin-top: 0.5em;
+      color: rgba(255,255,255,0.8);
+      font-size: 0.62em;
+      margin-top: 0.6em;
+      font-style: italic;
     }
     .title-slide .meta {
-      color: rgba(255,255,255,0.55);
-      font-size: 0.5em;
+      color: rgba(255,255,255,0.5);
+      font-size: 0.45em;
       margin-top: 2em;
-      border-top: 1px solid rgba(255,255,255,0.2);
+      border-top: 1px solid rgba(255,255,255,0.15);
       padding-top: 0.8em;
+      letter-spacing: 0.02em;
     }
+    .title-slide a { color: rgba(255,255,255,0.65) !important; }
 
     /* ── Two-column layout ────────────────────────────────── */
     .cols {
       display: grid;
-      gap: 2em;
+      gap: 1.6em;
       align-items: start;
       text-align: left;
     }
@@ -86,71 +130,82 @@
     .callout {
       background: var(--blue-light);
       border-left: 4px solid var(--blue);
-      border-radius: 0 6px 6px 0;
-      padding: 0.5em 0.9em;
+      border-radius: 0 8px 8px 0;
+      padding: 0.5em 1em;
       margin: 0.5em 0;
-      font-size: 0.75em;
+      font-size: 0.72em;
       text-align: left;
+      box-shadow: var(--shadow);
     }
     .callout.warn {
-      background: #fff8e1;
-      border-left-color: #e6a817;
+      background: #fffbee;
+      border-left-color: #d4900a;
     }
     .callout.good {
-      background: #e8f5e9;
+      background: #f0faf1;
       border-left-color: #2e7d32;
     }
     .callout.bad {
-      background: #fce8e8;
+      background: #fef2f2;
       border-left-color: #c0392b;
     }
 
     /* ── Code ─────────────────────────────────────────────── */
     .reveal pre {
       width: 100%;
-      box-shadow: none;
+      box-shadow: var(--shadow);
       border: 1px solid var(--border);
-      border-radius: 6px;
-      font-size: 0.55em;
+      border-radius: 8px;
+      font-size: 0.52em;
       margin: 0.6em 0;
+      background: var(--code-bg);
     }
     .reveal code.inline {
       background: var(--code-bg);
       border: 1px solid var(--border);
-      border-radius: 3px;
-      padding: 1px 6px;
-      font-size: 0.8em;
+      border-radius: 4px;
+      padding: 1px 7px;
+      font-size: 0.78em;
+      color: var(--blue-dark);
     }
 
     /* ── Table ────────────────────────────────────────────── */
     .reveal table {
-      font-size: 0.7em;
+      font-size: 0.68em;
       width: 100%;
       border-collapse: collapse;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
     }
     .reveal table th {
-      background: var(--blue);
+      background: linear-gradient(90deg, var(--blue-dark), var(--blue));
       color: #fff;
-      padding: 0.4em 0.8em;
+      padding: 0.45em 0.9em;
       text-align: left;
+      font-weight: 600;
+      letter-spacing: 0.02em;
     }
     .reveal table td {
-      padding: 0.35em 0.8em;
+      padding: 0.38em 0.9em;
       border-bottom: 1px solid var(--border);
       vertical-align: top;
     }
-    .reveal table tr:nth-child(even) td { background: var(--blue-light); }
+    .reveal table tr:last-child td { border-bottom: none; }
+    .reveal table tr:nth-child(even) td { background: #f8fbff; }
 
     /* ── Chip/tag ─────────────────────────────────────────── */
     .chip {
       display: inline-block;
       background: var(--blue-light);
       color: var(--blue);
-      border-radius: 12px;
-      padding: 2px 12px;
-      font-size: 0.6em;
+      border: 1px solid #c5d8f5;
+      border-radius: 14px;
+      padding: 2px 14px;
+      font-size: 0.58em;
       font-family: 'SFMono-Regular', Consolas, monospace;
       margin: 2px;
+      font-weight: 600;
     }
 
     /* ── Diagram ──────────────────────────────────────────── */
@@ -163,62 +218,67 @@
       margin: 0.8em 0;
     }
     .diagram-box {
-      background: var(--blue);
+      background: linear-gradient(135deg, var(--blue), #1a6abf);
       color: #fff;
-      border-radius: 8px;
-      padding: 0.5em 1em;
+      border-radius: 10px;
+      padding: 0.55em 1.1em;
       text-align: center;
       font-weight: bold;
+      box-shadow: var(--shadow);
     }
     .diagram-box.light {
       background: var(--blue-light);
       color: var(--blue);
       border: 2px solid var(--blue);
+      box-shadow: none;
     }
     .diagram-arrow {
       font-size: 1.4em;
-      color: var(--blue);
+      color: var(--blue-mid);
       padding: 0 0.3em;
     }
     .diagram-label {
-      font-size: 0.8em;
+      font-size: 0.78em;
       color: var(--muted);
       display: block;
-      margin-top: 3px;
+      margin-top: 4px;
     }
 
     /* ── Step flow ────────────────────────────────────────── */
     .steps {
       display: flex;
-      gap: 0.4em;
+      gap: 0.5em;
       justify-content: center;
       margin: 0.8em 0;
     }
     .step {
       flex: 1;
-      background: var(--blue-light);
-      border-radius: 8px;
-      padding: 0.6em 0.4em;
+      background: linear-gradient(160deg, var(--blue-light), #dceeff);
+      border: 1px solid #c5d8f5;
+      border-radius: 10px;
+      padding: 0.7em 0.5em;
       text-align: center;
-      font-size: 0.6em;
+      font-size: 0.58em;
+      box-shadow: var(--shadow);
     }
     .step .step-num {
       display: block;
-      font-size: 1.6em;
+      font-size: 1.7em;
       font-weight: bold;
       color: var(--blue);
+      line-height: 1;
     }
     .step .step-name {
       display: block;
       font-weight: bold;
       color: var(--blue);
-      margin: 0.2em 0;
+      margin: 0.25em 0 0.15em;
     }
     .step .step-desc {
       display: block;
       color: var(--muted);
       font-size: 0.9em;
-      line-height: 1.3;
+      line-height: 1.35;
     }
 
     /* ── Do / Don't ───────────────────────────────────────── */
@@ -226,7 +286,7 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 1em;
-      font-size: 0.7em;
+      font-size: 0.68em;
       text-align: left;
     }
     .do-dont .col-head {
@@ -236,8 +296,28 @@
     }
     .do-dont li { font-size: 0.9em; margin-bottom: 0.3em; }
 
-    /* ── Slide number override ────────────────────────────── */
-    .reveal .slide-number { font-size: 14px; color: #aaa; }
+    /* ── Slide number badge ───────────────────────────────── */
+    .reveal .slide-number {
+      background: var(--blue);
+      color: #fff;
+      font-size: 12px;
+      font-family: 'SFMono-Regular', Consolas, monospace;
+      border-radius: 4px 0 0 0;
+      padding: 3px 9px;
+      bottom: 0;
+      right: 0;
+    }
+
+    /* ── Navigation arrows ────────────────────────────────── */
+    .reveal .controls button {
+      color: var(--blue) !important;
+      opacity: 0.5;
+    }
+    .reveal .controls button:hover { opacity: 1; }
+
+    /* ── Progress bar ─────────────────────────────────────── */
+    .reveal .progress { background: rgba(15,77,146,0.15); }
+    .reveal .progress span { background: var(--blue); }
 
     /* ── Footer ───────────────────────────────────────────── */
     .slide-footer {
@@ -472,13 +552,6 @@
         <li><strong><code class="inline">default</code></strong> — pauses before terminal commands &amp; file edits <span style="color:#2e7d32">← start here</span></li>
         <li><strong><code class="inline">autopilot</code></strong> — auto-approves all, runs to completion</li>
         <li><strong><code class="inline">autoApprove</code></strong> — bypasses everything, avoid in research</li>
-      </ul>
-      <p style="color: var(--blue); font-weight: bold; margin: 0.6em 0 0.3em">Fine-grained controls</p>
-      <ul>
-        <li><code class="inline">chat.tools.terminal.autoApprove</code> — whitelist safe commands</li>
-        <li><code class="inline">chat.tools.edits.autoApprove</code> — glob patterns for safe paths</li>
-        <li><code class="inline">chat.agent.maxRequests: 25</code> — runaway prevention</li>
-        <li><code class="inline">chat.agent.deniedNetworkDomains</code> — block data exfiltration</li>
       </ul>
     </div>
     <div>
@@ -841,9 +914,9 @@ claude --model claude-opus-4-7</code></pre>
     hash: true,
     slideNumber: 'c/t',
     progress: true,
-    center: true,
-    transition: 'fade',
-    transitionSpeed: 'fast',
+    center: false,
+    transition: 'slide',
+    transitionSpeed: 'default',
     plugins: [RevealHighlight, RevealNotes],
     highlight: { highlightOnLoad: true }
   });
