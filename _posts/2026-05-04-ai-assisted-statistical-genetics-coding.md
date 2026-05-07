@@ -11,7 +11,7 @@ I'm a postdoctoral researcher at the Broad Institute working on statistical gene
 
 Over the past year, AI coding agents have fundamentally changed how I work. This post covers the tools I use, the concepts that make them effective, and practical patterns for statistical genetics specifically, including how to work safely with sensitive genomic data.
 
-<p style="margin: 1.2em 0 0.5em"><a href="/assets/slides/ai-workflow-slides.html" target="_blank" rel="noopener" style="display:inline-block; background:#0f4d92; color:#fff; padding:6px 16px; border-radius:4px; text-decoration:none; font-size:0.88rem; font-family:sans-serif">&#9654; View as slides</a> <span style="font-size:0.82rem; color:#666; font-family:sans-serif">— 18-slide deck for lab meetings</span></p>
+<p style="margin: 1.2em 0 0.5em"><a href="/assets/slides/ai-workflow-slides.html" target="_blank" rel="noopener" style="display:inline-block; background:#0f4d92; color:#fff; padding:6px 16px; border-radius:4px; text-decoration:none; font-size:0.88rem; font-family:sans-serif">&#9654; View as slides</a> <span style="font-size:0.82rem; color:#666; font-family:sans-serif">— 20-slide deck for lab meetings</span></p>
 
 ## The AI toolkit
 
@@ -134,6 +134,68 @@ Write code with the agent's assistance. At this stage it has context from explor
 ### Commit
 
 Review the diff, run a sanity check, and commit. A good agent writes a concise commit message, checks that no hardcoded local paths leaked into the script, and verifies the `.gitignore` excludes data files.
+
+## Approval settings: keeping the agent out of dangerous territory
+
+AI agents are most useful when they can act autonomously — reading files, running code, making edits — without you approving every keystroke. But unconstrained autonomy is also how things go wrong: an agent that can delete files, overwrite data, or push to a remote repository without asking can cause damage that is hard or impossible to undo. Approval settings let you define exactly where the agent acts freely and where it stops and asks.
+
+Every major agent has some version of this control. Understanding it before you start a session is like checking the brakes before you drive — the point is that you rarely need them, but you want them calibrated correctly.
+
+### GitHub Copilot autopilot approval levels
+
+Copilot's autopilot mode has three approval levels, configured in VS Code settings under `github.copilot.chat.agent.autoApprove`:
+
+- **Confirm all** (default): Copilot proposes each action — file edit, terminal command, file creation — and waits for your explicit approval. Safest, but interrupts your flow frequently.
+- **Confirm risky actions**: Copilot auto-approves low-risk edits (writing code, reading files) and pauses only for actions it considers potentially destructive (running shell commands, modifying or deleting existing files). A reasonable balance for most research coding.
+- **Approve all**: fully autonomous — Copilot executes without pausing. Use this only on well-scoped tasks where you have reviewed the plan and understand exactly what the agent will touch.
+
+A practical pattern: start a new task in "confirm all" mode until you trust that the agent understands what you want, then switch to "confirm risky actions" for execution.
+
+### Claude Code permissions
+
+Claude Code has a permission system that controls which file paths and shell commands the agent can access without asking. These are set in the project's `.claude/settings.json`:
+
+```json
+{
+  "permissions": {
+    "allow": [
+      "Bash(Rscript:*)",
+      "Bash(plink2:*)",
+      "Read(**)",
+      "Write(src/**)"
+    ],
+    "deny": [
+      "Bash(rm -rf *)",
+      "Write(/protected/**)"
+    ]
+  }
+}
+```
+
+`allow` entries let the agent use specific commands or write to specific paths without prompting. `deny` entries are hard blocks — the agent will not execute them even if asked. A well-written settings file for a genomics project might allow running R, PLINK, and REGENIE, allow reading anywhere in the project tree, allow writing to the `src/` and `scripts/` directories, and hard-deny any writes to the `/protected/` data directory.
+
+### Plan mode: the pre-flight check
+
+Both Copilot and Claude Code support a plan-before-code mode. In Claude Code, activating plan mode tells the agent to describe what it intends to do and wait for your sign-off before writing a single line of code. This is the most powerful approval mechanism because it catches wrong assumptions at the cheapest possible moment — before any changes have been made.
+
+For complex tasks — "refactor this entire QC pipeline," "add chromosome-stratified output to all downstream scripts" — always review the plan first. Look specifically for:
+- Files it intends to modify that you didn't expect
+- Shell commands it plans to run (especially anything involving deletion, overwriting, or external network calls)
+- Assumptions about data formats or file locations that might be wrong
+
+Approving the plan does not mean blindly trusting the implementation. Review the diff after implementation, before committing.
+
+### What should always require your approval
+
+Regardless of how your approval settings are configured, these actions should always stop and ask:
+
+- **Any deletion** — `rm`, overwriting an existing file, clearing a directory
+- **Git operations that affect remote state** — `push`, `force-push`, branch deletion
+- **Writes to protected data directories** — any path containing your actual genomic or phenotypic data
+- **External API calls** — anything that sends data outside your environment
+- **HPC job submission** — `qsub`, `sbatch`, or equivalent: a misfired array job is expensive to cancel and can hold cluster resources for hours
+
+The goal is not to make the agent ask about every line of code it writes. It is to ensure that irreversible or high-impact actions always have a human in the loop.
 
 ## Working with sensitive genomic data
 
@@ -264,21 +326,26 @@ The [MCP registry](https://registry.mcphub.io) lists community-maintained server
 
 ## Cost awareness
 
-AI agents are not free, and the cost structure is worth understanding even if the Broad's enterprise Copilot license covers part of it.
+With Copilot, your usage is tracked in **premium requests** — a unit that counts how many "expensive" model interactions you consume from your monthly allowance. The key insight is that different models cost different numbers of premium requests *per single interaction*:
 
-**The token model**: you pay (in dollars or usage quota) per token — roughly, per word processed. Both your input (the conversation, any files you share, the context window) and the model's output count. A large codebase added to context, or a long back-and-forth debugging session, can consume tokens quickly.
+| Tier | Premium requests used | Examples |
+|------|----------------------|---------|
+| Standard | **1** per interaction | GPT-4.5, Claude Sonnet 4.6 — everyday coding tasks |
+| Premium | **3** per interaction | Claude Opus 4.6 — stronger reasoning, planning |
+| High-tier / Agentic | **15** per interaction | Claude Opus 4.7, agentic modes — complex multi-step work |
 
-**Typical costs for a GWAS coding session**: a 90-minute Claude Sonnet session doing pipeline development — exploring existing scripts, writing a new REGENIE wrapper, debugging a SLURM array — runs roughly 200–400K tokens total. At current API pricing that is about $0.50–$1.50. For Opus-class models used for heavy planning, the same session costs 3–5× more. These numbers shift as pricing changes, but the relative ordering (Haiku << Sonnet << Opus, in cost) is stable.
+So the "3×" and "15×" labels are literal: one Opus 4.7 interaction consumes 15 premium requests in a single shot. If your monthly plan includes 300 premium requests, that's 300 standard interactions, 100 premium interactions, or just 20 high-tier interactions before you hit the cap. One long agentic pipeline run with Opus 4.7 can exhaust a significant portion of your monthly allowance.
 
 **Practical strategies**:
 
-- **Match model to task**: plan with Opus, implement with Sonnet, generate boilerplate with Haiku. Copilot Auto mode does this for you; Claude Code's `/model` command lets you do it explicitly.
-- **Don't add large files to context unless necessary**: adding a 10MB VCF header to context when you only need the column names wastes tokens on every subsequent exchange. Share what the agent actually needs — column names, file paths, a few example rows — not the whole file.
-- **Use `/compact` in Claude Code**: when a long debugging session has accumulated many turns, `/compact` condenses the conversation history while preserving the essential context. This avoids hitting the context limit mid-session and keeps costs from compounding.
-- **Prefer targeted questions over broad ones**: "why is my REGENIE step 2 producing NA p-values for chromosome 6?" costs far fewer tokens than "review my entire pipeline and tell me what's wrong." The more specific your question, the smaller the input, and the more useful the answer.
-- **Check your usage dashboard**: Claude Code's usage is visible at console.anthropic.com. Copilot usage is in your GitHub settings. Worth checking once a week when you start, so unexpected spikes don't surprise you.
+- **Default to Standard for most coding tasks**: Sonnet-class models handle GWAS QC scripting, plot generation, and boilerplate just as well at 1 premium request per interaction.
+- **Reserve Premium (3 requests) for planning and architecture**: designing a new pipeline, debugging a subtle statistical error, or reviewing a complex script — tasks where stronger reasoning actually pays off.
+- **Use High-tier (15 requests) deliberately**: for genuinely complex multi-step agentic work only. Don't leave an Opus 4.7 session running overnight on routine tasks.
+- **Keep context lean**: every turn in a session draws from your allowance. Sharing a full VCF header when you only need column names costs premium requests on *every subsequent exchange* in that conversation.
+- **Prefer targeted questions**: "why is my REGENIE step 2 producing NA p-values for chromosome 6?" uses fewer premium requests than "review my entire pipeline" — and tends to get a better answer.
+- **Check your usage**: GitHub Settings → Billing → Copilot. Worth checking after your first few agentic sessions so you can calibrate.
 
-From June 1, 2026, GitHub Copilot Enterprise plans move to usage-based billing for some features. Check with BITS on how the Broad's agreement handles this before running extended agentic sessions.
+From June 1, 2026, GitHub Copilot Enterprise plans move to usage-based billing for premium requests beyond the plan limit. Check with BITS on how the Broad's enterprise agreement handles overages before running extended high-tier sessions.
 
 ## Tips and caveats
 
@@ -299,5 +366,7 @@ From June 1, 2026, GitHub Copilot Enterprise plans move to usage-based billing f
 2. Test on a small subset (e.g., chromosome 22) before submitting a 22-chromosome array job.
 3. Compare against known results or a previous version of the pipeline where possible.
 4. Check that test statistics, p-values, and effect sizes are in plausible ranges.
+
+**Don't get locked into one provider.** This field moves faster than any other area of software I have watched. The model that is clearly best today may be third-best in six months, and a newcomer you haven't heard of may be leading on code benchmarks by the time you read this. The practical implication: structure your workflow around the *interface* (VS Code, a context file, the Explore→Plan→Implement→Commit loop) rather than around any specific model. Copilot's Auto mode helps here — it routes to whichever model performs best for a given task, across Anthropic, OpenAI, Google, and others, without you having to manually track rankings. Outside of Copilot, it is worth spending an afternoon every few months with a new model on a real task you know well, so you have a concrete sense of where the landscape actually stands.
 
 The bottom line: AI agents do not replace statistical genetics expertise — they amplify it. They handle the mechanical parts of coding so you can focus on the science.
