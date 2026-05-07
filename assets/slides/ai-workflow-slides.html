@@ -44,9 +44,9 @@
       text-align: center;
     }
 
-    /* Outer reveal background — dark blue so slide boundary looks intentional */
-    body { background: #071d3a; }
-    .reveal { background: #071d3a; }
+    /* Fill viewport fully */
+    html, body { height: 100%; margin: 0; padding: 0; background: #fff; }
+    .reveal { background: #fff; }
 
     /* ── Headings ─────────────────────────────────────────── */
     .reveal h1, .reveal h2, .reveal h3 {
@@ -918,6 +918,9 @@ claude --model claude-opus-4-7</code></pre>
     center: false,
     transition: 'slide',
     transitionSpeed: 'default',
+    width: 960,
+    height: 700,
+    margin: 0,
     plugins: [RevealHighlight, RevealNotes],
     highlight: { highlightOnLoad: true }
   });
