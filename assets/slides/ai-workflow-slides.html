@@ -649,49 +649,49 @@ claude --model claude-opus-4-7</code></pre>
 
 <!-- ⑮ Cost awareness ─────────────────────────────────────── -->
 <section>
-  <h2>Copilot quota multipliers</h2>
-  <h3>Not all models cost the same — they drain your quota at different rates</h3>
+  <h2>Copilot premium requests</h2>
+  <h3>Each model tier costs a different number of premium requests per interaction</h3>
 
   <table style="font-size: 0.63em; margin-top: 0.3em">
     <tr>
       <th>Tier</th>
-      <th>Multiplier</th>
+      <th>Premium requests used</th>
       <th>Examples</th>
       <th>Use for</th>
     </tr>
     <tr>
       <td>Standard</td>
-      <td style="color:#2e7d32; font-weight:bold">1×</td>
+      <td style="color:#2e7d32; font-weight:bold">1 per interaction</td>
       <td>GPT-4.5, Claude Sonnet 4.6</td>
       <td>Everyday coding, QC scripts, plots</td>
     </tr>
     <tr>
       <td>Premium</td>
-      <td style="color:#e67e22; font-weight:bold">3×</td>
+      <td style="color:#e67e22; font-weight:bold">3 per interaction</td>
       <td>Claude Opus 4.6</td>
       <td>Planning, architecture, tricky bugs</td>
     </tr>
     <tr>
       <td>High-tier / Agentic</td>
-      <td style="color:#c0392b; font-weight:bold">15×</td>
+      <td style="color:#c0392b; font-weight:bold">15 per interaction</td>
       <td>Claude Opus 4.7</td>
       <td>Complex multi-step pipelines only</td>
     </tr>
   </table>
 
   <div class="callout bad" style="margin-top: 0.6em; font-size: 0.62em">
-    1,000 standard interactions = <strong>333 premium</strong> = <strong>67 high-tier</strong>.
-    One long Opus 4.7 agentic run can consume a significant chunk of your monthly quota.
+    300 premium requests/month = 300 standard <em>or</em> 100 premium <em>or</em> <strong>just 20 high-tier</strong> interactions.
+    One Opus 4.7 agentic run spends 15 in a single shot.
   </div>
 
   <ul style="font-size: 0.62em; margin-top: 0.5em">
     <li>Default to <strong>Standard</strong> — sufficient for most research coding</li>
-    <li>Share <strong>column names, not files</strong> — large context multiplies cost every turn</li>
-    <li>Check usage in <strong>GitHub Settings → Billing</strong></li>
+    <li>Keep context lean — every turn draws from your allowance</li>
+    <li>Check: <strong>GitHub Settings → Billing → Copilot</strong></li>
   </ul>
 
   <div class="callout warn" style="margin-top: 0.5em; font-size: 0.58em">
-    ⚠️ Usage-based billing starts June 1, 2026 — verify BITS coverage before extended high-tier sessions.
+    ⚠️ Usage-based billing (overages) starts June 1, 2026 — verify BITS coverage first.
   </div>
 </section>
 

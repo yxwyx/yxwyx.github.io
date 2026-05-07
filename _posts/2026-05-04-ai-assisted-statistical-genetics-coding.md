@@ -264,26 +264,26 @@ The [MCP registry](https://registry.mcphub.io) lists community-maintained server
 
 ## Cost awareness
 
-With Copilot's enterprise plan, your usage is measured in **multipliers against a monthly quota**, not raw dollars. Understanding the tiers matters because a single agentic session can burn quota much faster than you expect.
+With Copilot, your usage is tracked in **premium requests** — a unit that counts how many "expensive" model interactions you consume from your monthly allowance. The key insight is that different models cost different numbers of premium requests *per single interaction*:
 
-| Tier | Multiplier | Examples |
-|------|-----------|---------|
-| Standard | **1×** | GPT-4.5, Claude Sonnet 4.6 — baseline rate, most everyday tasks |
-| Premium | **3×** | Claude Opus 4.6 — stronger reasoning, three times the quota consumption |
-| High-tier / Agentic | **15×** | Claude Opus 4.7, specialized agentic modes — complex multi-step tasks, exhausts quota rapidly |
+| Tier | Premium requests used | Examples |
+|------|----------------------|---------|
+| Standard | **1** per interaction | GPT-4.5, Claude Sonnet 4.6 — everyday coding tasks |
+| Premium | **3** per interaction | Claude Opus 4.6 — stronger reasoning, planning |
+| High-tier / Agentic | **15** per interaction | Claude Opus 4.7, agentic modes — complex multi-step work |
 
-In practice: if your monthly quota supports 1,000 standard interactions, switching to a 15× model means you burn through that same quota in roughly 67 interactions. One long agentic GWAS pipeline run at 15× can consume a significant fraction of a month's allowance.
+So the "3×" and "15×" labels are literal: one Opus 4.7 interaction consumes 15 premium requests in a single shot. If your monthly plan includes 300 premium requests, that's 300 standard interactions, 100 premium interactions, or just 20 high-tier interactions before you hit the cap. One long agentic pipeline run with Opus 4.7 can exhaust a significant portion of your monthly allowance.
 
-**Practical strategies for managing quota**:
+**Practical strategies**:
 
-- **Default to Standard for most coding tasks**: Sonnet-class models handle GWAS QC scripting, plot generation, and boilerplate equally well at 1× cost.
-- **Reserve Premium (3×) for planning and architecture**: designing a pipeline, reasoning about a statistical model, debugging a subtle error — tasks where stronger reasoning pays off.
-- **Use High-tier (15×) deliberately**: for genuinely complex multi-step agentic work only. Don't leave an Opus 4.7 session running overnight on routine tasks.
-- **Don't add large files to context**: sharing an entire VCF header or a full phenotype file when you only need the column names multiplies your usage on every subsequent turn in that session.
-- **Prefer targeted questions**: "why is my REGENIE step 2 producing NA p-values for chromosome 6?" consumes far less quota than "review my entire pipeline." Specificity is both cheaper and more effective.
-- **Check your usage dashboard**: Copilot usage is in your GitHub settings under Billing. Worth checking after your first few agentic sessions to calibrate your intuition.
+- **Default to Standard for most coding tasks**: Sonnet-class models handle GWAS QC scripting, plot generation, and boilerplate just as well at 1 premium request per interaction.
+- **Reserve Premium (3 requests) for planning and architecture**: designing a new pipeline, debugging a subtle statistical error, or reviewing a complex script — tasks where stronger reasoning actually pays off.
+- **Use High-tier (15 requests) deliberately**: for genuinely complex multi-step agentic work only. Don't leave an Opus 4.7 session running overnight on routine tasks.
+- **Keep context lean**: every turn in a session draws from your allowance. Sharing a full VCF header when you only need column names costs premium requests on *every subsequent exchange* in that conversation.
+- **Prefer targeted questions**: "why is my REGENIE step 2 producing NA p-values for chromosome 6?" uses fewer premium requests than "review my entire pipeline" — and tends to get a better answer.
+- **Check your usage**: GitHub Settings → Billing → Copilot. Worth checking after your first few agentic sessions so you can calibrate.
 
-From June 1, 2026, GitHub Copilot Enterprise plans move to usage-based billing for some features. Check with BITS on how the Broad's agreement handles this before running extended high-tier sessions.
+From June 1, 2026, GitHub Copilot Enterprise plans move to usage-based billing for premium requests beyond the plan limit. Check with BITS on how the Broad's enterprise agreement handles overages before running extended high-tier sessions.
 
 ## Tips and caveats
 
