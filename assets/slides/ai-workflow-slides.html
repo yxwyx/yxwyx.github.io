@@ -382,59 +382,59 @@
     <div class="diagram-arrow">=</div>
     <div>
       <div class="diagram-box">Agent</div>
-      <span class="diagram-label">Claude Code<br>Copilot, OpenClaw</span>
+      <span class="diagram-label">GitHub Copilot<br>in VS Code</span>
     </div>
   </div>
 
   <div class="callout" style="font-size: 0.65em">
-    Same LLM (e.g., Claude Sonnet) can run inside Claude Code, Copilot, or OpenClaw with different capabilities.
-    <strong>Cost = tokens (a model property, not an agent property).</strong>
+    Copilot is the agent wrapper. The underlying model — Claude Sonnet, GPT-4o, Gemini — is selected automatically or by you.
+    <strong>Cost = tokens (a model property). The agent wrapper is what can act on your code.</strong>
   </div>
 </section>
 
 <!-- ④ The toolkit ───────────────────────────────────────── -->
 <section>
-  <h2>The toolkit</h2>
+  <h2>GitHub Copilot: one tool, many models</h2>
   <p style="font-size:0.65em; color:var(--muted); margin: -0.4em 0 0.6em">
-    Before AI: RStudio. Now: VS Code — the only editor where all of these integrate natively.
+    Before AI: RStudio. Now: VS Code + Copilot — the only setup compliant at both Broad and MGB.
   </p>
 
   <table>
     <tr>
-      <th>Tool</th>
-      <th>Strength</th>
-      <th>Compliance (Broad / MGB)</th>
+      <th>Copilot capability</th>
+      <th>What it gives you</th>
+      <th>Models available</th>
     </tr>
     <tr>
-      <td><strong>Copilot in VS Code</strong></td>
-      <td>Inline completion, autopilot, auto-model</td>
-      <td style="color:#2e7d32; font-weight:bold">✓ Both</td>
+      <td><strong>Inline completion</strong></td>
+      <td>Tab-complete as you type</td>
+      <td>GPT-4o, Claude Haiku</td>
     </tr>
     <tr>
-      <td><strong>Claude Code</strong></td>
-      <td>Extended agentic tasks, skills, hooks</td>
-      <td style="color:#c0392b">✗ Neither*</td>
+      <td><strong>Copilot Chat</strong></td>
+      <td>Multi-turn conversation, file-aware</td>
+      <td>Claude Sonnet, GPT-4o</td>
     </tr>
     <tr>
-      <td><strong>Codex / Gemini</strong></td>
-      <td>Quick generation, large context</td>
-      <td style="color:#2e7d32">✓ via Copilot</td>
+      <td><strong>Autopilot / Plan agent</strong></td>
+      <td>Multi-step agentic tasks end-to-end</td>
+      <td>Claude Opus, GPT-5.5</td>
     </tr>
     <tr>
-      <td><strong>Local models</strong><br><small>(Qwen, custom)</small></td>
+      <td><strong>Local models</strong></td>
       <td>Private data, zero API cost</td>
-      <td style="color:#2e7d32">✓ Self-hosted</td>
+      <td>Qwen, custom endpoints</td>
     </tr>
     <tr>
-      <td><strong>OpenClaw</strong></td>
-      <td>Always-on, multi-channel (Slack, voice)</td>
-      <td style="color:#e67e22">Personal use only</td>
+      <td><strong>MCP integrations</strong></td>
+      <td>PubMed, gnomAD, external tools inline</td>
+      <td>Any model</td>
     </tr>
   </table>
 
-  <p style="font-size:0.55em; color:var(--muted); margin: 0.4em 0 0">
-    * Claude Code is not covered by an institutional agreement at either Broad or MGB. Use Copilot for all institutional work.
-  </p>
+  <div class="callout good" style="margin-top: 0.5em; font-size: 0.58em">
+    ✓ <strong>Only tool approved at both Broad and MGB</strong> — covered by Microsoft enterprise agreement.
+  </div>
 </section>
 
 <!-- ⑤ Copilot deep-dive ──────────────────────────────────── -->
@@ -456,7 +456,7 @@
 <!-- ⑥ The context file ───────────────────────────────────── -->
 <section>
   <h2>The single most impactful thing</h2>
-  <h3>Write a <code class="inline">CLAUDE.md</code> for your project</h3>
+  <h3>Write a <code class="inline">.github/copilot-instructions.md</code> for your project</h3>
 
   <div class="cols cols-2" style="font-size: 0.7em; margin-top: 0.5em">
     <div>
@@ -480,15 +480,14 @@
   </div>
 
   <div class="callout" style="margin-top: 0.7em; font-size: 0.6em">
-    Copilot equivalent: <code class="inline">.github/copilot-instructions.md</code> &nbsp;·&nbsp;
-    Generic: <code class="inline">AGENTS.md</code>
+    Same idea for other agents: <code class="inline">CLAUDE.md</code> (Claude Code) &nbsp;·&nbsp; <code class="inline">AGENTS.md</code> (generic)
   </div>
 </section>
 
 <!-- ⑦ CLAUDE.md example ─────────────────────────────────── -->
 <section>
   <h2>A real example</h2>
-  <h3>From an active project</h3>
+  <h3>From an active project — works in <code class="inline">.github/copilot-instructions.md</code></h3>
 
 <pre><code class="language-markdown">## Scientific Focus
 - Prioritize statistical + biological correctness over style
@@ -514,7 +513,7 @@
 <!-- ⑧ The workflow ───────────────────────────────────────── -->
 <section>
   <h2>The workflow that works</h2>
-  <h3>Applies to any agent: Copilot, Claude Code, etc.</h3>
+  <h3>Using GitHub Copilot in VS Code</h3>
 
   <div class="steps">
     <div class="step">
@@ -540,8 +539,7 @@
   </div>
 
   <div class="callout" style="font-size: 0.62em; margin-top: 0.4em">
-    Claude Code has a <strong>plan mode</strong> that enforces this — no code until you approve the plan.
-    Copilot autopilot does the same with manual review before each action.
+    Use Copilot's <strong>Plan agent</strong> to enforce this — it describes every step and waits for your sign-off before touching anything.
   </div>
 </section>
 
@@ -569,8 +567,7 @@
         <li>Any <strong>external network call</strong></li>
       </ul>
       <div class="callout" style="margin-top: 0.5em; font-size: 0.85em">
-        Use <strong>Plan agent</strong> in Copilot or <strong>plan mode</strong> in Claude Code —
-        agent describes every step before touching anything.
+        Use Copilot's <strong>Plan agent</strong> — it describes every step before touching anything.
       </div>
     </div>
   </div>
@@ -603,7 +600,7 @@ git worktree add ../project-dev dev-branch
   </div>
 
   <div class="callout" style="margin-top: 0.7em; font-size: 0.62em">
-    Claude Code and Copilot both respect worktree boundaries — each worktree gets its own agent context.
+    Copilot respects worktree boundaries — each directory gets its own agent context.
     Submit jobs from <code class="inline">main</code>, develop in <code class="inline">dev-branch</code>, no interference.
   </div>
 </section>
@@ -633,41 +630,35 @@ git worktree add ../project-dev dev-branch
 <!-- ⑫ Model switching ───────────────────────────────────── -->
 <section>
   <h2>Right model for the task</h2>
-  <h3>cc-switch: switching models mid-workflow</h3>
+  <h3>Copilot Auto mode handles this — or override manually</h3>
 
   <table style="font-size: 0.65em">
     <tr>
       <th>Task</th>
-      <th>Model</th>
+      <th>Model tier</th>
       <th>Why</th>
     </tr>
     <tr>
       <td>Exploration, planning, statistical reasoning</td>
-      <td><span class="chip">claude-opus-4-7</span></td>
-      <td>Best reasoning</td>
+      <td><span class="chip">High — Claude Opus 4.7</span></td>
+      <td>Best reasoning, worth the cost</td>
     </tr>
     <tr>
       <td>Implementation, refactoring</td>
-      <td><span class="chip">claude-sonnet-4-6</span></td>
-      <td>Fast, sufficient</td>
+      <td><span class="chip">Medium — Claude Sonnet 4.6</span></td>
+      <td>Fast, sufficient for coding</td>
     </tr>
     <tr>
       <td>Boilerplate, format conversions</td>
-      <td><span class="chip">claude-haiku-4-5</span></td>
-      <td>Very fast, cheap</td>
+      <td><span class="chip">Low — GPT-4o / Haiku</span></td>
+      <td>Instant, nearly free</td>
     </tr>
   </table>
 
-<pre style="margin-top: 0.7em"><code class="language-bash"># Inside Claude Code — switch mid-session
-/model claude-sonnet-4-6
-
-# At session start
-claude --model claude-opus-4-7</code></pre>
-
-  <p style="font-size: 0.6em; color: var(--muted)">
-    Copilot <strong>Auto mode</strong> does this automatically.
-    Manual switching gives you more control over cost vs. quality.
-  </p>
+  <div class="callout good" style="margin-top: 0.7em; font-size: 0.65em">
+    <strong>Copilot Auto mode</strong> picks the right tier automatically for each request.
+    To override: click the model selector in the Copilot Chat panel.
+  </div>
 </section>
 
 <!-- ⑬ Sensitive data ─────────────────────────────────────── -->
@@ -699,71 +690,7 @@ claude --model claude-opus-4-7</code></pre>
   </div>
 </section>
 
-<!-- ⑭ OpenClaw ───────────────────────────────────────────── -->
-<section>
-  <h2>OpenClaw</h2>
-  <h3>A different paradigm: local-first, always-on</h3>
-
-  <div class="cols cols-2" style="font-size: 0.7em">
-    <div>
-      <ul>
-        <li>Runs on your own device (not cloud-hosted)</li>
-        <li>Answers via WhatsApp, Slack, Discord, voice</li>
-        <li>Multi-model: Claude, GPT-4o, local Qwen</li>
-        <li>Skills registry (like Claude Code)</li>
-      </ul>
-    </div>
-    <div>
-      <div class="callout" style="font-size: 0.9em">
-        <strong>When this beats Claude Code:</strong><br>
-        Monitoring a cluster job while away from your desk.<br>
-        Quick questions via Slack.<br>
-        Hands-free via voice on mobile.
-      </div>
-      <p style="margin-top: 0.6em; font-size: 0.85em; color: var(--muted)">
-        <a href="https://github.com/openclaw/openclaw">github.com/openclaw/openclaw</a>
-      </p>
-    </div>
-  </div>
-</section>
-
-<!-- ⑮ MCP ────────────────────────────────────────────────── -->
-<section>
-  <h2>MCP: agents that fetch for you</h2>
-  <h3>Model Context Protocol — open standard for agent ↔ tool connections</h3>
-
-  <div class="cols cols-2" style="font-size: 0.68em; gap: 1.5em; margin-top: 0.5em">
-    <div>
-      <p style="color: var(--blue); font-weight: bold; margin: 0 0 0.4em">Without MCP</p>
-      <ul>
-        <li>Open browser → search PubMed → copy abstract → paste into chat</li>
-        <li>Go to gnomAD → look up allele frequency → switch back</li>
-        <li>Context switch every few minutes</li>
-      </ul>
-    </div>
-    <div>
-      <p style="color: var(--blue); font-weight: bold; margin: 0 0 0.4em">With MCP</p>
-      <ul>
-        <li>Agent searches PubMed inline</li>
-        <li>Agent queries gnomAD directly</li>
-        <li>You stay in the coding session</li>
-      </ul>
-    </div>
-  </div>
-
-  <div style="font-size: 0.62em; margin-top: 0.7em">
-    <strong>Relevant servers for statistical genetics:</strong><br>
-    PubMed &nbsp;·&nbsp; bioRxiv &nbsp;·&nbsp; gnomAD &nbsp;·&nbsp; ClinicalTrials.gov &nbsp;·&nbsp; ChEMBL
-  </div>
-
-  <div class="callout" style="margin-top: 0.6em; font-size: 0.6em">
-    Claude Code: <code class="inline">claude mcp add &lt;server&gt;</code> &nbsp;·&nbsp;
-    VS Code Copilot: MCP Servers panel &nbsp;·&nbsp;
-    Registry: <a href="https://registry.mcphub.io">registry.mcphub.io</a>
-  </div>
-</section>
-
-<!-- ⑯ Cost awareness ─────────────────────────────────────── -->
+<!-- ⑭ Cost awareness ─────────────────────────────────────── -->
 <section>
   <h2>Copilot cost: heavier models cost more</h2>
   <h3>Billing transitions to AI Credits on June 1, 2026 — the principle stays the same</h3>
@@ -859,6 +786,69 @@ claude --model claude-opus-4-7</code></pre>
       <strong>Try the workflow on one task you've been putting off</strong> — Explore → Plan → Implement → Commit
     </li>
   </ol>
+</section>
+
+<!-- ⑱ OpenClaw ───────────────────────────────────────────── -->
+<section>
+  <h2>OpenClaw</h2>
+  <h3>A different paradigm: local-first, always-on</h3>
+
+  <div class="cols cols-2" style="font-size: 0.7em">
+    <div>
+      <ul>
+        <li>Runs on your own device (not cloud-hosted)</li>
+        <li>Answers via WhatsApp, Slack, Discord, voice</li>
+        <li>Multi-model: Claude, GPT-4o, local Qwen</li>
+        <li>Skills registry (like Claude Code)</li>
+      </ul>
+    </div>
+    <div>
+      <div class="callout" style="font-size: 0.9em">
+        <strong>When this beats Claude Code:</strong><br>
+        Monitoring a cluster job while away from your desk.<br>
+        Quick questions via Slack.<br>
+        Hands-free via voice on mobile.
+      </div>
+      <p style="margin-top: 0.6em; font-size: 0.85em; color: var(--muted)">
+        <a href="https://github.com/openclaw/openclaw">github.com/openclaw/openclaw</a>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ⑲ MCP ────────────────────────────────────────────────── -->
+<section>
+  <h2>MCP: agents that fetch for you</h2>
+  <h3>Model Context Protocol — open standard for agent ↔ tool connections</h3>
+
+  <div class="cols cols-2" style="font-size: 0.68em; gap: 1.5em; margin-top: 0.5em">
+    <div>
+      <p style="color: var(--blue); font-weight: bold; margin: 0 0 0.4em">Without MCP</p>
+      <ul>
+        <li>Open browser → search PubMed → copy abstract → paste into chat</li>
+        <li>Go to gnomAD → look up allele frequency → switch back</li>
+        <li>Context switch every few minutes</li>
+      </ul>
+    </div>
+    <div>
+      <p style="color: var(--blue); font-weight: bold; margin: 0 0 0.4em">With MCP</p>
+      <ul>
+        <li>Agent searches PubMed inline</li>
+        <li>Agent queries gnomAD directly</li>
+        <li>You stay in the coding session</li>
+      </ul>
+    </div>
+  </div>
+
+  <div style="font-size: 0.62em; margin-top: 0.7em">
+    <strong>Relevant servers for statistical genetics:</strong><br>
+    PubMed &nbsp;·&nbsp; bioRxiv &nbsp;·&nbsp; gnomAD &nbsp;·&nbsp; ClinicalTrials.gov &nbsp;·&nbsp; ChEMBL
+  </div>
+
+  <div class="callout" style="margin-top: 0.6em; font-size: 0.6em">
+    VS Code Copilot: MCP Servers panel &nbsp;·&nbsp;
+    Registry: <a href="https://registry.mcphub.io">registry.mcphub.io</a>
+  </div>
 </section>
 
 <!-- ⑳ Q&A ─────────────────────────────────────────────────── -->
