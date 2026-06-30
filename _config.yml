@@ -58,9 +58,18 @@ plugins:
   - jekyll-sitemap
 
 exclude:
+  - .DS_Store
+  - .Rhistory
+  - .Rproj.user/
+  - .claude/
+  - .jekyll-cache/
+  - .sass-cache/
   - Gemfile
   - Gemfile.lock
-  - README.md
   - LICENSE
+  - README.md
+  - _site/
+  - git-update.sh
   - minimal-light.gemspec
+  - yxwyx.github.io.Rproj
   - html_source_file/

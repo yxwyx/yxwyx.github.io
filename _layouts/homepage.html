@@ -57,7 +57,7 @@
     <script>if(localStorage.getItem('theme')==='dark')document.documentElement.classList.add('dark');</script>
 
     <!-- Favicons and touch icons -->
-    <link rel="icon" media="(prefers-color-scheme:dark)" href="{{ site.favicon_dark }}" type="image/png">
+    <link rel="icon" media="(prefers-color-scheme:dark)" href="{{ site.favicon_dark | default: site.favicon }}" type="image/png">
     <link rel="icon" media="(prefers-color-scheme:light)" href="{{ site.favicon }}" type="image/png">
     <script src="./assets/js/favicon-switcher.js" type="application/javascript"></script>
 
@@ -81,6 +81,10 @@
       <link rel="stylesheet" href="./assets/css/nav.css">
     {% endif %}
 
+    {% if page.extra_css %}
+      <link rel="stylesheet" href="{{ page.extra_css }}">
+    {% endif %}
+
   </head>
   <body>
     <!-- Top Navigation -->
@@ -100,15 +104,6 @@
       function toggleNav() {
         var navLinks = document.getElementById("myLinks");
         navLinks.classList.toggle("active");
-        reverseLinks();
-      }
-      function reverseLinks() {
-        var container = document.getElementById("myLinks");
-        var links = Array.from(container.getElementsByTagName('a'));
-        container.innerHTML = '';
-        for (var i = links.length - 1; i >= 0; i--) {
-          container.appendChild(links[i]);
-        }
       }
     </script>
 
@@ -219,10 +214,6 @@
     <script src="./assets/js/dark-mode.js"></script>
     <script src="./assets/js/bibtex.js"></script>
     <script src="{{ '/assets/js/scale.fix.js' | relative_url }}"></script>
-
-    {% if page.extra_css %}
-      <link rel="stylesheet" href="{{ page.extra_css }}">
-    {% endif %}
 
     {% if site.google_analytics %}
       <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.google_analytics }}"></script>

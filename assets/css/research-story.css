@@ -1,5 +1,44 @@
 /* ── Research Story Page ─────────────────────────────────── */
 
+.research-header {
+  margin-bottom: 1.4rem;
+}
+
+.research-kicker {
+  color: #0f4d92;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  margin: 0 0 0.35rem;
+  text-transform: uppercase;
+}
+
+.research-title {
+  color: #111;
+  font-size: 2rem;
+  line-height: 1.16;
+  margin: 0 0 0.9rem;
+}
+
+.research-summary-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 1rem;
+}
+
+.research-summary-tags span,
+.story-paper-tags span {
+  background: #eef3fb;
+  border: 1px solid #c2d4ec;
+  border-radius: 999px;
+  color: #0f4d92;
+  font-size: 0.78rem;
+  font-weight: 500;
+  padding: 3px 10px;
+  white-space: nowrap;
+}
+
 /* Chapter block */
 .story-chapter {
   border-top: 3px solid #0f4d92;
@@ -44,12 +83,12 @@
 
 .story-paper-card {
   display: flex;
-  gap: 12px;
+  gap: 16px;
   align-items: flex-start;
-  padding: 12px 14px;
-  margin-bottom: 10px;
+  padding: 14px 16px;
+  margin-bottom: 12px;
   border: 1px solid #e2eaf4;
-  border-radius: 8px;
+  border-radius: 6px;
   background: #fff;
   transition: box-shadow 0.18s, transform 0.18s;
 }
@@ -134,6 +173,22 @@
   font-style: italic;
 }
 
+.story-paper-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.story-paper-contribution {
+  border-left: 3px solid #d6e2f1;
+  color: #444;
+  font-size: 0.86rem;
+  line-height: 1.5;
+  margin-top: 9px;
+  padding-left: 10px;
+}
+
 /* Impact bar */
 .impact-bar {
   display: flex;
@@ -181,6 +236,15 @@
 
 /* ── Dark Mode ───────────────────────────────────────────── */
 html.dark .story-hero { color: #c9d1d9; }
+html.dark .research-kicker { color: #58a6ff; }
+html.dark .research-title { color: #e6edf3; }
+
+html.dark .research-summary-tags span,
+html.dark .story-paper-tags span {
+  background: #1c2d3d;
+  border-color: #30363d;
+  color: #79aaef;
+}
 
 html.dark .story-narrative {
   background: #1c2d3d;
@@ -212,23 +276,60 @@ html.dark .chip-cites {
   color: #8b949e;
 }
 
+html.dark .story-paper-contribution {
+  border-left-color: #30363d;
+  color: #c9d1d9;
+}
+
 html.dark .impact-bar { background: #1c2d3d; }
 
 /* ── Responsive ──────────────────────────────────────────── */
 @media screen and (max-width: 600px) {
+  .research-title {
+    font-size: 1.6rem;
+  }
+
+  .story-hero,
+  .story-narrative {
+    font-size: 0.95rem;
+    line-height: 1.65;
+  }
+
   .impact-bar {
-    flex-direction: column;
-    gap: 1rem;
+    align-items: stretch;
+    border-radius: 6px;
+    flex-direction: row;
+    gap: 0;
+    justify-content: space-between;
+    padding: 0.9rem 0.65rem;
   }
+
+  .impact-number {
+    font-size: 1.55rem;
+  }
+
+  .impact-label {
+    font-size: 0.62rem;
+    letter-spacing: 0.04em;
+  }
+
   .impact-divider {
-    width: 80px;
-    height: 1px;
+    width: 1px;
+    height: auto;
   }
+
   .story-paper-card {
     flex-direction: column;
+    gap: 10px;
+    padding: 13px;
   }
+
   .story-paper-meta {
     flex-direction: row;
     min-width: unset;
+  }
+
+  .story-paper-tags span {
+    white-space: normal;
   }
 }

@@ -11,7 +11,7 @@
     <script>if(localStorage.getItem('theme')==='dark')document.documentElement.classList.add('dark');</script>
 
     <!-- Favicons -->
-    <link rel="icon" media="(prefers-color-scheme:dark)" href="{{ site.favicon_dark }}" type="image/png">
+    <link rel="icon" media="(prefers-color-scheme:dark)" href="{{ site.favicon_dark | default: site.favicon }}" type="image/png">
     <link rel="icon" media="(prefers-color-scheme:light)" href="{{ site.favicon }}" type="image/png">
     <script src="./assets/js/favicon-switcher.js" type="application/javascript"></script>
 
@@ -57,15 +57,6 @@
       function toggleNav() {
         var navLinks = document.getElementById("myLinks");
         navLinks.classList.toggle("active");
-        reverseLinks();
-      }
-      function reverseLinks() {
-        var container = document.getElementById("myLinks");
-        var links = Array.from(container.getElementsByTagName('a'));
-        container.innerHTML = '';
-        for (var i = links.length - 1; i >= 0; i--) {
-          container.appendChild(links[i]);
-        }
       }
     </script>
 

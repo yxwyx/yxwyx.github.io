@@ -361,3 +361,98 @@ html.dark .citation-badge:hover { background: #243447; }
 html.dark #back-to-top { background: #161b22; color: #c9d1d9; border-color: #30363d; }
 html.dark footer p { color: #6e7681 !important; }
 html.dark .leaflet-tile-pane { filter: invert(1) hue-rotate(200deg) brightness(0.85); }
+
+/* ── Modern Navigation Overrides ─────────────────────────── */
+.topnav {
+  align-items: center;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12);
+  display: flex;
+  left: 0;
+  min-height: 42px;
+  overflow: visible;
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.topnav #myLinks {
+  display: flex;
+  flex: 1;
+  gap: 2px;
+  justify-content: flex-end;
+  margin-right: max(1rem, calc((100% - 860px) / 2));
+  order: 2;
+}
+
+.topnav a.normal {
+  display: block;
+  float: none;
+  font-size: 0.95rem;
+  line-height: 1.2;
+  padding: 13px 10px;
+}
+
+.topnav a.right {
+  margin-right: 0;
+}
+
+.dark-toggle {
+  float: none;
+  margin-left: max(1rem, calc((100% - 860px) / 2));
+  order: 1;
+}
+
+.topnav a.icon {
+  display: none;
+  float: none;
+  margin: 0 max(1rem, calc((100% - 860px) / 2)) 0 auto;
+  order: 3;
+  position: static;
+}
+
+@media screen and (max-width: 960px) {
+  .page-content {
+    padding: 4.25rem 1rem 3rem;
+  }
+
+  .topnav {
+    flex-wrap: wrap;
+  }
+
+  .dark-toggle {
+    margin-left: 1rem;
+  }
+
+  .topnav a.icon {
+    color: white;
+    display: block;
+    font-size: 1rem;
+    margin: 0 1rem 0 auto;
+    padding: 11px 0;
+    position: static;
+  }
+
+  .topnav #myLinks {
+    background: #0f4d92;
+    display: none;
+    flex: 0 0 100%;
+    flex-direction: column;
+    gap: 0;
+    margin: 0;
+    order: 4;
+    padding: 0.25rem 0 0.5rem;
+  }
+
+  .topnav #myLinks.active {
+    display: flex !important;
+  }
+
+  .topnav a.normal,
+  .topnav a.right {
+    color: white;
+    float: none;
+    margin: 0;
+    padding: 10px 1rem;
+    text-align: left;
+  }
+}

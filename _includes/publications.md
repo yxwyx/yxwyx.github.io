@@ -4,6 +4,7 @@
 <ol class="bibliography">
 
 {% for link in site.data.publications.main %}
+{% unless link.show_publications == false %}
 
 <li>
 <div class="pub-row">
@@ -16,19 +17,19 @@
     {% endif %}
   </div>
   <div class="col-sm-9" style="position: relative;padding-right: 15px;padding-left: 20px;">
-      <div class="title"><a href="{{ link.link | default: link.pdf }}">{{ link.title }}</a></div>
+      <div class="title"><a href="{{ link.website | default: link.pdf }}">{{ link.title }}</a></div>
       <div class="author">{{ link.authors }}</div>
       <div class="periodical"><em>{{ link.journal }}</em>
       </div>
     <div class="links">
       <!-- {% if link.link %}
-      <a href="{{ link.link }}" class="btn btn-sm z-depth-0" role="button" target="_blank" style="font-size:12px;">Link</a>
+      <a href="{{ link.link }}" class="btn btn-sm z-depth-0" role="button" target="_blank" rel="noopener" style="font-size:12px;">Link</a>
       {% endif %} -->
       {% if link.code %}
-      <a href="{{ link.code }}" class="btn btn-sm z-depth-0" role="button" target="_blank" style="font-size:12px;">Code</a>
+      <a href="{{ link.code }}" class="btn btn-sm z-depth-0" role="button" target="_blank" rel="noopener" style="font-size:12px;">Code</a>
       {% endif %}
       {% if link.website %}
-      <a href="{{ link.website }}" class="btn btn-sm z-depth-0" role="button" target="_blank" style="font-size:12px;">Website</a>
+      <a href="{{ link.website }}" class="btn btn-sm z-depth-0" role="button" target="_blank" rel="noopener" style="font-size:12px;">Website</a>
       {% endif %}
       {% if link.bibtex %}
       <button class="btn btn-sm z-depth-0 bibtex-btn" data-bibtex="{{ link.bibtex }}" style="font-size:12px;cursor:pointer;border:1px solid #000;">Cite</button>
@@ -44,6 +45,7 @@
 </div>
 </li>
 
+{% endunless %}
 {% endfor %}
 
 </ol>

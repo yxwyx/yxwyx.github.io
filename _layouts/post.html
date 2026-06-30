@@ -85,6 +85,10 @@
       footer { position: static !important; float: none !important; width: 100% !important; }
     </style>
 
+    {% if page.extra_css %}
+      <link rel="stylesheet" href="{{ page.extra_css }}">
+    {% endif %}
+
   </head>
   <body>
     <!-- Top Navigation -->
@@ -111,15 +115,6 @@
       function toggleNav() {
         var navLinks = document.getElementById("myLinks");
         navLinks.classList.toggle("active");
-        reverseLinks();
-      }
-      function reverseLinks() {
-        var container = document.getElementById("myLinks");
-        var links = Array.from(container.getElementsByTagName('a'));
-        container.innerHTML = '';
-        for (var i = links.length - 1; i >= 0; i--) {
-          container.appendChild(links[i]);
-        }
       }
     </script>
 
@@ -210,10 +205,6 @@
     <!-- Feature Scripts -->
     <script src="/assets/js/dark-mode.js"></script>
     <script src="/assets/js/scale.fix.js"></script>
-
-    {% if page.extra_css %}
-      <link rel="stylesheet" href="{{ page.extra_css }}">
-    {% endif %}
 
     {% if site.google_analytics %}
       <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.google_analytics }}"></script>

@@ -1,0 +1,28 @@
+{% assign paper = include.paper %}
+<li class="story-paper-card">
+  {% if paper.research_role %}
+    <div class="story-paper-meta">
+      <span class="badge-{{ paper.research_role_class | default: 'role' }}">{{ paper.research_role }}</span>
+    </div>
+  {% endif %}
+
+  <div class="story-paper-body">
+    <a class="story-paper-title" href="{{ paper.website | default: paper.pdf }}" target="_blank" rel="noopener">
+      {{ paper.title }}
+    </a>
+    <div class="story-paper-authors">{{ paper.research_authors | default: paper.authors }}</div>
+    <div class="story-paper-journal">{{ paper.journal }}</div>
+
+    {% if paper.research_tags %}
+      <div class="story-paper-tags">
+        {% for tag in paper.research_tags %}
+          <span>{{ tag }}</span>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    {% if paper.research_contribution %}
+      <div class="story-paper-contribution">{{ paper.research_contribution }}</div>
+    {% endif %}
+  </div>
+</li>
