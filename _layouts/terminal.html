@@ -3,16 +3,16 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{{ page.title | default: site.title | escape }} · YW/OS</title>
+  <title>{{ page.title | default: site.title | escape }}{% unless page.url == '/' %} · YW/OS{% endunless %}</title>
   <meta name="description" content="{{ page.description | default: page.excerpt | default: site.description | strip_html | escape }}">
   <link rel="canonical" href="{{ page.url | absolute_url }}">
-  <meta property="og:title" content="{{ site.title | escape }} / personal terminal">
+  <meta property="og:title" content="{{ site.title | escape }}{% unless page.url == '/' %} / personal terminal{% endunless %}">
   <meta property="og:description" content="{{ page.description | default: site.description | escape }}">
   <meta property="og:url" content="{{ page.url | absolute_url }}">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary">
   <link rel="icon" href="{{ '/assets/img/favicon.png' | relative_url }}">
-  <link rel="stylesheet" href="{{ '/assets/css/terminal.css' | relative_url }}?v=6">
+  <link rel="stylesheet" href="{{ '/assets/css/terminal.css' | relative_url }}?v=8">
 </head>
 <body>
   <main class="terminal" aria-label="Yuxuan Wang’s interactive portfolio">
@@ -32,6 +32,7 @@
       </form>
       <div id="completion-panel" class="completion-panel" hidden><div id="completion-options" role="listbox" aria-label="Command completions"></div><p>↑↓ / Tab select · Enter inserts · Esc dismisses</p></div>
       <p id="input-notice" class="input-notice" role="status" hidden></p>
+      {% if page.url == '/' %}<nav class="home-actions" id="home-actions" aria-label="Arcade" hidden><button type="button" id="home-play-tank">[ play tank ]</button></nav>{% endif %}
       <noscript><div class="document-output">{{ content }}</div></noscript>
     </div>
     <footer class="terminal-footer" id="command-hint"><button type="button" data-command="help" aria-label="Show available commands">help</button><span class="sr-only">Tab completes commands. Up and down browse history. Control R searches history.</span></footer>
@@ -44,11 +45,13 @@
   <script type="application/json" id="portfolio-data">
   {"home":{{ "/" | relative_url | jsonify }},"page":{{ page.url | jsonify }},"scholar":{{ site.google_scholar | jsonify }},"github":{{ site.github_link | jsonify }},"linkedin":{{ site.linkedin | jsonify }},"papers":{{ site.data.publications.main | jsonify | replace: '</', '<\/' }},"talks":{{ site.data.talks | jsonify | replace: '</', '<\/' }},"posts":[{% for post in site.posts %}{"title":{{ post.title | jsonify }},"url":{{ post.url | jsonify }},"date":"{{ post.date | date: '%Y-%m-%d' }}","excerpt":{{ post.excerpt | strip_html | jsonify }}}{% unless forloop.last %},{% endunless %}{% endfor %}]}
   </script>
-  <script src="{{ '/assets/js/tank-engine.js' | relative_url }}?v=6" defer></script>
-  <script src="{{ '/assets/js/tank-game.js' | relative_url }}?v=6" defer></script>
-  <script src="{{ '/assets/js/vim-reader.js' | relative_url }}?v=6" defer></script>
-  <script src="{{ '/assets/js/portfolio-catalog.js' | relative_url }}?v=6" defer></script>
-  <script src="{{ '/assets/js/terminal-fs.js' | relative_url }}?v=6" defer></script>
-  <script src="{{ '/assets/js/terminal.js' | relative_url }}?v=6" defer></script>
+  <script src="{{ '/assets/js/snake-engine.js' | relative_url }}?v=8" defer></script>
+  <script src="{{ '/assets/js/snake-game.js' | relative_url }}?v=8" defer></script>
+  <script src="{{ '/assets/js/tank-engine.js' | relative_url }}?v=8" defer></script>
+  <script src="{{ '/assets/js/tank-game.js' | relative_url }}?v=8" defer></script>
+  <script src="{{ '/assets/js/vim-reader.js' | relative_url }}?v=8" defer></script>
+  <script src="{{ '/assets/js/portfolio-catalog.js' | relative_url }}?v=8" defer></script>
+  <script src="{{ '/assets/js/terminal-fs.js' | relative_url }}?v=8" defer></script>
+  <script src="{{ '/assets/js/terminal.js' | relative_url }}?v=8" defer></script>
 </body>
 </html>

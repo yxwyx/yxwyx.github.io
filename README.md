@@ -136,6 +136,20 @@ Publication and presentation records remain in `_data/`; posts remain in
 The standalone slide deck retains its own styling. Building locally does
 not publish the website.
 
+## DNA Snake
+
+Run `games` to choose a game, `snake` to open DNA Snake, or visit `/?play=snake`.
+The homepage keeps its single Tank shortcut. Snake uses arrows, WASD, HJKL,
+touch arrows or swipes; P pauses and Escape exits. Focus returns to the terminal.
+The A/T/C/G sequence grows with each pickup; speed increases every five pickups.
+Best scores stay in browser-local storage. This is an arcade game, not a biological simulation.
+
+The seeded simulation is independent of rendering and is tested with:
+
+```sh
+node --test tests/snake-engine.test.cjs
+```
+
 ## Research workflow slides
 
 `assets/slides/ai-workflow-slides.html` is a self-contained 20-slide presentation.

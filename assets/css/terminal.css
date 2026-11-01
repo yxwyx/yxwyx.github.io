@@ -238,6 +238,10 @@ button:focus-visible,a:focus-visible,input:focus-visible {
   color:var(--bright);
 }
 
+.home-actions { display:flex; flex-wrap:wrap; gap:4px 18px; margin:16px 0 0; }
+.home-actions button { background:none; border:0; padding:10px 0; color:var(--dim); font-size:11px; min-height:44px; }
+.home-actions button:hover,.home-actions button:focus-visible { color:var(--bright); }
+
 .entry {
   margin-bottom:30px;
   animation:arrive .2s ease-out;
@@ -719,7 +723,7 @@ button:focus-visible,a:focus-visible,input:focus-visible {
     color:black;
     padding:0;
   }
-  .terminal-footer,.command-form {
+  .terminal-footer,.command-form,.home-actions {
     display:none;
   }
   .terminal {
@@ -739,7 +743,7 @@ button:focus-visible,a:focus-visible,input:focus-visible {
   }
 }
 
-/* Optional arcade cartridge, opened only by the tank command. */
+/* Optional arcade cartridge, opened from the homepage or the tank command. */
 body.tank-open { overflow: hidden; }
 .tank-dialog {
   width: min(660px, calc(100vw - 20px));
@@ -766,11 +770,15 @@ body.tank-open { overflow: hidden; }
 .tank-hud strong { font-size: 16px; letter-spacing: .12em; font-weight: normal; }
 .tank-stage { position: relative; display: flex; justify-content: center; background: #101719; border: 1px solid #37443d; }
 .tank-stage canvas { display: block; width: min(100%, 416px, max(240px, calc(100dvh - 350px))); height: auto; aspect-ratio: 1; image-rendering: pixelated; touch-action: none; }
-.tank-overlay { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; text-align: center; background: #101719e8; }
+.tank-overlay { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: safe center; overflow-y: auto; padding: 20px; text-align: center; background: #101719e8; }
 .tank-overlay h3 { color: #edc879; font-size: clamp(14px, 3vw, 21px); letter-spacing: .08em; margin: 0 0 12px; }
 .tank-overlay p { max-width: 290px; color: #b7c4ba; font-size: 11px; margin: 0 0 20px; }
 .tank-overlay button { background: #edc879; color: #101719; border-color: #edc879; font-weight: bold; padding: 10px 22px; }
 .tank-overlay button:hover { color: #edc879; }
+.tank-reward { margin-top:14px; display:flex; flex-wrap:wrap; justify-content:center; gap:4px 16px; }
+.tank-reward p { flex-basis:100%; font-size:10px; margin:0; color:#c6e7b2; }
+.tank-reward a { color:#edc879; font-size:11px; padding:10px 0; }
+.tank-reward a:hover { background:#edc879; color:#101719; }
 .tank-instructions { text-align: center; color: #a7b4aa; font-size: 9px; margin: 10px 0; }
 .tank-controls { display: flex; align-items: center; justify-content: space-between; gap: 15px; }
 .tank-dpad { display: grid; grid-template-columns: repeat(3, 36px); grid-template-rows: repeat(3, 32px); gap: 3px; }
@@ -867,3 +875,38 @@ body.vim-open { overflow:hidden; }
 .search-result mark { background:var(--line); color:var(--bright); padding:0 1px; }
 .search-result a:hover mark { background:transparent; color:inherit; }
 @media (pointer:coarse) { .share-actions a,.share-actions button { display:inline-flex; min-height:44px; align-items:center; } }
+
+/* DNA Snake: a separate cartridge, discoverable through the terminal. */
+body.snake-open { overflow:hidden; }
+.snake-dialog { width:min(540px,calc(100vw - 20px)); max-height:calc(100dvh - 20px); overflow:auto; background:#101815; color:#b8d4b8; border:1px solid #4a6552; border-radius:5px; padding:20px 24px; font:12px/1.5 var(--mono); box-shadow:0 25px 100px #000b; }
+.snake-dialog::backdrop { background:#080d10e8; }
+.snake-dialog button { background:transparent; color:#c6e7b2; border:1px solid #4a6552; padding:10px 12px; min-height:44px; font:11px var(--mono); }
+.snake-dialog button:hover,.snake-dialog button:focus-visible { background:#293e30; border-color:#c6e7b2; }
+.snake-dialog button:disabled { opacity:.4; cursor:default; }
+.snake-header { display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:12px; }
+.snake-kicker { font-size:8px; letter-spacing:.14em; color:#90a897; }
+.snake-header h2 { font-size:17px; letter-spacing:.08em; margin:5px 0 0; }
+.snake-header>button { border:0; }
+.snake-hud { display:flex; justify-content:space-between; padding:10px 0; border-top:1px solid #334b3b; }
+.snake-hud span { display:block; color:#90a897; font-size:8px; letter-spacing:.12em; }
+.snake-hud strong { font-size:16px; font-weight:normal; }
+.snake-stage { position:relative; display:flex; justify-content:center; border:1px solid #334b3b; }
+.snake-stage canvas { display:block; width:min(100%,400px,max(240px,calc(100dvh - 370px))); height:auto; aspect-ratio:1; touch-action:none; }
+.snake-overlay { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:safe center; overflow-y:auto; padding:20px; background:#101815ed; text-align:center; }
+.snake-overlay h3 { font-size:clamp(14px,3vw,20px); letter-spacing:.05em; margin:0 0 12px; color:#c6e7b2; }
+.snake-overlay p { margin:0 0 20px; max-width:250px; font-size:11px; }
+.snake-overlay button { background:#c6e7b2; color:#101815; }
+.snake-overlay button:hover { color:#c6e7b2; }
+.snake-sequence { display:flex; align-items:center; gap:12px; min-width:0; padding:12px 0; border-bottom:1px solid #334b3b; }
+.snake-sequence>span { flex-shrink:0; color:#90a897; font-size:10px; }
+.snake-sequence code { font:12px var(--mono); letter-spacing:.08em; overflow-wrap:anywhere; min-width:0; color:#c6e7b2; }
+.snake-instructions,.snake-objective { text-align:center; font-size:9px; color:#90a897; margin:10px 0; }
+.snake-controls { display:flex; justify-content:space-between; align-items:center; gap:12px; }
+.snake-dpad { display:grid; grid-template-columns:repeat(3,44px); grid-template-rows:repeat(2,44px); gap:4px; }
+.snake-dpad button { padding:0; font-size:18px; touch-action:manipulation; }
+.snake-pad-up { grid-area:1 / 2; }
+.snake-pad-left { grid-area:2 / 1; }
+.snake-pad-down { grid-area:2 / 2; }
+.snake-pad-right { grid-area:2 / 3; }
+.snake-actions { display:flex; flex-direction:column; gap:6px; }
+@media(max-width:480px) { .snake-dialog { padding:12px 15px; } .snake-header h2 { font-size:14px; } .snake-stage canvas { width:min(100%,max(220px,calc(100dvh - 350px))); } }

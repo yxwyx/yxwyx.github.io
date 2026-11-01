@@ -1,6 +1,6 @@
 ---
 layout: terminal
-title: Terminal
+title: Yuxuan Wang
 description: Explore Yuxuan Wang’s research in human genetics, cardiometabolic traits, and statistical methods through an interactive terminal.
 ---
 

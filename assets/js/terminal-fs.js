@@ -5,10 +5,12 @@
     var home='/home/yuxuan', cwd=home, previous=home;
     var fs=Object.create(null), started=Date.now();
     var data=api.data, el=api.el, line=api.line, heading=api.heading;
-    var advanced=['vim','view','tank','cd','pwd','ls','tree','cat','find','grep','man','neofetch','status','dna','fortune','papers --all','papers --featured','papers --year 2022','papers --year 2023','papers --year 2025'];
+    var advanced=['vim','view','tank','snake','games','cd','pwd','ls','tree','cat','find','grep','man','neofetch','status','dna','fortune','papers --all','papers --featured','papers --year 2022','papers --year 2023','papers --year 2025'];
     var manual={
       search:['search <words>','Search publications, talks, essays, research and profile pages. All words must match; matching is case insensitive. Results link to individual items. Example: search rare variants.'],
       open:['open <item>','Open an item by its stable name. Tab completes available items. Paper links use DOI identifiers, so reordering never changes their destination.'],
+      snake:['snake','Launch DNA Snake. Arrows, WASD or HJKL steer; P pauses; Escape exits. Touch arrows and swipe controls work on mobile. Collect bases, avoid walls and yourself.'],
+      games:['games','List the arcade games. Select snake or tank to play.'],
       tank:['tank','Launch Tank / Base Defense. WASD or arrows move; Space/J fires; P pauses; Escape exits. Touch controls are below the battlefield. Protect your base and defeat all 18 enemies.'],
       vim:['vim <file> (or view <file>)','Open a read-only Vim-style reader. j/k: move; gg/G: first/last line; /: literal, case-insensitive search; n/N: next/previous match; :42: jump; :q: quit. Ctrl+D/U scroll half a page. ? shows help.'],
       cd:['cd [directory]','Navigate the portfolio filesystem. Supports ~, .., absolute paths, and cd - (previous directory).'],
@@ -33,6 +35,7 @@
       return source.textContent.trim().replace(/\n[ \t]+/g,'\n').replace(/\n{3,}/g,'\n\n');
     }
     fs['/']={type:'dir'};fs['/home']={type:'dir'};fs[home]={type:'dir'};dir('research');dir('papers');dir('writing');dir('games');
+    file('games/snake.txt','DNA / SNAKE\n\nCollect A, T, C and G. Each base extends your sequence.\nAvoid walls and yourself. Every five pickups increases speed.\n\nSteer: arrows / WASD / HJKL / touch arrows / swipe\nPause: P\nExit: Escape\nLaunch: snake',function(out){heading(out,'DNA / SNAKE','~/games/');line(out,'Build your sequence, one base at a time.');api.suggest(out,['snake','man snake']);});
     file('games/tank.txt','TANK / BASE DEFENSE\n\nMove: WASD or arrow keys\nFire: Space or J\nPause: P\nExit: Escape\n\nProtect the base. Three lives. Eighteen hostiles.\nBrick walls break; steel walls stop shots.\n\nLaunch: tank',function(out){heading(out,'TANK / BASE DEFENSE','~/games/');line(out,'Defend the base. Break through brick walls. Outlast 18 enemies.');api.suggest(out,['tank','man tank']);});
     file('README.txt','Yuxuan Wang / statistical genetics\n\nStart: whoami\nExplore: tree\nRead: cat about.txt\nReader: vim papers.bib\nSearch: papers | grep -i lipid\nHidden files: ls -a\nManual: man pipes\n\nThis filesystem contains portfolio content.');
     file('about.txt',templateText('about-source'),function(out){api.template(out,'about-source');});
@@ -107,7 +110,7 @@
       var parsed;
       try{parsed=tokenize(raw);}catch(e){line(out,e.message,'error');return true;}
       var cmd=parsed[0][0].toLowerCase(),args=parsed[0].slice(1);
-      if(parsed.length===1&&!['cd','pwd','ls','tree','cat','find','grep','man','neofetch','status','dna','fortune','tank','vim','view','search','open'].includes(cmd)&&!((cmd==='papers'||cmd==='publications')&&args.length))return false;
+      if(parsed.length===1&&!['cd','pwd','ls','tree','cat','find','grep','man','neofetch','status','dna','fortune','tank','snake','games','vim','view','search','open'].includes(cmd)&&!((cmd==='papers'||cmd==='publications')&&args.length))return false;
       try{
         if(parsed.length>1){
           var lines=textOutput(parsed[0]);
@@ -118,6 +121,12 @@
           api.search(out,args.join(' '));
         }else if(cmd==='open'){
           if(args.length!==1)throw Error('Usage: open <item>');api.open(out,args[0]);
+        }else if(cmd==='games'){
+          heading(out,'Choose a cartridge.','~/games/');line(out,'DNA Snake — collect bases and grow your sequence.');line(out,'Tank / Base Defense — protect the base from 18 enemies.');api.suggest(out,['snake','tank']);
+        }else if(cmd==='snake'){
+          if(args.length)throw Error('Usage: snake');
+          line(out,'Loading DNA / SNAKE…','bright');api.suggest(out,['snake','games']);
+          api.launch(function(){window.openSnakeGame();});
         }else if(cmd==='tank'){
           line(out,'Launching TANK / BASE DEFENSE…','bright');api.suggest(out,['tank']);
           api.launch(function(){window.openTankGame();});

@@ -4,6 +4,7 @@
   var form = document.getElementById('command-form');
   var input = document.getElementById('command-input');
   var transcript = document.getElementById('transcript');
+  var homeActions = document.getElementById('home-actions');
   var history = [], historyIndex = 0, draft = '';
   var composing=false, pendingLaunch=null, candidates=[], candidateIndex=-1, ghostValue='';
   var ghost=document.getElementById('command-ghost'), completionPanel=document.getElementById('completion-panel'), completionOptions=document.getElementById('completion-options'), inputNotice=document.getElementById('input-notice');
@@ -20,7 +21,7 @@
     ['research', 'Three questions I work on'], ['papers', 'Publications & citation exports'],
     ['musings', 'Notes on research and AI'], ['talks', 'Presentations, places, ideas'],
     ['teaching', 'Teaching & statistical computing'], ['news', 'A few recent milestones'],
-    ['contact', 'Find me elsewhere'], ['vim papers.bib', 'Read portfolio files with Vim navigation'], ['tank', 'A pixel tank game hidden in the terminal'], ['clear', 'A clean screen']
+    ['contact', 'Find me elsewhere'], ['vim papers.bib', 'Read portfolio files with Vim navigation'], ['games', 'DNA Snake & Tank / Base Defense'], ['clear', 'A clean screen']
   ];
   var catalog=window.createPortfolioCatalog(data,themesInfo,templateText);
   var shell = window.createPortfolioShell({data:data, themes:themesInfo, commands:commands,
@@ -56,7 +57,7 @@
     document.documentElement.dataset.phosphor = theme;
     try { localStorage.setItem('phosphor', theme); } catch (e) {}
   }
-  function clearScreen() { transcript.replaceChildren(); }
+  function clearScreen() { transcript.replaceChildren(); if(homeActions)homeActions.hidden=false; }
   function feedback(message) { inputNotice.textContent=message||'';inputNotice.hidden=!message; }
   function syncInput() {
     input.parentElement.classList.toggle('has-value', input.value.length > 0);
@@ -89,6 +90,7 @@
   }
 
   function entry(raw) {
+    if(homeActions)homeActions.hidden=true;
     var block = el('section', null, 'entry');
     var echo = el('div', null, 'echo');
     var prompt = el('span', 'guest@yxw:'+shell.path()+' $', 'prompt'); prompt.setAttribute('aria-hidden', 'true');
@@ -274,6 +276,12 @@
     result.block.scrollIntoView({behavior:'instant',block:'start'});
   }
   form.hidden=false;
+  if(homeActions){
+    homeActions.hidden=false;
+    document.getElementById('home-play-tank').addEventListener('click',function(){
+      closeCompletions();feedback('');window.openTankGame({start:true});
+    });
+  }
   input.addEventListener('input',function(){closeCompletions();feedback('');historyIndex=history.length;syncInput();});
   input.addEventListener('compositionstart',function(){composing=true;closeCompletions();syncInput();});
   input.addEventListener('compositionend',function(){composing=false;syncInput();});
@@ -371,7 +379,8 @@
   if(data.page==='/research.html' && location.hash){initial='research '+({'#gwas':'1','#wgs':'2','#methods':'3'}[location.hash] || '');}
   if(data.page==='/' && location.hash==='#about')initial='about';
   if(data.page==='/' && location.hash==='#news')initial='news';
-  if(new URLSearchParams(location.search).get('play')==='tank')initial='tank';
+  var play=new URLSearchParams(location.search).get('play');
+  if(play==='tank'||play==='snake')initial=play;
   var readerFile=new URLSearchParams(location.search).get('read');
   if(readerFile&&/^[a-zA-Z0-9_.~/-]+$/.test(readerFile))initial='vim '+readerFile;
   if(!runRoute(hashRoute(),false)&&initial)run(initial,false);

@@ -1,14 +1,14 @@
 (function(){
   'use strict';
   var dialog,canvas,ctx,world,raf=0,last=0,keys=new Set(),touch=new Set(),best=0,previousFocus;
-  var hud={},overlay,message,startButton,pauseButton;
+  var hud={},overlay,message,startButton,pauseButton,reward;
   var moveKeys={ArrowUp:0,KeyW:0,ArrowRight:1,KeyD:1,ArrowDown:2,KeyS:2,ArrowLeft:3,KeyA:3};
   function node(tag,text,cls){var n=document.createElement(tag);if(text)n.textContent=text;if(cls)n.className=cls;return n;}
   function button(text,label,action){var b=node('button',text);b.type='button';b.setAttribute('aria-label',label);b.addEventListener('click',action);return b;}
   function resetInput(){keys.clear();touch.clear();if(dialog)dialog.querySelectorAll('[data-control]').forEach(function(b){b.classList.remove('is-held');});}
   function saveBest(){if(world.score>best){best=world.score;try{localStorage.setItem('yw-tank-best',String(best));}catch(e){}}}
-  function setOverlay(title,detail,action){message.textContent=title;overlay.querySelector('p').textContent=detail;startButton.textContent=action;overlay.hidden=false;}
-  function start(){world=new TankEngine.World(Date.now());resetInput();overlay.hidden=true;pauseButton.textContent='Pause';pauseButton.disabled=false;last=0;canvas.focus();}
+  function setOverlay(title,detail,action){message.textContent=title;overlay.querySelector('p').textContent=detail;startButton.textContent=action;reward.hidden=true;overlay.hidden=false;}
+  function start(){world=new TankEngine.World(Date.now());resetInput();overlay.hidden=true;reward.hidden=true;pauseButton.textContent='Pause';pauseButton.disabled=false;last=0;canvas.focus();}
   function pause(){
     resetInput();
     if(world.state==='playing'){world.state='paused';setOverlay('PAUSED','Take a breath. Your base is waiting.','Resume');pauseButton.textContent='Resume';}
@@ -23,6 +23,9 @@
     var stats=node('div',null,'tank-hud');[['score','SCORE'],['lives','LIVES'],['remaining','HOSTILES'],['best','BEST']].forEach(function(p){var s=node('div');s.append(node('span',p[1]));hud[p[0]]=node('strong','0');s.append(hud[p[0]]);stats.append(s);});dialog.append(stats);
     var stage=node('div',null,'tank-stage');canvas=node('canvas');canvas.width=canvas.height=TankEngine.SIZE;canvas.tabIndex=0;canvas.setAttribute('aria-label','Tank battlefield. Move with arrow keys or W A S D; Space or J fires; P pauses; Escape exits.');canvas.setAttribute('aria-describedby','tank-instructions');canvas.textContent='This game requires a browser with canvas support.';stage.append(canvas);ctx=canvas.getContext('2d');
     overlay=node('div',null,'tank-overlay');message=node('h3');overlay.append(message,node('p'));startButton=button('Start game','Start or resume tank game',function(){if(world.state==='paused')pause();else start();});overlay.append(startButton);stage.append(overlay);dialog.append(stage);
+    reward=node('div',null,'tank-reward');reward.hidden=true;
+    reward.append(node('p','RESEARCH ACCESS GRANTED'));
+    [['Explore research','/research.html'],['Read papers','/publications.html']].forEach(function(item){var a=node('a',item[0]);a.href=item[1];reward.append(a);});overlay.append(reward);
     var instructions=node('p','WASD / ↑↓←→ move · SPACE / J fire · P pause','tank-instructions');instructions.id='tank-instructions';dialog.append(instructions);
     var controls=node('div',null,'tank-controls'),dpad=node('div',null,'tank-dpad');
     [['up','↑',0],['left','←',3],['down','↓',2],['right','→',1]].forEach(function(p){var b=node('button',p[1],'pad-'+p[0]);b.type='button';b.dataset.control=String(p[2]);b.setAttribute('aria-label','Move '+p[0]);hold(b,p[2]);dpad.append(b);});controls.append(dpad);
@@ -76,16 +79,17 @@
     if(!dialog.open)return;
     var direction=-1;keys.forEach(function(k){if(moveKeys[k]!==undefined)direction=moveKeys[k];});touch.forEach(function(k){if(typeof k==='number')direction=k;});
     var old=world.state;world.step(last?(time-last)/1000:0,{dir:direction,fire:keys.has('Space')||keys.has('KeyJ')||touch.has('fire')});last=time;draw();
-    if(old==='playing'&&(world.state==='lost'||world.state==='won')){saveBest();resetInput();pauseButton.disabled=true;setOverlay(world.reason,'SCORE '+world.score+' · '+world.kills+' / '+world.total+' hostiles cleared','Play again');startButton.focus({preventScroll:true});}
+    if(old==='playing'&&(world.state==='lost'||world.state==='won')){saveBest();resetInput();pauseButton.disabled=true;setOverlay(world.reason,'SCORE '+world.score+' · '+world.kills+' / '+world.total+' hostiles cleared','Play again');reward.hidden=world.state!=='won';startButton.focus({preventScroll:true});}
     raf=requestAnimationFrame(frame);
   }
-  window.openTankGame=function(){
+  window.openTankGame=function(options){
     if(!dialog)build();if(dialog.open)return;
     previousFocus=document.activeElement;if(previousFocus)previousFocus.blur();
     try{best=Math.max(0,parseInt(localStorage.getItem('yw-tank-best'),10)||0);}catch(e){}
     world=new TankEngine.World(Date.now());world.state='ready';resetInput();last=0;
     dialog.showModal();document.body.classList.add('tank-open');pauseButton.disabled=true;
     setOverlay('TANK / BASE DEFENSE','One base. Three lives. Eighteen reasons to keep moving.','Start game');
-    draw();startButton.focus();raf=requestAnimationFrame(frame);
+    if(options&&options.start)start();else startButton.focus();
+    draw();raf=requestAnimationFrame(frame);
   };
 })();
