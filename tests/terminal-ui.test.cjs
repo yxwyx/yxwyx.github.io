@@ -142,3 +142,17 @@ test('share copies a local deep link, citation copy keeps the source DOI after s
   b.w.navigator.clipboard.writeText=async()=>{throw Error('Clipboard denied');};
   paper.querySelector('[data-share]').click();await b.tick();const field=paper.querySelector('.share-url');assert.equal(field.value,copied);assert.equal(field.selectionEnd,field.value.length);assert.equal(field.readOnly,true);
 });
+
+test('merged talks keep both event links and appear once in search and the reader',t=>{
+  const b=boot(t),title='Rare Variants in Long Non-coding RNAs are Associated with Blood Lipid Levels in the TOPMed Whole Genome Sequencing Study';
+  b.run('talks');const items=[...b.log.lastElementChild.querySelectorAll('.talk-item')];
+  assert.equal(items.length,6);const grouped=items.filter(n=>n.querySelector('h3').textContent===title);assert.equal(grouped.length,1);
+  assert.match(grouped[0].textContent,/2023 \/ BU-FHS/);assert.match(grouped[0].textContent,/2022 \/ ASHG/);
+  for(const id of ['lncrna-ashg-2022','lncrna-bu-2023']){
+    b.run('open talk/'+id);assert.equal(b.log.lastElementChild.querySelector('h2').textContent,title);
+    assert.match(b.log.lastElementChild.textContent,/BU-FHS/);assert.match(b.log.lastElementChild.textContent,/ASHG/);
+    const deep=boot(t,'#talk/'+id);assert.match(deep.log.textContent,/BU-FHS/);assert.match(deep.log.textContent,/ASHG/);
+  }
+  b.run('search long non-coding RNAs');const talks=[...b.log.lastElementChild.querySelectorAll('.search-result')].filter(n=>n.querySelector('[data-route]').dataset.route.startsWith('talk/'));assert.equal(talks.length,1);
+  b.run('cat talks.txt');const text=b.log.lastElementChild.querySelector('pre').textContent;assert.equal(text.split(title).length-1,1);assert.match(text,/2023 \| BU-FHS/);assert.match(text,/2022 \| ASHG/);
+});

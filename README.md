@@ -176,3 +176,17 @@ This project is licensed under [Creative Commons Zero v1.0 Universal](https://gi
 - Based on [minimal-light](https://github.com/yaoyao-liu/minimal-light) by [Yaoyao Liu](https://github.com/yaoyao-liu)
 
 ---
+
+## Public guestbook
+
+Run `guestbook`, visit `/guestbook.html`, or use `/#guestbook`.
+One fixed GitHub Discussion stores all messages; the public identifiers are in
+`_config.yml`. The homepage remains empty and loads no guestbook service until
+opened. GitHub sign-in is required to post. Moderation happens in the repository's
+Discussions area. The website holds no posting token and does not store messages.
+
+Embedded comments require the [giscus GitHub app](https://github.com/apps/giscus)
+to be installed for `yxwyx/yxwyx.github.io`. The guestbook checks availability on
+opening; after installation, refresh or use Retry loading comments. It always
+provides a direct GitHub link when embedding is unavailable. No fake comments or
+local-only submission forms are used.

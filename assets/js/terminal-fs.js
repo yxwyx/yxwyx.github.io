@@ -7,6 +7,8 @@
     var data=api.data, el=api.el, line=api.line, heading=api.heading;
     var advanced=['vim','view','tank','snake','games','cd','pwd','ls','tree','cat','find','grep','man','neofetch','status','dna','fortune','papers --all','papers --featured','papers --year 2022','papers --year 2023','papers --year 2025'];
     var manual={
+      commands:['Command reference','Profile: whoami · about · talks · teaching · news · contact · guestbook\nResearch: research [1–3] · papers · musings · search <words> · open <item>\nFiles: pwd · cd · ls · tree · cat · find · grep · vim · view\nSession: clear · history · !! · theme amber/green/white\nExtras: games · tank · snake · neofetch · status · dna · fortune\n\nDetails: man keyboard · man pipes · man papers · man vim'],
+      guestbook:['guestbook','Open the public guestbook. Anyone can read; a GitHub account is required to post. Messages and replies are public.'],
       search:['search <words>','Search publications, talks, essays, research and profile pages. All words must match; matching is case insensitive. Results link to individual items. Example: search rare variants.'],
       open:['open <item>','Open an item by its stable name. Tab completes available items. Paper links use DOI identifiers, so reordering never changes their destination.'],
       snake:['snake','Launch DNA Snake. Arrows, WASD or HJKL steer; P pauses; Escape exits. Touch arrows and swipe controls work on mobile. Collect bases, avoid walls and yourself.'],
@@ -35,12 +37,13 @@
       return source.textContent.trim().replace(/\n[ \t]+/g,'\n').replace(/\n{3,}/g,'\n\n');
     }
     fs['/']={type:'dir'};fs['/home']={type:'dir'};fs[home]={type:'dir'};dir('research');dir('papers');dir('writing');dir('games');
-    file('games/snake.txt','DNA / SNAKE\n\nCollect A, T, C and G. Each base extends your sequence.\nAvoid walls and yourself. Every five pickups increases speed.\n\nSteer: arrows / WASD / HJKL / touch arrows / swipe\nPause: P\nExit: Escape\nLaunch: snake',function(out){heading(out,'DNA / SNAKE','~/games/');line(out,'Build your sequence, one base at a time.');api.suggest(out,['snake','man snake']);});
-    file('games/tank.txt','TANK / BASE DEFENSE\n\nMove: WASD or arrow keys\nFire: Space or J\nPause: P\nExit: Escape\n\nProtect the base. Three lives. Eighteen hostiles.\nBrick walls break; steel walls stop shots.\n\nLaunch: tank',function(out){heading(out,'TANK / BASE DEFENSE','~/games/');line(out,'Defend the base. Break through brick walls. Outlast 18 enemies.');api.suggest(out,['tank','man tank']);});
+    file('games/snake.txt','DNA / SNAKE\n\nCollect A, T, C and G. Each base extends your sequence.\nAvoid walls and yourself. Every five pickups increases speed.\n\nSteer: arrows / WASD / HJKL / touch arrows / swipe\nPause: P\nExit: Escape\nLaunch: snake',function(out){heading(out,'DNA / SNAKE','~/games/');line(out,'Build your sequence, one base at a time.');api.suggest(out,['snake']);});
+    file('games/tank.txt','TANK / BASE DEFENSE\n\nMove: WASD or arrow keys\nFire: Space or J\nPause: P\nExit: Escape\n\nProtect the base. Three lives. Eighteen hostiles.\nBrick walls break; steel walls stop shots.\n\nLaunch: tank',function(out){heading(out,'TANK / BASE DEFENSE','~/games/');line(out,'Defend the base. Break through brick walls. Outlast 18 enemies.');api.suggest(out,['tank']);});
     file('README.txt','Yuxuan Wang / statistical genetics\n\nStart: whoami\nExplore: tree\nRead: cat about.txt\nReader: vim papers.bib\nSearch: papers | grep -i lipid\nHidden files: ls -a\nManual: man pipes\n\nThis filesystem contains portfolio content.');
     file('about.txt',templateText('about-source'),function(out){api.template(out,'about-source');});
     file('news.log',templateText('news-source'),function(out){api.template(out,'news-source');});
     file('teaching.txt',templateText('teaching-source'),function(out){api.template(out,'teaching-source');});
+    file('guestbook.txt','Public guestbook\n\nRead and leave a message: '+data.guestbook.discussion_url+'\n\nMessages are public. GitHub sign-in is required to post.\nLaunch: guestbook',function(out){heading(out,'Guestbook');api.link(out,'Read & sign on GitHub ↗',data.guestbook.discussion_url);api.suggest(out,['guestbook']);});
     file('contact.txt','Google Scholar: '+data.scholar+'\nGitHub: '+data.github+'\nLinkedIn: '+data.linkedin,function(out){[['Google Scholar',data.scholar],['GitHub',data.github],['LinkedIn',data.linkedin]].forEach(function(v){var p=el('p');api.link(p,v[0]+' ↗',v[1]);out.appendChild(p);});});
     file('.plan','> Questions I keep coming back to\n\nHow do common and rare variants shape cardiometabolic traits?\nWhich genes do association signals implicate?\nWhat makes a signal replicate across studies and populations?\n\n$ research 3');
     file('.motd','You found the dotfiles.\n\nThere are no secret credentials here.\nJust a statistical geneticist with a terminal-shaped website.\n\nTry: dna\nOr: fortune');
@@ -53,7 +56,7 @@
       file('papers/'+basename+'.txt',p.title+'\n'+p.authors+'\n'+p.journal+'\nDOI: '+p.doi+'\n'+p.website,function(out){api.listPapers(out,[p]);});
       if(p.bibtex)file('papers/'+basename+'.bib',p.bibtex);
     });
-    file('talks.txt',data.talks.map(function(t){return t.year+' | '+t.venue+' | '+t.location+'\n'+t.title;}).join('\n\n'));
+    file('talks.txt',api.talks.map(function(t){return t.title+'\n'+t.events.map(function(e){return e.year+' | '+e.venue+' | '+e.location;}).join('\n');}).join('\n\n'));
     data.posts.forEach(function(p,i){
       var name=p.url.split('/').filter(Boolean).pop()+'.md';
       var source=document.getElementById('writing-'+i);
@@ -110,7 +113,7 @@
       var parsed;
       try{parsed=tokenize(raw);}catch(e){line(out,e.message,'error');return true;}
       var cmd=parsed[0][0].toLowerCase(),args=parsed[0].slice(1);
-      if(parsed.length===1&&!['cd','pwd','ls','tree','cat','find','grep','man','neofetch','status','dna','fortune','tank','snake','games','vim','view','search','open'].includes(cmd)&&!((cmd==='papers'||cmd==='publications')&&args.length))return false;
+      if(parsed.length===1&&!['cd','pwd','ls','tree','cat','find','grep','man','neofetch','status','dna','fortune','tank','snake','games','guestbook','vim','view','search','open'].includes(cmd)&&!((cmd==='papers'||cmd==='publications')&&args.length))return false;
       try{
         if(parsed.length>1){
           var lines=textOutput(parsed[0]);
@@ -121,14 +124,18 @@
           api.search(out,args.join(' '));
         }else if(cmd==='open'){
           if(args.length!==1)throw Error('Usage: open <item>');api.open(out,args[0]);
+        }else if(cmd==='guestbook'){
+          if(args.length)throw Error('Usage: guestbook');
+          heading(out,'Guestbook');line(out,'Public messages · GitHub sign-in to post.','muted small');api.link(out,'Read & sign on GitHub ↗',data.guestbook.discussion_url);
+          api.launch(function(){window.openGuestbook();});
         }else if(cmd==='games'){
-          heading(out,'Choose a cartridge.','~/games/');line(out,'DNA Snake — collect bases and grow your sequence.');line(out,'Tank / Base Defense — protect the base from 18 enemies.');api.suggest(out,['snake','tank']);
+          heading(out,'Games','~/games/');line(out,'DNA Snake — collect bases and grow your sequence.');line(out,'Tank / Base Defense — protect the base from 18 enemies.');api.suggest(out,['snake','tank']);
         }else if(cmd==='snake'){
           if(args.length)throw Error('Usage: snake');
-          line(out,'Loading DNA / SNAKE…','bright');api.suggest(out,['snake','games']);
+          line(out,'Loading DNA / SNAKE…','bright');
           api.launch(function(){window.openSnakeGame();});
         }else if(cmd==='tank'){
-          line(out,'Launching TANK / BASE DEFENSE…','bright');api.suggest(out,['tank']);
+          line(out,'Launching TANK / BASE DEFENSE…','bright');
           api.launch(function(){window.openTankGame();});
         }else if(cmd==='vim'||cmd==='view'){
           if(args.length!==1)throw Error('Usage: '+cmd+' <file>');
@@ -138,7 +145,7 @@
         }else if(cmd==='cd'){
           if(args.length>1)throw Error('Usage: cd [directory]');var next=args[0]==='-'?previous:path(args[0]||'~');requireNode(next,'dir');previous=cwd;cwd=next;
           document.querySelector('#command-form .prompt-path').textContent=':'+display(cwd);
-          line(out,display(cwd),'muted');api.suggest(out,['ls','tree','cd ~']);
+          line(out,display(cwd),'muted');api.suggest(out,['ls']);
         }else if(cmd==='ls'){
           var o=options(args,'-a');if(o.args.length>1)throw Error('Usage: ls [-a] [directory]');var p=path(o.args[0]);requireNode(p,'dir');heading(out,display(p)+'/','directory');
           children(p,o.enabled).forEach(function(k){var row=el('div',null,'file-row');row.appendChild(el('span',fs[k].type==='dir'?'dr-xr-xr-x':'-r--r--r--','file-mode'));api.commandButton(row,k.split('/').pop()+(fs[k].type==='dir'?'/':''),(fs[k].type==='dir'?'cd ':'cat ')+display(k));row.appendChild(el('span',fs[k].type==='dir'?'<DIR>':new Blob([fs[k].text]).size+' B','file-size'));out.appendChild(row);});
@@ -151,14 +158,14 @@
         }else if(cmd==='papers'||cmd==='publications'){
           api.paperView(out,args);
         }else if(cmd==='man'){
-          var name=args[0]||'keyboard',m=manual[name];if(!m){heading(out,'Available manual pages');api.suggest(out,Object.keys(manual).map(function(k){return 'man '+k;}));}else{heading(out,name.toUpperCase()+'(1)','YW/OS manual');line(out,m[0],'tagline');line(out,m[1]);}
+          var name=args[0]||'commands',m=manual[name];if(!m){heading(out,'Available manual pages');api.suggest(out,Object.keys(manual).map(function(k){return 'man '+k;}));}else{heading(out,name.toUpperCase()+'(1)','YW/OS manual');if(name==='commands')out.appendChild(el('pre',m[1],'shell-text'));else{line(out,m[0],'tagline');line(out,m[1]);}}
         }else if(cmd==='neofetch'){
           var fetch=el('div',null,'neofetch');fetch.appendChild(el('pre','     ╱╲      ╱╲\n    ╱  ╲    ╱  ╲\n   ╱    ╲  ╱    ╲\n   ╲     ╳      ╱\n    ╲   ╱ ╲    ╱\n     ╲ ╱   ╲  ╱\n      ╳     ╳\n     ╱ ╲   ╱ ╲\n    ╱   ╲ ╱   ╲\n   ╱     ╳     ╲','fetch-art'));
-          var info=el('div');heading(info,'yuxuan@statgen');[['OS','YW/OS · portfolio shell'],['Host','Broad Institute / Natarajan Lab'],['Research','Human genetics & cardiometabolic traits'],['Language','R'],['Methods','GWAS · rare variants · Bayesian inference'],['Index',data.papers.length+' publications / '+data.posts.length+' essays'],['Session',Math.floor((Date.now()-started)/1000)+' seconds'],['Phosphor',document.documentElement.dataset.phosphor]].forEach(function(r){var row=el('p',null,'fetch-row');row.append(el('span',r[0],'fetch-key'),document.createTextNode(r[1]));info.appendChild(row);});var palette=el('div',null,'fetch-palette');['#51432c','#a89069','#e6b96c','#ffd89a','#35503d','#8bca99','#b9c3d0','#e8edf4'].forEach(function(c){var sw=el('i');sw.style.background=c;palette.appendChild(sw);});info.appendChild(palette);fetch.appendChild(info);out.appendChild(fetch);api.suggest(out,['tree','ls -a','man pipes']);
+          var info=el('div');heading(info,'yuxuan@statgen');[['OS','YW/OS · portfolio shell'],['Host','Amgen'],['Mentor','Pradeep Natarajan'],['Research','Human genetics & cardiometabolic traits'],['Language','R'],['Methods','GWAS · rare variants · Bayesian inference'],['Index',data.papers.length+' publications / '+data.posts.length+' essays'],['Session',Math.floor((Date.now()-started)/1000)+' seconds'],['Phosphor',document.documentElement.dataset.phosphor]].forEach(function(r){var row=el('p',null,'fetch-row');row.append(el('span',r[0],'fetch-key'),document.createTextNode(r[1]));info.appendChild(row);});var palette=el('div',null,'fetch-palette');['#51432c','#a89069','#e6b96c','#ffd89a','#35503d','#8bca99','#b9c3d0','#e8edf4'].forEach(function(c){var sw=el('i');sw.style.background=c;palette.appendChild(sw);});info.appendChild(palette);fetch.appendChild(info);out.appendChild(fetch);
         }else if(cmd==='status'){
           heading(out,'Session status');line(out,'cwd       '+cwd);line(out,'uptime    '+Math.floor((Date.now()-started)/1000)+'s');line(out,'commands  '+api.history().length);line(out,'files     '+Object.values(fs).filter(function(n){return n.type==='file';}).length);line(out,'access    read-only portfolio');
         }else if(cmd==='dna'){
-          var rows=[];for(var i=0;i<28;i++){var phase=i*Math.PI/7,a=Math.round(13+11*Math.sin(phase)),b=Math.round(13-11*Math.sin(phase)),lo=Math.min(a,b),hi=Math.max(a,b);rows.push(' '.repeat(lo)+(a<=b?'A':'T')+'─'.repeat(Math.max(0,hi-lo-1))+(hi===lo?'':'G')+' '.repeat(26-hi));}heading(out,'A little structure in the noise.','decorative sequence art · not biological data');out.appendChild(el('pre',rows.join('\n'),'dna-art'));api.suggest(out,['fortune','research 2']);
+          var rows=[];for(var i=0;i<28;i++){var phase=i*Math.PI/7,a=Math.round(13+11*Math.sin(phase)),b=Math.round(13-11*Math.sin(phase)),lo=Math.min(a,b),hi=Math.max(a,b);rows.push(' '.repeat(lo)+(a<=b?'A':'T')+'─'.repeat(Math.max(0,hi-lo-1))+(hi===lo?'':'G')+' '.repeat(26-hi));}heading(out,'A little structure in the noise.','decorative sequence art · not biological data');out.appendChild(el('pre',rows.join('\n'),'dna-art'));
         }else if(cmd==='fortune'){
           var fortunes=['Keep the raw data immutable. Let the hypotheses change.','A small p-value is the beginning of a question.','Somewhere, a phenotype definition is more important than a bigger GPU.','The real treasure was the well-matched LD reference.','May your alleles align and your jobs finish before the weekend.'];line(out,fortunes[Math.floor(Math.random()*fortunes.length)],'tagline');
         }

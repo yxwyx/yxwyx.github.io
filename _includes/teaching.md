@@ -1,4 +1,4 @@
-<h1 class="section-heading" id="teaching">Teaching</h1>
+## Teaching
 
 At Boston University:
 

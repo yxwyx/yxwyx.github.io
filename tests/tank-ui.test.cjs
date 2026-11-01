@@ -29,7 +29,7 @@ test('homepage launches only on request, Escape returns focus, terminal entry an
   b.frame(100);b.w.dispatchEvent(new b.w.Event('blur'));assert.equal(b.world().state,'paused');
   game.dispatchEvent(new b.w.Event('cancel',{cancelable:true}));assert.equal(game.open,false);assert.equal(b.d.activeElement,play);
   assert.equal(b.d.getElementById('transcript').children.length,0);
-  b.run('help');assert(choices.hidden);assert.match(b.d.getElementById('transcript').textContent,/whoami/);
+  b.run('help');assert(choices.hidden);assert.match(b.d.getElementById('transcript').textContent,/Background & teaching/);
   b.run('clear');assert.equal(choices.hidden,false);assert.equal(b.d.getElementById('transcript').children.length,0);
 });
 test('victory reveals research links, restart and loss remove reward, command launch keeps ready screen',t=>{

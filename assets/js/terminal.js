@@ -8,7 +8,7 @@
   var history = [], historyIndex = 0, draft = '';
   var composing=false, pendingLaunch=null, candidates=[], candidateIndex=-1, ghostValue='';
   var ghost=document.getElementById('command-ghost'), completionPanel=document.getElementById('completion-panel'), completionOptions=document.getElementById('completion-options'), inputNotice=document.getElementById('input-notice');
-  var commands = ['help', 'search', 'open', 'whoami', 'about', 'research', 'papers', 'musings', 'talks', 'teaching', 'news', 'contact', 'ls', 'clear', 'history', 'theme amber', 'theme green', 'theme white'];
+  var commands = ['help', 'guestbook', 'search', 'open', 'whoami', 'about', 'research', 'papers', 'musings', 'talks', 'teaching', 'news', 'contact', 'ls', 'clear', 'history', 'theme amber', 'theme green', 'theme white'];
   var themes = ['amber', 'green', 'white'];
   var themesInfo = [
     {title:'A wider view of lipid genetics', key:'gwas', description:'Multi-ancestry GWAS meta-analysis, gene prioritization, pleiotropy, and sex differences in blood lipid traits. In GLGC, I work on connecting association signals with biological interpretation.'},
@@ -16,17 +16,15 @@
     {title:'How robust is the signal?', key:'methods', description:'Bayesian frameworks for quantifying the replicability of pleiotropic loci across studies and populations. A methodological interest in assessing how well genetic associations stand up to scrutiny.'}
   ];
   var help = [
-    ['whoami', 'The person behind the prompt'], ['about', 'Background, training, collaborators'],
-    ['search lipid', 'Search papers, talks, essays & research'],
-    ['research', 'Three questions I work on'], ['papers', 'Publications & citation exports'],
-    ['musings', 'Notes on research and AI'], ['talks', 'Presentations, places, ideas'],
-    ['teaching', 'Teaching & statistical computing'], ['news', 'A few recent milestones'],
-    ['contact', 'Find me elsewhere'], ['vim papers.bib', 'Read portfolio files with Vim navigation'], ['games', 'DNA Snake & Tank / Base Defense'], ['clear', 'A clean screen']
+    ['about', 'Background & teaching'], ['research', 'Research themes'],
+    ['papers', 'Publications & citations'], ['musings', 'Research notes'],
+    ['contact', 'Scholar, GitHub & LinkedIn'], ['games', 'DNA Snake & Tank'],
+    ['search', 'Search the portfolio'], ['guestbook', 'Read & leave public messages']
   ];
   var catalog=window.createPortfolioCatalog(data,themesInfo,templateText);
   var shell = window.createPortfolioShell({data:data, themes:themesInfo, commands:commands,
     el:el, line:line, heading:heading, link:link, commandButton:commandButton,
-    suggest:suggest, template:template, research:research, listPapers:listPapers, selectPapers:catalog.selectPapers, paperView:paperView, search:searchContent, open:openContent, contentKeys:catalog.keys,
+    suggest:suggest, template:template, research:research, listPapers:listPapers, selectPapers:catalog.selectPapers, paperView:paperView, search:searchContent, open:openContent, contentKeys:catalog.keys, talks:catalog.talks,
     history:function(){return history;}, launch:function(fn){if(pendingLaunch!==null)clearTimeout(pendingLaunch);pendingLaunch=setTimeout(function(){pendingLaunch=null;fn();},0);}});
   function el(tag, text, cls) {
     var node = document.createElement(tag);
@@ -126,7 +124,7 @@
       if(other.length){out.appendChild(el('h3','Other publications · newest first','paper-group-title'));listPapers(out,other);}
     }else {line(out,records.length+' listed publications · newest first','muted small');listPapers(out,records);}
     if(!records.length)line(out,'No listed publications for this selection.','muted');
-    suggest(out,['papers --all','papers --featured','papers --year 2025']);
+    suggest(out,['man papers']);
     var more=el('p',null,'small');link(more,'Full publication record on Google Scholar ↗',data.scholar);out.appendChild(more);
   }
   function openContent(out,key) {
@@ -136,9 +134,9 @@
     else if(record.type==='research')research(out,themesInfo[record.index].key);
     else if(record.type==='writing'){template(out,'writing-'+record.index);share(out,key);}
     else if(record.type==='talk'){
-      var talk=data.talks[record.index];heading(out,talk.title,talk.year+' / '+talk.venue+' / '+talk.location);share(out,key);
+      var talk=record.talk;heading(out,talk.title,'Talk');talk.events.forEach(function(event){line(out,event.year+' / '+event.venue+' / '+event.location,'item-number');});share(out,record.key);
     }else if(key==='contact'){
-      heading(out,'Continue the conversation.');[['Google Scholar',data.scholar],['GitHub',data.github],['LinkedIn',data.linkedin]].forEach(function(pair){var p=el('p');link(p,pair[0]+' ↗',pair[1]);out.appendChild(p);});share(out,key);
+      heading(out,'Contact');[['Google Scholar',data.scholar],['GitHub',data.github],['LinkedIn',data.linkedin]].forEach(function(pair){var p=el('p');link(p,pair[0]+' ↗',pair[1]);out.appendChild(p);});share(out,key);
     }else {template(out,key+'-source');share(out,key);}
   }
   function highlighted(parent,text,terms) {
@@ -190,7 +188,7 @@
   function research(out, arg) {
     var aliases = {'1':0,'01':0,'gwas':0,'2':1,'02':1,'wgs':1,'3':2,'03':2,'methods':2};
     if (arg && !Object.prototype.hasOwnProperty.call(aliases,arg)) { line(out,'Unknown theme. Try research 1, research 2, or research 3.'); return; }
-    heading(out, arg ? themesInfo[aliases[arg]].title : 'Different scales. Connected questions.', '~/research/');
+    heading(out, arg ? themesInfo[aliases[arg]].title : 'Research', '~/research/');
     var selected = arg ? [themesInfo[aliases[arg]]] : themesInfo;
     selected.forEach(function (theme) {
       var i = themesInfo.indexOf(theme) + 1;
@@ -201,12 +199,11 @@
         share(item,'research/'+theme.key);
         if (theme.key==='methods') {
           line(item,'Featured presentation: RePlei — Replication of pleiotropic loci with GWAS summary statistics. NESS 2025, New Haven.','muted');
-          suggest(item,['talks','papers']);
+          suggest(item,['talks']);
         } else { listPapers(item,data.papers.filter(function(p){return p.research_theme===theme.key;})); }
-      } else commandButton(item,'→ explore this thread','research '+i);
+      }
       out.appendChild(item);
     });
-    if (!arg) suggest(out,['research 1','research 2','research 3']);
   }
   function run(raw, focus, render) {
     raw = raw.trim(); if (!raw) raw = 'help';
@@ -221,45 +218,30 @@
     if(render)render(out);
     else if (!shell.execute(raw,out)) switch(cmd) {
       case 'help':
-        heading(out,'A person, a few questions, a lot of code.','YW/OS · command reference');
-        line(out,'Explore at your own pace. Type a command or select one below.','muted small');
+        heading(out,'Commands');
         help.forEach(function(row){var r=el('div',null,'help-row');commandButton(r,row[0]);r.appendChild(el('span',row[1]));out.appendChild(r);});
-        line(out,'Filesystem: cd · ls -a · tree · cat · vim <file> · find · grep','muted small');
-        line(out,'Shell: pipes · Tab menu · → accept history suggestion · Ctrl+R history · Ctrl+C cancel · !! repeat','muted small');
-        line(out,'Read a manual: man pipes / man keyboard. Change colors: theme green.','muted small');
-        suggest(out,['neofetch','tree','papers | grep -i lipid | head 3','man pipes']); break;
+        suggest(out,['man commands']);break;
       case 'whoami':
-        out.appendChild(el('pre',[
-          ' __   __ _   _ __  __ _   _   _    _   _',
-          ' \\ \\ / /| | | |\\ \\/ /| | | | / \\  | \\ | |',
-          '  \\ V / | | | | >  < | | | |/ _ \\ |  \\| |',
-          '   | |  | |_| |/ /\\ \\| |_| / ___ \\| |\\  |',
-          '   |_|   \\___//_/  \\_\\\\___/_/   \\_\\_| \\_|',
-          '                         W A N G'
-        ].join('\n'),'ascii-name'));
         var dl=el('dl',null,'identity');
-        [['name','Yuxuan Wang'],['role','Statistical geneticist'],['currently','Postdoctoral Researcher · Broad Institute'],['focus','Human genetics & cardiometabolic traits']].forEach(function(row){dl.append(el('dt',row[0]),el('dd',row[1]));});out.appendChild(dl);
-        line(out,'Finding meaning in genetic variation.','tagline');
-        suggest(out,['about','research','contact']);break;
+        [['name','Yuxuan Wang'],['role','Postdoctoral Fellow · Amgen'],['focus','Statistical genetics · cardiometabolic traits']].forEach(function(row){dl.append(el('dt',row[0]),el('dd',row[1]));});out.appendChild(dl);break;
       case 'about':
-        heading(out,'Yuxuan Wang','~/about.txt');template(out,'about-source');suggest(out,['research','talks','news']);break;
+        heading(out,'Yuxuan Wang','~/about.txt');template(out,'about-source');break;
       case 'research':research(out,arg);break;
       case 'papers': case 'publications':
         paperView(out,[]);break;
       case 'musings': case 'writing':
-        heading(out,'Notes from the research workflow.','~/musings/');
+        heading(out,'Musings','~/musings/');
         data.posts.forEach(function(post){var a=el('article',null,'post-item');line(a,post.date,'item-number');var h=el('h3');link(h,post.title+' ↗',post.url);a.appendChild(h);line(a,post.excerpt,'muted small');share(a,'writing/'+post.url.split('/').filter(Boolean).pop());out.appendChild(a);});break;
       case 'read':
         if (data.page.indexOf('/musings/')===0) {template(out,'page-source');var post=data.posts.find(function(p){return p.url===data.page;});if(post)share(out,'writing/'+post.url.split('/').filter(Boolean).pop());}
         else {line(out,'Choose an essay from the writing directory.');suggest(out,['musings']);}break;
       case 'talks': case 'presentations':
-        heading(out,'Ideas shared out loud.','~/talks.txt');
-        data.talks.forEach(function(t){var a=el('article',null,'talk-item');line(a,t.year+' / '+t.venue+' / '+t.location,'item-number');a.appendChild(el('h3',t.title));out.appendChild(a);});suggest(out,['research 3','teaching']);break;
-      case 'teaching':template(out,'teaching-source');suggest(out,['talks','about']);break;
-      case 'news':template(out,'news-source');suggest(out,['about','research']);break;
+        heading(out,'Talks','~/talks.txt');
+        catalog.talks.forEach(function(t){var a=el('article',null,'talk-item');a.appendChild(el('h3',t.title));t.events.forEach(function(event){line(a,event.year+' / '+event.venue+' / '+event.location,'item-number');});out.appendChild(a);});break;
+      case 'teaching':template(out,'teaching-source');break;
+      case 'news':template(out,'news-source');break;
       case 'contact':
-        heading(out,'Continue the conversation.','~/contact.txt');
-        line(out,'Research, code, and a place to connect.','muted small');
+        heading(out,'Contact','~/contact.txt');
         [['Google Scholar',data.scholar],['GitHub',data.github],['LinkedIn',data.linkedin]].forEach(function(row){var p=el('p');link(p,row[0]+' ↗',row[1]);out.appendChild(p);});break;
       case 'history':history.forEach(function(c,i){line(out,String(i+1).padStart(3,' ')+'  '+c,'small');});break;
       case 'theme':
@@ -374,18 +356,19 @@
   historyPanel.addEventListener('keydown',function(e){if(e.key==='Escape'){e.preventDefault();closeHistory();}});
   document.getElementById('history-close').addEventListener('click',closeHistory);
   try{var saved=localStorage.getItem('phosphor');if(themes.indexOf(saved)!==-1)setTheme(saved);}catch(e){}
-  var initial={'/research.html':'research','/publications.html':'papers','/musings.html':'musings','/presentations.html':'talks','/teaching.html':'teaching'}[data.page];
+  var initial={'/research.html':'research','/publications.html':'papers','/musings.html':'musings','/presentations.html':'talks','/teaching.html':'teaching','/guestbook.html':'guestbook'}[data.page];
   if(data.page.indexOf('/musings/')===0)initial='read';
   if(data.page==='/research.html' && location.hash){initial='research '+({'#gwas':'1','#wgs':'2','#methods':'3'}[location.hash] || '');}
   if(data.page==='/' && location.hash==='#about')initial='about';
   if(data.page==='/' && location.hash==='#news')initial='news';
+  if(data.page==='/' && location.hash==='#guestbook')initial='guestbook';
   var play=new URLSearchParams(location.search).get('play');
   if(play==='tank'||play==='snake')initial=play;
   var readerFile=new URLSearchParams(location.search).get('read');
   if(readerFile&&/^[a-zA-Z0-9_.~/-]+$/.test(readerFile))initial='vim '+readerFile;
   if(!runRoute(hashRoute(),false)&&initial)run(initial,false);
   var followedURL=location.href;
-  function followLocation(){if(followedURL===location.href)return;followedURL=location.href;var key=hashRoute();if(key)runRoute(key,true);else clearScreen();}
+  function followLocation(){if(followedURL===location.href)return;followedURL=location.href;var key=hashRoute();if(key==='guestbook')run('guestbook',true);else if(key)runRoute(key,true);else clearScreen();}
   window.addEventListener('popstate',followLocation);
   window.addEventListener('hashchange',followLocation);
   if(matchMedia('(pointer:fine)').matches)input.focus({preventScroll:true});

@@ -1,15 +1,15 @@
 # Basic Information
 title: Yuxuan Wang
-position: Postdoctoral Researcher
-affiliation: Broad Institute
-affiliation_link: https://www.broadinstitute.org/
+position: Postdoctoral Fellow
+affiliation: Amgen
+affiliation_link: https://www.amgen.com/
 url: https://www.yuxuanwang.org
 canonical: https://www.yuxuanwang.org
 
 # Search Engine Optimization (SEO)
 # The following information is used to improve the website traffic from search engines, e.g., Google.
 keywords: yuxuan wang, wang yuxuan, biostatistics, human genetics, statistical genetics, gwas, rare variants, broad institute, boston university
-description: Yuxuan Wang is a statistical geneticist and Postdoctoral Researcher at the Broad Institute, studying genetic variation and cardiometabolic traits.
+description: Yuxuan Wang is a statistical geneticist and Postdoctoral Fellow at Amgen, working with Pradeep Natarajan on genetic variation and cardiometabolic traits.
 
 # Links
 # If you don't need one of them, you may delete the corresponding line.
@@ -44,3 +44,12 @@ exclude:
   - minimal-light.gemspec
   - yxwyx.github.io.Rproj
   - html_source_file/
+
+# Public guestbook; all identifiers below are public, not credentials.
+guestbook:
+  repo: yxwyx/yxwyx.github.io
+  repo_id: R_kgDOOYJp8w
+  category: Announcements
+  category_id: DIC_kwDOOYJp884DKLHi
+  discussion_number: 25
+  discussion_url: https://github.com/yxwyx/yxwyx.github.io/discussions/25
