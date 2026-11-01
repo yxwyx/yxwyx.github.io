@@ -1,0 +1,8 @@
+{% assign paper = include.paper %}
+<article class="research-paper">
+  <div class="paper-meta">{{ paper.journal }}{% if paper.research_role %}<span>{{ paper.research_role }} author</span>{% endif %}</div>
+  <h3><a href="{{ paper.website | default: paper.pdf }}">{{ paper.title }} <span aria-hidden="true">↗</span></a></h3>
+  <p class="paper-authors">{{ paper.authors }}</p>
+  <p class="paper-contribution">{{ paper.research_contribution }}</p>
+  <div class="paper-actions"><a href="{{ paper.website | default: paper.pdf }}">Read paper ↗</a>{% if paper.code %}<a href="{{ paper.code }}">Code ↗</a>{% endif %}</div>
+</article>

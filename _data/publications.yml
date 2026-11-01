@@ -1,0 +1,91 @@
+main:
+
+  - title: "Rare variants in long non-coding RNAs are associated with blood lipid levels in the TOPMed whole-genome sequencing study"
+    year: 2023
+    authors: Yuxuan Wang, Margaret Sunitha Selvaraj, Xihao Li, ..., Xihong Lin, Pradeep Natarajan, Gina M. Peloso* (*Corresponding authors)
+    journal: American Journal of Human Genetics, 2023.
+    pdf: ./assets/files/lncRNA.pdf
+    website: https://www.cell.com/ajhg/fulltext/S0002-9297(23)00316-6
+    doi: 10.1016/j.ajhg.2023.09.003
+    research_featured: true
+    research_theme: wgs
+    research_role: "First"
+    research_tags:
+      - rare variants
+      - lncRNA
+      - TOPMed WGS
+    research_contribution: "First-author rare-variant analysis of long non-coding RNAs using TOPMed whole-genome sequencing."
+    bibtex: "@article{wang2023rare,\n  title={Rare variants in long non-coding RNAs are associated with blood lipid levels in the TOPMed whole-genome sequencing study},\n  author={Wang, Yuxuan and Selvaraj, Margaret Sunitha and Li, Xihao and others},\n  journal={American Journal of Human Genetics},\n  volume={110},\n  pages={1704--1717},\n  year={2023},\n  doi={10.1016/j.ajhg.2023.09.003}\n}"
+
+  - title: "Implicating genes, pleiotropy, and sexual dimorphism at blood lipid loci through multi-ancestry meta-analysis"
+    year: 2022
+    authors: Stavroula Kanoni†, Sarah E. Graham†, Yuxuan Wang†, Ida Surakka†, Shweta Ramdas†, Xiang Zhu†, ..., Cristen J. Willer*, Themistocles L. Assimes and Gina M. Peloso* († Co-first authors, *Corresponding authors)
+    journal: Genome Biology, 2022.
+    pdf: ./assets/files/glgc2.pdf
+    code: https://github.com/Global-Lipids-Genetics/glgc_biology_paper
+    website: https://genomebiology.biomedcentral.com/articles/10.1186/s13059-022-02837-1
+    doi: 10.1186/s13059-022-02837-1
+    research_featured: true
+    research_theme: gwas
+    research_role: "Co-first"
+    research_tags:
+      - multi-ancestry GWAS
+      - pleiotropy
+      - gene prioritization
+    research_contribution: "Co-first author on multi-ancestry lipid meta-analysis, gene prioritization, pleiotropy, and sex-difference analyses."
+    bibtex: "@article{kanoni2022implicating,\n  title={Implicating genes, pleiotropy, and sexual dimorphism at blood lipid loci through multi-ancestry meta-analysis},\n  author={Kanoni, Stavroula and Graham, Sarah E and Wang, Yuxuan and others},\n  journal={Genome Biology},\n  volume={23},\n  pages={268},\n  year={2022},\n  doi={10.1186/s13059-022-02837-1}\n}"
+
+  - title: "A multi-layer functional genomic analysis to understand noncoding genetic variation in lipids"
+    year: 2022
+    authors: Shweta Ramdas†, Jonathan Judd†, Sarah E. Graham†, Stavroula Kanoni†, Yuxuan Wang†, ..., Cristen J. Willer, Xiang Zhu*, Christopher D. Brown* († Co-first authors, *Corresponding authors)
+    journal: American Journal of Human Genetics, 2022.
+    pdf: ./assets/files/glgc3.pdf
+    website: https://www.cell.com/ajhg/fulltext/S0002-9297(22)00265-8
+    doi: 10.1016/j.ajhg.2022.06.012
+    research_featured: true
+    research_theme: gwas
+    research_role: "Co-first"
+    research_tags:
+      - noncoding variants
+      - functional genomics
+      - fine-mapping
+    research_contribution: "Co-first author integrating functional genomic annotations to interpret noncoding lipid GWAS signals."
+    bibtex: "@article{ramdas2022multi,\n  title={A multi-layer functional genomic analysis to understand noncoding genetic variation in lipids},\n  author={Ramdas, Shweta and Judd, Jonathan and Graham, Sarah E and Wang, Yuxuan and others},\n  journal={American Journal of Human Genetics},\n  volume={109},\n  pages={1366--1387},\n  year={2022},\n  doi={10.1016/j.ajhg.2022.06.012}\n}"
+
+  - title: "Whole genome sequence analysis of blood lipid levels in >66,000 individuals"
+    year: 2022
+    authors: Margaret Sunitha Selvaraj, Xihao Li, Zilin Li, ..., Yuxuan Wang, ..., Gina M. Peloso, Pradeep Natarajan
+    journal: Nature Communications, 2022.
+    website: https://www.nature.com/articles/s41467-022-33510-7
+    doi: 10.1038/s41467-022-33510-7
+    research_featured: true
+    research_theme: wgs
+    research_tags:
+      - TOPMed WGS
+      - lipid loci
+      - rare variants
+    research_contribution: "Collaborative TOPMed whole-genome sequencing analysis across the allele frequency spectrum."
+
+  - title: "Whole genome sequence analysis of low-density lipoprotein cholesterol across 246K individuals"
+    year: 2025
+    authors: Margaret Sunitha Selvaraj, Xihao Li, Zilin Li, ..., Yuxuan Wang, ..., Xihong Lin, Gina M. Peloso
+    journal: Genome Biology, 2025.
+    website: https://genomebiology.biomedcentral.com/articles/10.1186/s13059-025-03698-0
+    doi: 10.1186/s13059-025-03698-0
+    research_featured: true
+    research_theme: wgs
+    research_tags:
+      - LDL cholesterol
+      - WGS
+      - 246K individuals
+    research_contribution: "Large-scale LDL cholesterol WGS analysis extending lipid sequencing discovery into much larger sample sizes."
+
+  - title: "A comparison of analytical strategies for cluster randomized trials with survival outcomes in the presence of competing risks"
+    year: 2022
+    authors: Fan Li*, Wenhan Lu, Yuxuan Wang, Zehua Pan, Erich J Greene, Guanqun Meng, Can Meng, Ondrej Blaha, Yize Zhao, Peter Peduzzi, Denise Esserman († Co-first authors, *Corresponding authors)
+    journal: Statistical Methods in Medical Research, 2022.
+    pdf: ./assets/files/simCRT.pdf
+    code: https://github.com/yxwyx/simCRTs
+    website: https://journals.sagepub.com/doi/abs/10.1177/09622802221085080
+    doi: 10.1177/09622802221085080
+    bibtex: "@article{li2022comparison,\n  title={A comparison of analytical strategies for cluster randomized trials with survival outcomes in the presence of competing risks},\n  author={Li, Fan and Lu, Wenhan and Wang, Yuxuan and others},\n  journal={Statistical Methods in Medical Research},\n  volume={31},\n  pages={1505--1521},\n  year={2022},\n  doi={10.1177/09622802221085080}\n}"

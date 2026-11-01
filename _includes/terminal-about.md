@@ -1,0 +1,3 @@
+I am a Postdoctoral Researcher in the [Natarajan Lab](https://natarajanlab.mgh.harvard.edu/) at the [Broad Institute](https://www.broadinstitute.org/). I study how genetic variation shapes cardiometabolic traits, particularly blood lipids, through GWAS, rare-variant analyses, and Bayesian methods for assessing replication. I contribute to [TOPMed](https://topmed.nhlbi.nih.gov) and the [Global Lipids Genetics Consortium](https://www.lipidgenetics.org).
+
+I received my PhD in Biostatistics from [Boston University](https://www.bu.edu/), advised by [Ching-Ti Liu](https://www.bu.edu/sph/profile/ching-ti-liu/) and [Gina Peloso](https://www.bu.edu/sph/profile/gina-peloso/), and my master's in Biostatistics from [Yale University](https://ysph.yale.edu/).

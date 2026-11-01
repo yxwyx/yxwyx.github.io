@@ -1,0 +1,41 @@
+- id: replei-ness-2025
+  title: "RePlei: Replication of pleiotropic loci with GWAS summary statistics"
+  venue: "NESS 2025"
+  location: "New Haven, CT"
+  year: 2025
+
+- id: apoe-genentech-2024
+  title: "Assessing Fine-Mapping Methods to Identify Causal Variants at the APOE Locus in Alzheimer's Disease"
+  venue: "Genentech, Inc."
+  location: "South San Francisco, CA"
+  year: 2024
+
+- id: heterogeneity-ashg-2023
+  title: "Impact of GWAS Meta-analysis Heterogeneity on Polygenic Prediction Accuracy"
+  venue: "ASHG"
+  location: "Washington, D.C."
+  year: 2023
+
+- id: lncrna-ashg-2022
+  title: "Rare Variants in Long Non-coding RNAs are Associated with Blood Lipid Levels in the TOPMed Whole Genome Sequencing Study"
+  venue: "ASHG"
+  location: "Los Angeles, CA"
+  year: 2022
+
+- id: lncrna-bu-2023
+  title: "Rare Variants in Long Non-coding RNAs are Associated with Blood Lipid Levels in the TOPMed Whole Genome Sequencing Study"
+  venue: "BU-FHS TOPMed Working Group"
+  location: "Boston, MA"
+  year: 2023
+
+- id: gene-prioritization-bu-2021
+  title: "Integrating Multiple Gene Prioritization Methods to Identify Causal Genes"
+  venue: "Statistical Genetics Seminar, Boston University"
+  location: "Boston, MA"
+  year: 2021
+
+- id: competing-risks-enar-2020
+  title: "Comparison of Methods to Analyze Clustered Time-to-Event Data with Competing Risks"
+  venue: "ENAR"
+  location: "Nashville, TN"
+  year: 2020
