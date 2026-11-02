@@ -190,3 +190,33 @@ to be installed for `yxwyx/yxwyx.github.io`. The guestbook checks availability o
 opening; after installation, refresh or use Retry loading comments. It always
 provides a direct GitHub link when embedding is unavailable. No fake comments or
 local-only submission forms are used.
+
+## Browser security
+
+The terminal layout includes `_includes/security-head.html` before any resources.
+Its meta Content Security Policy permits local scripts and the exact giscus
+loader URL, blocks inline JavaScript and eval, and restricts frames/connections
+to giscus. Inline CSS remains allowed for the widget, existing article styles,
+and runtime presentation. giscus remains a trusted third-party script.
+
+The standalone slide deck has its own CSP with SHA-256 hashes for its embedded
+script and stylesheet. After editing either block, update its CSP hash; the
+security tests detect stale hashes. This preserves the single-file download.
+
+`giscus.json` permits embedding only from `https://www.yuxuanwang.org`.
+Other origins, including localhost previews, retain the direct GitHub discussion
+link. Changing the production domain requires updating this allowlist too.
+This controls embedding, not who can visit or post to the public discussion.
+
+These meta policies do not provide `frame-ancestors`, HSTS, or other HTTP-only
+headers. Those require a hosting/proxy configuration that sets response headers.
+Do not add unsupported directives to the meta policy and assume they work.
+
+After building, run all checks with jsdom installed:
+
+```sh
+SITE_BUILD_DIR=_site node --test tests/*.test.cjs
+```
+
+The DOM tests do not enforce CSP. Verify policy enforcement in a real browser
+as well as checking generated files before publishing a policy change.
