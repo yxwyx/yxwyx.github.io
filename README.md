@@ -13,6 +13,13 @@ bundle exec jekyll serve --host 127.0.0.1 --port 4000
 
 Open `http://127.0.0.1:4000`. Jekyll rebuilds when source files change.
 
+The custom domain serves the site at `/`. Keep `baseurl: ""` explicit in
+`_config.yml` so GitHub Pages does not infer a repository path for assets and
+links. After publishing, verify the live stylesheet and scripts load and the
+terminal accepts a command; a successful build or homepage HTTP 200 alone is
+not sufficient. The tests also accept a downloaded Pages build via
+`SITE_BUILD_DIR`, allowing the actual deployment artifact to be checked.
+
 The interactive portfolio uses `_layouts/terminal.html`,
 `assets/css/terminal.css`, `assets/js/terminal.js`, and the virtual filesystem
 in `assets/js/terminal-fs.js`. The homepage starts

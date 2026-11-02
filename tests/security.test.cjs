@@ -29,6 +29,11 @@ test('every generated HTML page applies CSP before resources and allows its own 
       assert(!scripts.includes("'unsafe-inline'")&&!scripts.includes("'unsafe-eval'")&&!scripts.includes('*'),file);
       const meta=d.querySelector('meta[http-equiv="Content-Security-Policy"]');
       for(const resource of d.querySelectorAll('script,style,link[rel=stylesheet]'))assert(meta.compareDocumentPosition(resource)&4,file+' policy must precede resources');
+      for(const link of d.querySelectorAll('link[rel=stylesheet],link[rel=icon]')){
+        const url=new URL(link.href);
+        assert.equal(url.origin,'https://www.yuxuanwang.org');
+        assert(fs.existsSync(path.join(build,decodeURIComponent(url.pathname))),link.href);
+      }
       for(const script of d.querySelectorAll('script')){
         if(script.type==='application/json')continue;
         if(script.src){

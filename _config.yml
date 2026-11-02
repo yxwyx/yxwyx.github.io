@@ -4,6 +4,8 @@ position: Postdoctoral Fellow
 affiliation: Amgen
 affiliation_link: https://www.amgen.com/
 url: https://www.yuxuanwang.org
+# The custom domain serves this site at its root; do not infer a repository prefix.
+baseurl: ""
 canonical: https://www.yuxuanwang.org
 
 # Search Engine Optimization (SEO)
