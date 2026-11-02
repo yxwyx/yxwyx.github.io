@@ -48,7 +48,7 @@ test('terminal limits third-party scripts, connections and frames to the guestbo
     const p=policy(dom.window.document);
     assert.deepEqual(p['script-src'],["'self'",'https://giscus.app/client.js']);
     assert.deepEqual(p['frame-src'],['https://giscus.app']);
-    assert.deepEqual(p['connect-src'],['https://giscus.app']);
+    assert.deepEqual(p['connect-src'],["'none'"]);
     assert(!('frame-ancestors' in p),'frame-ancestors cannot be enforced by a meta tag');
   }finally{dom.window.close();}
 });

@@ -186,7 +186,7 @@ opened. GitHub sign-in is required to post. Moderation happens in the repository
 Discussions area. The website holds no posting token and does not store messages.
 
 Embedded comments require the [giscus GitHub app](https://github.com/apps/giscus)
-to be installed for `yxwyx/yxwyx.github.io`. The guestbook checks availability on
+to be installed for `yxwyx/yxwyx.github.io`. The official widget loads on
 opening; after installation, refresh or use Retry loading comments. It always
 provides a direct GitHub link when embedding is unavailable. No fake comments or
 local-only submission forms are used.
@@ -195,8 +195,9 @@ local-only submission forms are used.
 
 The terminal layout includes `_includes/security-head.html` before any resources.
 Its meta Content Security Policy permits local scripts and the exact giscus
-loader URL, blocks inline JavaScript and eval, and restricts frames/connections
-to giscus. Inline CSS remains allowed for the widget, existing article styles,
+loader URL, blocks inline JavaScript, eval, and parent-page network API calls,
+and restricts frames to giscus. The frame has its own resource policy.
+Inline CSS remains allowed for the widget, existing article styles,
 and runtime presentation. giscus remains a trusted third-party script.
 
 The standalone slide deck has its own CSP with SHA-256 hashes for its embedded
