@@ -7,7 +7,8 @@
     var data=api.data, el=api.el, line=api.line, heading=api.heading;
     var advanced=['vim','view','tank','snake','games','cd','pwd','ls','tree','cat','find','grep','man','neofetch','status','dna','fortune','papers --all','papers --featured','papers --year 2022','papers --year 2023','papers --year 2025'];
     var manual={
-      commands:['Command reference','Profile: whoami · about · talks · teaching · news · contact · guestbook\nResearch: research [1–3] · papers · musings · search <words> · open <item>\nFiles: pwd · cd · ls · tree · cat · find · grep · vim · view\nSession: clear · history · !! · theme amber/green/white\nExtras: games · tank · snake · neofetch · status · dna · fortune\n\nDetails: man keyboard · man pipes · man papers · man vim'],
+      commands:['Command reference','Profile: whoami · about · talks · teaching · news · contact · guestbook · visitors\nResearch: research [1–3] · papers · musings · search <words> · open <item>\nFiles: pwd · cd · ls · tree · cat · find · grep · vim · view\nSession: clear · history · !! · theme amber/green/white\nExtras: games · tank · snake · neofetch · status · dna · fortune\n\nDetails: man keyboard · man pipes · man papers · man vim'],
+      visitors:['visitors','Open the existing public visitor map. Each page load requests a small MapMyVisitors image; terminal commands do not add pageviews. Locations are approximate; blocked requests may not be counted.'],
       guestbook:['guestbook','Open the public guestbook. Anyone can read; a GitHub account is required to post. Messages and replies are public.'],
       search:['search <words>','Search publications, talks, essays, research and profile pages. All words must match; matching is case insensitive. Results link to individual items. Example: search rare variants.'],
       open:['open <item>','Open an item by its stable name. Tab completes available items. Paper links use DOI identifiers, so reordering never changes their destination.'],
@@ -113,7 +114,7 @@
       var parsed;
       try{parsed=tokenize(raw);}catch(e){line(out,e.message,'error');return true;}
       var cmd=parsed[0][0].toLowerCase(),args=parsed[0].slice(1);
-      if(parsed.length===1&&!['cd','pwd','ls','tree','cat','find','grep','man','neofetch','status','dna','fortune','tank','snake','games','guestbook','vim','view','search','open'].includes(cmd)&&!((cmd==='papers'||cmd==='publications')&&args.length))return false;
+      if(parsed.length===1&&!['cd','pwd','ls','tree','cat','find','grep','man','neofetch','status','dna','fortune','tank','snake','games','guestbook','visitors','vim','view','search','open'].includes(cmd)&&!((cmd==='papers'||cmd==='publications')&&args.length))return false;
       try{
         if(parsed.length>1){
           var lines=textOutput(parsed[0]);
@@ -124,6 +125,10 @@
           api.search(out,args.join(' '));
         }else if(cmd==='open'){
           if(args.length!==1)throw Error('Usage: open <item>');api.open(out,args[0]);
+        }else if(cmd==='visitors'){
+          if(args.length)throw Error('Usage: visitors');
+          heading(out,'Visitor map');line(out,'Page loads are counted by MapMyVisitors. Locations are approximate; blocked requests may not be counted.','muted small');
+          api.link(out,'Open visitor map & statistics ↗',data.visitors.url);
         }else if(cmd==='guestbook'){
           if(args.length)throw Error('Usage: guestbook');
           heading(out,'Guestbook');line(out,'Public messages · GitHub sign-in to post.','muted small');api.link(out,'Read & sign on GitHub ↗',data.guestbook.discussion_url);

@@ -53,3 +53,8 @@ guestbook:
   category_id: DIC_kwDOOYJp884DKLHi
   discussion_number: 25
   discussion_url: https://github.com/yxwyx/yxwyx.github.io/discussions/25
+
+# Existing public MapMyVisitors counter; this identifier is not a credential.
+visitors:
+  id: hMAAWNcwzxNR6aXZMVQfOO_4WhTpfpGdQd4AiUdcxLU
+  url: https://mapmyvisitors.com/web/1c4b3

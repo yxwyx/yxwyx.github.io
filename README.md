@@ -221,3 +221,22 @@ SITE_BUILD_DIR=_site node --test tests/*.test.cjs
 
 The DOM tests do not enforce CSP. Verify policy enforcement in a real browser
 as well as checking generated files before publishing a policy change.
+
+## Visitor statistics
+
+Every generated HTML page, including the standalone slide deck, eagerly loads
+one MapMyVisitors counter image. It reuses the existing public counter configured
+in `_config.yml`, works without JavaScript, and does not change the visible home
+screen. `visitors` links to the original public map/statistics page.
+
+Only the image endpoint is added to CSP. The legacy map script requires eval and
+is not loaded. The image sends the site origin as its referrer, not page paths,
+query strings, or terminal commands. Geographic estimates and visit/pageview
+deduplication are handled by the provider. Ad blockers, offline browsing, and
+failed requests can prevent counting; historical gaps cannot be reconstructed.
+
+A new HTML navigation/refresh requests the counter; commands and hash-only
+navigation do not. Local previews also contain the image, so automated tests must
+not fetch remote images or repeatedly exercise the real counter. The slide deck
+duplicates the image URL to stay standalone; security tests check it against the
+configured ID. Core slide content and controls still work offline.

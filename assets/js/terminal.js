@@ -8,7 +8,7 @@
   var history = [], historyIndex = 0, draft = '';
   var composing=false, pendingLaunch=null, candidates=[], candidateIndex=-1, ghostValue='';
   var ghost=document.getElementById('command-ghost'), completionPanel=document.getElementById('completion-panel'), completionOptions=document.getElementById('completion-options'), inputNotice=document.getElementById('input-notice');
-  var commands = ['help', 'guestbook', 'search', 'open', 'whoami', 'about', 'research', 'papers', 'musings', 'talks', 'teaching', 'news', 'contact', 'ls', 'clear', 'history', 'theme amber', 'theme green', 'theme white'];
+  var commands = ['help', 'guestbook', 'visitors', 'search', 'open', 'whoami', 'about', 'research', 'papers', 'musings', 'talks', 'teaching', 'news', 'contact', 'ls', 'clear', 'history', 'theme amber', 'theme green', 'theme white'];
   var themes = ['amber', 'green', 'white'];
   var themesInfo = [
     {title:'A wider view of lipid genetics', key:'gwas', description:'Multi-ancestry GWAS meta-analysis, gene prioritization, pleiotropy, and sex differences in blood lipid traits. In GLGC, I work on connecting association signals with biological interpretation.'},

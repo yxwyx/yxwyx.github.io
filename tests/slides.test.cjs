@@ -14,7 +14,7 @@ function boot(t,hash=''){
 }
 test('self-contained deck has 20 unique slides, speaker notes and valid internal links',t=>{
  const b=boot(t);const slides=[...b.d.querySelectorAll('.slide')];assert.equal(slides.length,20);assert.equal(new Set(slides.map(s=>s.id)).size,20);
- assert.equal(b.d.querySelectorAll('script[src],link[rel=stylesheet],img').length,0);
+ assert.equal(b.d.querySelectorAll('script[src],link[rel=stylesheet],img:not(.visitor-counter)').length,0);
  slides.forEach(s=>assert(s.querySelector('.notes').textContent.trim()));
  for(const a of b.d.querySelectorAll('a[href^="#"]'))assert(b.d.getElementById(a.hash.slice(1)));
  assert(!source.includes('Only tool approved'));assert(!source.includes('10% cost'));assert.match(source,/@media print/);

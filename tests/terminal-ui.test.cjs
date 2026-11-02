@@ -22,6 +22,17 @@ function boot(t,query='') {
   function key(value,node=input,extra={}){const e=new w.KeyboardEvent('keydown',{key:value,bubbles:true,cancelable:true,...extra});node.dispatchEvent(e);return e;}
   return {w,d,input,log,type,run,key,submit,tick:()=>new Promise(resolve=>w.setTimeout(resolve,5))};
 }
+test('visitors exposes the existing map without reloading or duplicating the page counter',t=>{
+  const b=boot(t),counter=b.d.querySelector('img.visitor-counter');
+  assert(counter);assert.equal(b.log.children.length,0);
+  b.run('visitors');b.run('visitors');
+  const link=b.log.lastElementChild.querySelector('a[href="https://mapmyvisitors.com/web/1c4b3"]');
+  assert(link);assert.equal(link.rel,'noopener noreferrer');
+  assert.equal(b.d.querySelectorAll('img.visitor-counter').length,1);
+  assert.equal(b.d.querySelector('img.visitor-counter'),counter);
+  b.run('clear');assert.equal(b.log.children.length,0);
+  assert.equal(b.d.querySelector('img.visitor-counter'),counter);
+});
 test('terminal keeps the initial screen empty; completion inserts without execution',t=>{
   const b=boot(t);assert.equal(b.log.children.length,0);
   b.type('vim rese');b.key('Tab');assert.equal(b.input.value,'vim research');

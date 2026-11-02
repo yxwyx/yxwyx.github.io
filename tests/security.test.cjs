@@ -62,3 +62,26 @@ test('published giscus config matches the canonical origin and rejects lookalike
     for(const denied of ['http://www.yuxuanwang.org','https://www.yuxuanwang.org.example.com','https://example.com','http://127.0.0.1:8765','http://localhost:4000'])assert(!config.origins.includes(denied));
   }finally{dom.window.close();}
 });
+test('each generated page eagerly loads exactly one image counter without enabling third-party analytics scripts',()=>{
+  const home=new JSDOM(fs.readFileSync(path.join(build,'index.html'),'utf8'));
+  const config=JSON.parse(home.window.document.getElementById('portfolio-data').textContent).visitors;
+  home.window.close();
+  assert.equal(config.url,'https://mapmyvisitors.com/web/1c4b3');
+  for(const file of htmlFiles(build)){
+    const dom=new JSDOM(fs.readFileSync(file,'utf8'));
+    try{
+      const d=dom.window.document,p=policy(d),counters=d.querySelectorAll('img.visitor-counter');
+      assert.equal(counters.length,1,file);
+      const counter=counters[0],url=new URL(counter.src);
+      assert.equal(url.origin+url.pathname,'https://mapmyvisitors.com/map.png');
+      assert.equal(url.searchParams.get('d'),config.id);
+      assert.equal(counter.getAttribute('loading'),'eager');
+      assert.equal(counter.getAttribute('referrerpolicy'),'origin');
+      assert.equal(counter.getAttribute('alt'),'');
+      assert(!counter.closest('template,noscript,dialog'),file+' must count before interaction and without JavaScript');
+      assert(p['img-src'].includes(url.origin+url.pathname));
+      assert(!(p['script-src']||[]).some(source=>source.includes('mapmyvisitors')||source==="'unsafe-eval'"));
+      assert(![...d.scripts].some(script=>script.src.includes('mapmyvisitors')));
+    }finally{dom.window.close();}
+  }
+});

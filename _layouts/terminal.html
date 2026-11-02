@@ -16,6 +16,7 @@
   <link rel="stylesheet" href="{{ '/assets/css/terminal.css' | relative_url }}?v=11">
 </head>
 <body>
+  {% include visitor-counter.html %}
   <main class="terminal" aria-label="Yuxuan Wang’s interactive portfolio">
     <div class="terminal-screen" id="terminal-screen">
       <h1 class="sr-only">Yuxuan Wang — statistical geneticist</h1>
@@ -44,7 +45,7 @@
   {% for post in site.posts %}<template id="writing-{{ forloop.index0 }}"><article class="document-output"><h1>{{ post.title | escape }}</h1><p class="muted">{{ post.date | date: '%Y-%m-%d' }}</p>{{ post.content | markdownify }}</article></template>{% endfor %}
   <template id="page-source"><div class="document-output">{{ content }}</div></template>
   <script type="application/json" id="portfolio-data">
-  {"guestbook":{{ site.guestbook | jsonify }},"home":{{ "/" | relative_url | jsonify }},"page":{{ page.url | jsonify }},"scholar":{{ site.google_scholar | jsonify }},"github":{{ site.github_link | jsonify }},"linkedin":{{ site.linkedin | jsonify }},"papers":{{ site.data.publications.main | jsonify | replace: '</', '<\/' }},"talks":{{ site.data.talks | jsonify | replace: '</', '<\/' }},"posts":[{% for post in site.posts %}{"title":{{ post.title | jsonify }},"url":{{ post.url | jsonify }},"date":"{{ post.date | date: '%Y-%m-%d' }}","excerpt":{{ post.excerpt | strip_html | jsonify }}}{% unless forloop.last %},{% endunless %}{% endfor %}]}
+  {"visitors":{{ site.visitors | jsonify }},"guestbook":{{ site.guestbook | jsonify }},"home":{{ "/" | relative_url | jsonify }},"page":{{ page.url | jsonify }},"scholar":{{ site.google_scholar | jsonify }},"github":{{ site.github_link | jsonify }},"linkedin":{{ site.linkedin | jsonify }},"papers":{{ site.data.publications.main | jsonify | replace: '</', '<\/' }},"talks":{{ site.data.talks | jsonify | replace: '</', '<\/' }},"posts":[{% for post in site.posts %}{"title":{{ post.title | jsonify }},"url":{{ post.url | jsonify }},"date":"{{ post.date | date: '%Y-%m-%d' }}","excerpt":{{ post.excerpt | strip_html | jsonify }}}{% unless forloop.last %},{% endunless %}{% endfor %}]}
   </script>
   <script src="{{ '/assets/js/snake-engine.js' | relative_url }}?v=11" defer></script>
   <script src="{{ '/assets/js/snake-game.js' | relative_url }}?v=11" defer></script>
@@ -52,8 +53,8 @@
   <script src="{{ '/assets/js/tank-game.js' | relative_url }}?v=11" defer></script>
   <script src="{{ '/assets/js/vim-reader.js' | relative_url }}?v=11" defer></script>
   <script src="{{ '/assets/js/portfolio-catalog.js' | relative_url }}?v=11" defer></script>
-  <script src="{{ '/assets/js/terminal-fs.js' | relative_url }}?v=11" defer></script>
+  <script src="{{ '/assets/js/terminal-fs.js' | relative_url }}?v=13" defer></script>
   <script src="{{ '/assets/js/guestbook.js' | relative_url }}?v=12" defer></script>
-  <script src="{{ '/assets/js/terminal.js' | relative_url }}?v=11" defer></script>
+  <script src="{{ '/assets/js/terminal.js' | relative_url }}?v=13" defer></script>
 </body>
 </html>
